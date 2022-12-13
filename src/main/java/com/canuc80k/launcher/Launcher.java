@@ -4,25 +4,20 @@ import java.io.File;
 import java.io.IOException;
 
 import com.canuc80k.compiler.CPPCompiler;
+import com.canuc80k.font.OpenSansFontInitor;
+import com.canuc80k.userinterface.HomeFrame;
 
 public class Launcher {
     public static void main(String[] args) {
         try {
+            OpenSansFontInitor.initFont();
+
+            HomeFrame homeFrame = new HomeFrame();
+            homeFrame.setVisible(true);
+
             CPPCompiler a = new CPPCompiler();
             a.compile_gplusplus(
                 new File("C:\\Users\\Lenovo\\Desktop\\a.cpp"),
-                new File("C:\\Users\\Lenovo\\Desktop\\b\\a.exe")
-            );
-            a.run(
-                new File("C:\\Users\\Lenovo\\Desktop\\b\\a.exe")
-            );
-            a.run(
-                new File("C:\\Users\\Lenovo\\Desktop\\b\\a.exe")
-            );
-            a.run(
-                new File("C:\\Users\\Lenovo\\Desktop\\b\\a.exe")
-            );
-            a.run(
                 new File("C:\\Users\\Lenovo\\Desktop\\b\\a.exe")
             );
         } catch (IOException e) {
