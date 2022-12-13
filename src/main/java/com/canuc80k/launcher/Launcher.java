@@ -1,6 +1,6 @@
-package com.canuc80k.Laucher;
+package com.canuc80k.launcher;
 
-public class Laucher {
+public class Launcher {
     public static void main(String[] args) {
         System.out.println("Hello World");
     }
