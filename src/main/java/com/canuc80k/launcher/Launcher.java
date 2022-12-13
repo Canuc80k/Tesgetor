@@ -10,7 +10,7 @@ import com.canuc80k.userinterface.HomeFrame;
 public class Launcher {
     public static void main(String[] args) {
         try {
-            OpenSansFontInitor.initFont();
+            new OpenSansFontInitor().initFont();
 
             HomeFrame homeFrame = new HomeFrame();
             homeFrame.setVisible(true);

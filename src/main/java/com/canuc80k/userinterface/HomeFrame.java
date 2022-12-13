@@ -21,7 +21,7 @@ public class HomeFrame extends JFrame {
 		contentPane.setLayout(new BorderLayout(0, 0));
 		
 		JLabel topLabel = new JLabel("Dont_generatetest_me_pls");
-        topLabel.setFont(new Font("Open Sans Bold", Font.PLAIN, 24));
+        topLabel.setFont(new Font("Open Sans ExtraBold", Font.PLAIN, 24));
 		contentPane.add(topLabel, BorderLayout.NORTH);
 	}
 
