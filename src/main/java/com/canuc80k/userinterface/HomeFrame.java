@@ -17,29 +17,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 public class HomeFrame extends JFrame {
-    private final URL GUIDE_GIF_URL = HomeFrame.class.getResource("/guide/guide.gif");
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	
-    public ImageIcon scaleImage(ImageIcon icon, int w, int h)
-    {
-        int nw = icon.getIconWidth();
-        int nh = icon.getIconHeight();
-
-        if(icon.getIconWidth() > w)
-        {
-          nw = w;
-          nh = (nw * icon.getIconHeight()) / icon.getIconWidth();
-        }
-
-        if(nh > h)
-        {
-          nh = h;
-          nw = (icon.getIconWidth() * nh) / icon.getIconHeight();
-        }
-
-        return new ImageIcon(icon.getImage().getScaledInstance(nw, nh, Image.SCALE_DEFAULT));
-    }
 
     public HomeFrame() {        
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
