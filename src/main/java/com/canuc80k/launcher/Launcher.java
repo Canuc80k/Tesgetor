@@ -3,9 +3,6 @@ package com.canuc80k.launcher;
 import java.io.File;
 import java.io.IOException;
 
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-
 import com.canuc80k.compiler.CPPCompiler;
 import com.canuc80k.font.OpenSansFontInitor;
 import com.canuc80k.userinterface.HomeFrame;
