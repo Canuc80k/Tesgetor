@@ -6,28 +6,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CPPCompiler extends Compiler {
-    private List<String> commands;
-    
     public CPPCompiler() {
         super();    
-        commands = new ArrayList<>();
-        commands.add("cmd.exe");
-        commands.add("/c");
+        List<String> initCommands = new ArrayList<String>();
+        initCommands.add("cmd.exe");
+        initCommands.add("/c");
+        setCommands(initCommands);
     }
 
     public synchronized void compile_gplusplus(File sourceFile, File outputFile) throws IOException, InterruptedException {
         String compileCommand = "g++ " + sourceFile.getAbsolutePath() + " -o " + "\"" + outputFile.getAbsolutePath() + "\"";
-        commands.add(compileCommand);
-
-        builder.command(commands).start().waitFor();
-        commands.remove(commands.size() - 1);
+        executeCommand(compileCommand);
     }
 
     public synchronized void run(File runFile) throws IOException, InterruptedException {
         String runCommand = runFile.getAbsolutePath();
-        commands.add(runCommand);
-
-        builder.command(commands).start().waitFor();
-        commands.remove(commands.size() - 1);
+        executeCommand(runCommand);
     }
 }
