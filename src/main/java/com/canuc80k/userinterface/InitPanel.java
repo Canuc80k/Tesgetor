@@ -56,8 +56,7 @@ public class InitPanel extends JPanel {
                     if (choosedOption.equals(options.get(CLEAR_OPTION_INDEX))) {
                     }
                     if (choosedOption.equals(options.get(CONFIG_OPTION_INDEX))) {
-                        HomeFrame currentFrame = (HomeFrame) SwingUtilities.windowForComponent(topLabel);
-                        System.out.println(currentFrame);
+                        HomeFrame currentFrame = (HomeFrame) SwingUtilities.windowForComponent(optionDescription);
                         currentFrame.setTopPanel(new ConfigPanel());
                     }
                 }
