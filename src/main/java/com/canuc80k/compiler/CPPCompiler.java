@@ -23,4 +23,16 @@ public class CPPCompiler extends Compiler {
         String runCommand = runFile.getAbsolutePath();
         executeCommand(runCommand);
     }
+
+    public synchronized void run(File runFile, String arg) throws IOException, InterruptedException {
+        String runCommand = runFile.getAbsolutePath() + " " + arg;
+        System.out.println(runCommand);
+        executeCommand(runCommand);
+    }
+
+    public synchronized void run(File runFile, String arg1, String arg2) throws IOException, InterruptedException {
+        String runCommand = runFile.getAbsolutePath() + " " + arg1 + " " + arg2;
+        System.out.println(runCommand);
+        executeCommand(runCommand);
+    }
 }

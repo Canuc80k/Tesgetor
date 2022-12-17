@@ -28,7 +28,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 @SuppressWarnings("unchecked")
 
 public class ConfigPanel extends JPanel {
-    private final File CONFIG_FILE = new File("config/config.cfg");
+    private static final File CONFIG_FILE = new File("config/config.cfg");
     private static List<String> configData;
 
     private JButton inputGeneratorFileButton;
@@ -42,14 +42,7 @@ public class ConfigPanel extends JPanel {
 
     ConfigPanel() {
         if (configData == null) {
-            try {
-                ObjectInputStream configFileObjectInputStream = new ObjectInputStream(new FileInputStream(CONFIG_FILE));
-                configData = (List<String>) configFileObjectInputStream.readObject();
-                configFileObjectInputStream.close();
-            } catch (IOException | ClassNotFoundException e) {
-                configData = new ArrayList<String>();
-                for (int i = 0; i < 3; i ++) configData.add("");
-            }
+            deserializeConfigData();
         }
         
         buildUI();
@@ -58,7 +51,7 @@ public class ConfigPanel extends JPanel {
     private void buildUI() {
         setPreferredSize(new Dimension(HomeFrame.APP_WIDTH, HomeFrame.TOPPANEL_HEIGHT));
         setBackground(Color.decode("#d7def8"));
-        setBorder(new EmptyBorder(10, 10, 10, 10));
+        setBorder(new EmptyBorder(0, 10, 10, 10));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         inputGeneratorFileLabel = new JLabel("Input Generator File");
@@ -168,7 +161,19 @@ public class ConfigPanel extends JPanel {
         }
     }
 
+    private static void deserializeConfigData() {
+        try {
+            ObjectInputStream configFileObjectInputStream = new ObjectInputStream(new FileInputStream(CONFIG_FILE));
+            configData = (List<String>) configFileObjectInputStream.readObject();
+            configFileObjectInputStream.close();
+        } catch (IOException | ClassNotFoundException e) {
+            configData = new ArrayList<String>();
+            for (int i = 0; i < 3; i ++) configData.add("");
+        }
+    }
+
     public static List<String> getConfigData() {
+        if (configData == null) deserializeConfigData();
         return configData;
     }
 }

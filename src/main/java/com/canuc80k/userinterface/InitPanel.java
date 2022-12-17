@@ -49,14 +49,15 @@ public class InitPanel extends JPanel {
                 public void mouseClicked(MouseEvent e) {
                     String choosedOption = ((JLabel) e.getSource()).getText();
 
+                    HomeFrame currentFrame = (HomeFrame) SwingUtilities.windowForComponent(optionDescription);
                     if (choosedOption.equals(options.get(GENERATE_OPTION_INDEX))) {
+                        currentFrame.setTopPanel(new GenerateTestPanel());
                     }
                     if (choosedOption.equals(options.get(ZIP_OPTION_INDEX))) {
                     }
                     if (choosedOption.equals(options.get(CLEAR_OPTION_INDEX))) {
                     }
                     if (choosedOption.equals(options.get(CONFIG_OPTION_INDEX))) {
-                        HomeFrame currentFrame = (HomeFrame) SwingUtilities.windowForComponent(optionDescription);
                         currentFrame.setTopPanel(new ConfigPanel());
                     }
                 }
