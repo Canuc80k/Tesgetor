@@ -16,7 +16,6 @@ import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -30,8 +29,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class ConfigPanel extends JPanel {
     private final File CONFIG_FILE = new File("config/config.cfg");
-    private List<JComponent> subComponents;
-    
+    private static List<String> configData;
+
     private JButton inputGeneratorFileButton;
     private JButton outputGeneratorFileButton;
     private JButton testcaseFolderButton;
@@ -42,68 +41,78 @@ public class ConfigPanel extends JPanel {
     private JLabel backtoHome;
 
     ConfigPanel() {
-        try {
-            ObjectInputStream configFileObjectInputStream = new ObjectInputStream(new FileInputStream(CONFIG_FILE));
-            subComponents = (List<JComponent>) configFileObjectInputStream.readObject();
-            configFileObjectInputStream.close();
-
-            inputGeneratorFileLabel = (JLabel) subComponents.get(0);
-            inputGeneratorFileButton = (JButton) subComponents.get(1);
-            outputGeneratorFileLabel = (JLabel) subComponents.get(2);
-            outputGeneratorFileButton = (JButton) subComponents.get(3);
-            testcaseFolderLabel = (JLabel) subComponents.get(4);
-            testcaseFolderButton = (JButton) subComponents.get(5);
-            backtoHome = (JLabel) subComponents.get(6);
-        } catch (IOException | ClassNotFoundException e) {
-            setDefaultStateForConfigPanel();
+        if (configData == null) {
+            try {
+                ObjectInputStream configFileObjectInputStream = new ObjectInputStream(new FileInputStream(CONFIG_FILE));
+                configData = (List<String>) configFileObjectInputStream.readObject();
+                configFileObjectInputStream.close();
+            } catch (IOException | ClassNotFoundException e) {
+                configData = new ArrayList<String>();
+                for (int i = 0; i < 3; i ++) configData.add("");
+            }
         }
         
-        subComponents.forEach((component) -> add(component));
-        initUIProperties();
+        buildUI();
     }
 
-    private void initUIProperties() {
+    private void buildUI() {
         setPreferredSize(new Dimension(HomeFrame.APP_WIDTH, HomeFrame.TOPPANEL_HEIGHT));
         setBackground(Color.decode("#d7def8"));
         setBorder(new EmptyBorder(10, 10, 10, 10));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
+        inputGeneratorFileLabel = new JLabel("Input Generator File");
         inputGeneratorFileLabel.setMinimumSize(new Dimension(HomeFrame.APP_WIDTH / 3 * 2, 50));
         inputGeneratorFileLabel.setMaximumSize(new Dimension(HomeFrame.APP_WIDTH / 3 * 2, 50));
         inputGeneratorFileLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-    
+        add(inputGeneratorFileLabel);
+
+        inputGeneratorFileButton = new JButton(configData.get(0));
         inputGeneratorFileButton.setMinimumSize(new Dimension(HomeFrame.APP_WIDTH / 3 * 2, 50));
         inputGeneratorFileButton.setMaximumSize(new Dimension(HomeFrame.APP_WIDTH / 3 * 2, 50));
         inputGeneratorFileButton.setAlignmentX(Component.LEFT_ALIGNMENT);
         inputGeneratorFileButton.addActionListener(e -> {
             chooseFile(e);
-            serializeSubComponents();
+            configData.set(0, inputGeneratorFileButton.getText());
+            serializeConfigData();
         });
+        add(inputGeneratorFileButton);
 
+        outputGeneratorFileLabel = new JLabel("Output Generator File");
         outputGeneratorFileLabel.setMinimumSize(new Dimension(HomeFrame.APP_WIDTH / 3 * 2, 50));
         outputGeneratorFileLabel.setMaximumSize(new Dimension(HomeFrame.APP_WIDTH / 3 * 2, 50));
         outputGeneratorFileLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        add(outputGeneratorFileLabel);
 
+        outputGeneratorFileButton = new JButton(configData.get(1));
         outputGeneratorFileButton.setMinimumSize(new Dimension(HomeFrame.APP_WIDTH / 3 * 2, 50));
         outputGeneratorFileButton.setMaximumSize(new Dimension(HomeFrame.APP_WIDTH / 3 * 2, 50));
         outputGeneratorFileButton.setAlignmentX(Component.LEFT_ALIGNMENT);
         outputGeneratorFileButton.addActionListener(e -> {
             chooseFile(e);
-            serializeSubComponents();
+            configData.set(1, outputGeneratorFileButton.getText());
+            serializeConfigData();
         });
+        add(outputGeneratorFileButton);
 
+        testcaseFolderLabel = new JLabel("Testcase Output Folder");
         testcaseFolderLabel.setMinimumSize(new Dimension(HomeFrame.APP_WIDTH / 3 * 2, 50));
         testcaseFolderLabel.setMaximumSize(new Dimension(HomeFrame.APP_WIDTH / 3 * 2, 50));
         testcaseFolderLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        add(testcaseFolderLabel);
 
+        testcaseFolderButton = new JButton(configData.get(2));
         testcaseFolderButton.setMinimumSize(new Dimension(HomeFrame.APP_WIDTH / 3 * 2, 50));
         testcaseFolderButton.setMaximumSize(new Dimension(HomeFrame.APP_WIDTH / 3 * 2, 50));
         testcaseFolderButton.setAlignmentX(Component.LEFT_ALIGNMENT);
         testcaseFolderButton.addActionListener(e -> {
             chooseFolder(e);
-            serializeSubComponents();
+            configData.set(2, testcaseFolderButton.getText());
+            serializeConfigData();
         });
-
+        add(testcaseFolderButton);
+        
+        backtoHome = new JLabel("Back to Home");
         backtoHome.setMinimumSize(new Dimension(100, 50));
         backtoHome.setMaximumSize(new Dimension(100, 50));
         backtoHome.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -119,31 +128,7 @@ public class ConfigPanel extends JPanel {
             public void mouseDragged(MouseEvent e) {}
             public void mouseMoved(MouseEvent e) {}
         });
-    }
-
-    private void setDefaultStateForConfigPanel() {
-        subComponents = new ArrayList<JComponent>();
-        
-        inputGeneratorFileLabel = new JLabel("Input Generator File");
-        subComponents.add(inputGeneratorFileLabel);
-
-        inputGeneratorFileButton = new JButton();
-        subComponents.add(inputGeneratorFileButton);
-
-        outputGeneratorFileLabel = new JLabel("Output Generator File");
-        subComponents.add(outputGeneratorFileLabel);
-
-        outputGeneratorFileButton = new JButton();
-        subComponents.add(outputGeneratorFileButton);
-
-        testcaseFolderLabel = new JLabel("Testcase Output Folder");
-        subComponents.add(testcaseFolderLabel);
-
-        testcaseFolderButton = new JButton();
-        subComponents.add(testcaseFolderButton);
-
-        backtoHome = new JLabel("Back to Home");
-        subComponents.add(backtoHome);
+        add(backtoHome);
     }
 
     private void chooseFile(ActionEvent e) {
@@ -172,14 +157,18 @@ public class ConfigPanel extends JPanel {
         }
     }
 
-    private void serializeSubComponents() {
+    private void serializeConfigData() {
         try {
             ObjectOutputStream configFileObjectOutputStream = new ObjectOutputStream(new FileOutputStream(CONFIG_FILE));
-            configFileObjectOutputStream.writeObject(subComponents);
+            configFileObjectOutputStream.writeObject(configData);
             configFileObjectOutputStream.flush();
             configFileObjectOutputStream.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static List<String> getConfigData() {
+        return configData;
     }
 }
