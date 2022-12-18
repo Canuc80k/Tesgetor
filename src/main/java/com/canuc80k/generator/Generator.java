@@ -8,6 +8,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import com.canuc80k.compiler.CPPCompiler;
+import com.canuc80k.constant.TestcaseFileNameType;
 import com.canuc80k.userinterface.ConfigPanel;
 
 import filetool.FileTool;
@@ -34,11 +35,11 @@ public class Generator {
         cppCompiler = new CPPCompiler();
     }
 
-    public synchronized void generate(int beginTestcaseIndex, int endTestcaseIndex) throws IOException, InterruptedException {
+    public synchronized void generate(int beginTestcaseIndex, int endTestcaseIndex, TestcaseFileNameType type, int lastTestcaseFileNameLength) throws IOException, InterruptedException {
         cppCompiler.compile_gplusplus(inputGeneratorFile, INPUT_GENERATOR_EXE_FILE);
         cppCompiler.compile_gplusplus(outputGeneratorFile, OUTPUT_GENERATOR_EXE_FILE);
 
-        generateTestcases(beginTestcaseIndex, endTestcaseIndex);
+        generateTestcases(beginTestcaseIndex, endTestcaseIndex, type, lastTestcaseFileNameLength);
     }
 
     public synchronized void clear() {   
@@ -46,7 +47,7 @@ public class Generator {
         FileTool.deleteFolder(testcaseFolder, FileTool.KEEP_CURRENT_FOLDER);
     }
 
-    private synchronized void generateTestcases(int beginTestcaseIndex, int endTestcaseIndex) throws IOException, InterruptedException { 
+    private synchronized void generateTestcases(int beginTestcaseIndex, int endTestcaseIndex, TestcaseFileNameType type, int lastTestcaseFileNameLength) throws IOException, InterruptedException { 
         List<Runnable> tasks = new ArrayList<Runnable>();
         for (int i = beginTestcaseIndex; i <= endTestcaseIndex; i ++) {
             Runnable inputGeneratorThread 
@@ -54,8 +55,8 @@ public class Generator {
                     cppCompiler, 
                     INPUT_GENERATOR_EXE_FILE, 
                     OUTPUT_GENERATOR_EXE_FILE,
-                    testcaseFolder.getAbsolutePath() + "\\" + i + ".INP",
-                    testcaseFolder.getAbsolutePath() + "\\" + i + ".OUT"
+                    testcaseFolder.getAbsolutePath() + "\\" + TestcaseFileNameType.getFileName(type, i, lastTestcaseFileNameLength) + ".INP",
+                    testcaseFolder.getAbsolutePath() + "\\" + TestcaseFileNameType.getFileName(type, i, lastTestcaseFileNameLength) + ".OUT"
                 );
             tasks.add(inputGeneratorThread);
         }

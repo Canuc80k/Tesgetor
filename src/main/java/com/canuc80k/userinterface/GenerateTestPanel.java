@@ -16,6 +16,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.MouseInputListener;
 
+import com.canuc80k.constant.TestcaseFileNameType;
 import com.canuc80k.generator.Generator;
 
 class GenerateTestPanel extends JPanel {
@@ -76,11 +77,16 @@ class GenerateTestPanel extends JPanel {
         generateButton.setMaximumSize(new Dimension(100, 50));
         generateButton.setAlignmentX(Component.LEFT_ALIGNMENT);
         generateButton.addActionListener(e -> {
-            String beginIndex = beginTestcaseIndexTextField.getText().trim(); 
+            TestcaseFileNameType type = TestcaseFileNameType.NORMAL;
+            String beginIndex = beginTestcaseIndexTextField.getText().trim();
             String endIndex = endTestcaseIndexTextField.getText().trim();
+            
+            if (beginIndex.length() == endIndex.length()) {
+                type = TestcaseFileNameType.LEXICOGRAPHICAL_ORDER;
+            }
 
             try {
-                new Generator().generate(Integer.parseInt(beginIndex), Integer.parseInt(endIndex));
+                new Generator().generate(Integer.parseInt(beginIndex), Integer.parseInt(endIndex), type, endIndex.length());
             } catch (NumberFormatException | IOException | InterruptedException e1) {
                 e1.printStackTrace();
             }
