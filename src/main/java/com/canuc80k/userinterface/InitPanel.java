@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.MouseInputListener;
+
+import org.zeroturnaround.zip.ZipUtil;
 
 import com.canuc80k.generator.Generator;
 
@@ -56,6 +59,9 @@ public class InitPanel extends JPanel {
                         currentFrame.setTopPanel(new GenerateTestPanel());
                     }
                     if (choosedOption.equals(options.get(ZIP_OPTION_INDEX))) {
+                        File testcaseFile = new File(ConfigPanel.getConfigData().get(2));
+                        File testcaseZipFile = new File(testcaseFile.getAbsolutePath() + ".zip");
+                        ZipUtil.pack(testcaseFile, testcaseZipFile);
                     }
                     if (choosedOption.equals(options.get(CLEAR_OPTION_INDEX))) {
                         new Generator().clear();
