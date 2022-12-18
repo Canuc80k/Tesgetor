@@ -2,6 +2,7 @@ package com.canuc80k.generator;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.canuc80k.compiler.CPPCompiler;
@@ -21,6 +22,8 @@ public class Generator {
     private CPPCompiler cppCompiler;
 
     public Generator() {
+        if (!TEMP_FOLDER.exists()) TEMP_FOLDER.mkdirs();
+
         List<String> configData = ConfigPanel.getConfigData();
         inputGeneratorFile = new File(configData.get(0));
         outputGeneratorFile = new File(configData.get(1));
@@ -33,8 +36,7 @@ public class Generator {
         cppCompiler.compile_gplusplus(inputGeneratorFile, INPUT_GENERATOR_EXE_FILE);
         cppCompiler.compile_gplusplus(outputGeneratorFile, OUTPUT_GENERATOR_EXE_FILE);
 
-        generateInputTestcase(beginTestcaseIndex, endTestcaseIndex);
-        generateOutputTestcase(beginTestcaseIndex, endTestcaseIndex);
+        generateTestcases(beginTestcaseIndex, endTestcaseIndex);
     }
 
     public synchronized void clear() {   
@@ -42,15 +44,20 @@ public class Generator {
         FileTool.deleteFolder(testcaseFolder, FileTool.KEEP_CURRENT_FOLDER);
     }
 
-    private synchronized void generateInputTestcase(int beginTestcaseIndex, int endTestcaseIndex) throws IOException, InterruptedException { 
+    private synchronized void generateTestcases(int beginTestcaseIndex, int endTestcaseIndex) throws IOException, InterruptedException { 
+        List<Thread> threads = new ArrayList<Thread>();
         for (int i = beginTestcaseIndex; i <= endTestcaseIndex; i ++) {
-            cppCompiler.run(INPUT_GENERATOR_EXE_FILE, testcaseFolder.getAbsolutePath() + "\\" + i + ".INP");
+            Thread inputGeneratorThread 
+                = new GeneratorThread(
+                    cppCompiler, 
+                    INPUT_GENERATOR_EXE_FILE, 
+                    OUTPUT_GENERATOR_EXE_FILE,
+                    testcaseFolder.getAbsolutePath() + "\\" + i + ".INP",
+                    testcaseFolder.getAbsolutePath() + "\\" + i + ".OUT"
+                );
+            threads.add(inputGeneratorThread);
         }
-    }
 
-    private synchronized void generateOutputTestcase(int beginTestcaseIndex, int endTestcaseIndex) throws IOException, InterruptedException {
-        for (int i = beginTestcaseIndex; i <= endTestcaseIndex; i ++) {
-            cppCompiler.run(OUTPUT_GENERATOR_EXE_FILE, testcaseFolder.getAbsolutePath() + "\\" + i + ".INP", testcaseFolder.getAbsolutePath() + "\\" + i + ".OUT");
-        }
+        threads.forEach((thread) -> thread.start());
     }
 }
