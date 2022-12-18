@@ -15,6 +15,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.MouseInputListener;
 
+import com.canuc80k.generator.Generator;
+
 public class InitPanel extends JPanel {
     private final int GENERATE_OPTION_INDEX = 0;
     private final int ZIP_OPTION_INDEX = 1;
@@ -56,6 +58,7 @@ public class InitPanel extends JPanel {
                     if (choosedOption.equals(options.get(ZIP_OPTION_INDEX))) {
                     }
                     if (choosedOption.equals(options.get(CLEAR_OPTION_INDEX))) {
+                        new Generator().clear();
                     }
                     if (choosedOption.equals(options.get(CONFIG_OPTION_INDEX))) {
                         currentFrame.setTopPanel(new ConfigPanel());

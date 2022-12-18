@@ -7,6 +7,8 @@ import java.util.List;
 import com.canuc80k.compiler.CPPCompiler;
 import com.canuc80k.userinterface.ConfigPanel;
 
+import filetool.FileTool;
+
 public class Generator {
     private final File TEMP_FOLDER = new File("temp");
     private final File INPUT_GENERATOR_EXE_FILE = new File(TEMP_FOLDER.getAbsolutePath() + "/inputGenerator.exe");
@@ -33,6 +35,11 @@ public class Generator {
 
         generateInputTestcase(beginTestcaseIndex, endTestcaseIndex);
         generateOutputTestcase(beginTestcaseIndex, endTestcaseIndex);
+    }
+
+    public synchronized void clear() {   
+        FileTool.deleteFolder(TEMP_FOLDER, FileTool.KEEP_CURRENT_FOLDER);
+        FileTool.deleteFolder(testcaseFolder, FileTool.KEEP_CURRENT_FOLDER);
     }
 
     private synchronized void generateInputTestcase(int beginTestcaseIndex, int endTestcaseIndex) throws IOException, InterruptedException { 
