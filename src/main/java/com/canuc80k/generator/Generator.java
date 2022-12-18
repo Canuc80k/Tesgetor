@@ -16,15 +16,18 @@ public class Generator {
     private File outputGeneratorFile;
     private File testcaseFolder;
 
+    private CPPCompiler cppCompiler;
+
     public Generator() {
         List<String> configData = ConfigPanel.getConfigData();
         inputGeneratorFile = new File(configData.get(0));
         outputGeneratorFile = new File(configData.get(1));
         testcaseFolder = new File(configData.get(2));
+        
+        cppCompiler = new CPPCompiler();
     }
 
     public synchronized void generate(int beginTestcaseIndex, int endTestcaseIndex) throws IOException, InterruptedException {
-        CPPCompiler cppCompiler = new CPPCompiler();
         cppCompiler.compile_gplusplus(inputGeneratorFile, INPUT_GENERATOR_EXE_FILE);
         cppCompiler.compile_gplusplus(outputGeneratorFile, OUTPUT_GENERATOR_EXE_FILE);
 
@@ -33,14 +36,12 @@ public class Generator {
     }
 
     private synchronized void generateInputTestcase(int beginTestcaseIndex, int endTestcaseIndex) throws IOException, InterruptedException { 
-        CPPCompiler cppCompiler = new CPPCompiler();
         for (int i = beginTestcaseIndex; i <= endTestcaseIndex; i ++) {
             cppCompiler.run(INPUT_GENERATOR_EXE_FILE, testcaseFolder.getAbsolutePath() + "\\" + i + ".INP");
         }
     }
 
     private synchronized void generateOutputTestcase(int beginTestcaseIndex, int endTestcaseIndex) throws IOException, InterruptedException {
-        CPPCompiler cppCompiler = new CPPCompiler();
         for (int i = beginTestcaseIndex; i <= endTestcaseIndex; i ++) {
             cppCompiler.run(OUTPUT_GENERATOR_EXE_FILE, testcaseFolder.getAbsolutePath() + "\\" + i + ".INP", testcaseFolder.getAbsolutePath() + "\\" + i + ".OUT");
         }
