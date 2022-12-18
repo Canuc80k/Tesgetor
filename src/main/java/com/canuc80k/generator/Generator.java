@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import com.canuc80k.compiler.CPPCompiler;
 import com.canuc80k.userinterface.ConfigPanel;
@@ -45,19 +47,21 @@ public class Generator {
     }
 
     private synchronized void generateTestcases(int beginTestcaseIndex, int endTestcaseIndex) throws IOException, InterruptedException { 
-        List<Thread> threads = new ArrayList<Thread>();
+        List<Runnable> tasks = new ArrayList<Runnable>();
         for (int i = beginTestcaseIndex; i <= endTestcaseIndex; i ++) {
-            Thread inputGeneratorThread 
-                = new GeneratorThread(
+            Runnable inputGeneratorThread 
+                = new GeneratorTask(
                     cppCompiler, 
                     INPUT_GENERATOR_EXE_FILE, 
                     OUTPUT_GENERATOR_EXE_FILE,
                     testcaseFolder.getAbsolutePath() + "\\" + i + ".INP",
                     testcaseFolder.getAbsolutePath() + "\\" + i + ".OUT"
                 );
-            threads.add(inputGeneratorThread);
+            tasks.add(inputGeneratorThread);
         }
 
-        threads.forEach((thread) -> thread.start());
+        ExecutorService threadPool = Executors.newFixedThreadPool(20);  
+        tasks.forEach((task) -> threadPool.execute(task));
+        threadPool.shutdown();
     }
 }

@@ -5,14 +5,14 @@ import java.io.IOException;
 
 import com.canuc80k.compiler.CPPCompiler;
 
-public class GeneratorThread extends Thread {
+public class GeneratorTask implements Runnable {
     private final File inputgeneratorExeFile;
     private final File outputgeneratorExeFile;
     private CPPCompiler cppCompiler;
 
     private String inputTescaseFilePath, outputTescaseFilePath;
 
-    GeneratorThread(CPPCompiler cppCompiler, File inputgeneratorExeFile, File outputgeneratorExeFile, String inputTescaseFilePath, String outputTescaseFilePath) {
+    GeneratorTask(CPPCompiler cppCompiler, File inputgeneratorExeFile, File outputgeneratorExeFile, String inputTescaseFilePath, String outputTescaseFilePath) {
         this.cppCompiler = cppCompiler;
         this.inputgeneratorExeFile = inputgeneratorExeFile;
         this.outputgeneratorExeFile = outputgeneratorExeFile;
