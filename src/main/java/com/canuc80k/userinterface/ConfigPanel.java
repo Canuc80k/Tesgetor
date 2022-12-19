@@ -50,7 +50,7 @@ public class ConfigPanel extends JPanel {
 
     private void buildUI() {
         setPreferredSize(new Dimension(HomeFrame.APP_WIDTH, HomeFrame.TOPPANEL_HEIGHT));
-        setBackground(Color.decode("#d7def8"));
+        setBackground(Color.decode("#282a36"));
         setBorder(new EmptyBorder(0, 10, 10, 10));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 

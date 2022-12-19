@@ -36,7 +36,7 @@ public class InitPanel extends JPanel {
         options.add("Config");
 
         setPreferredSize(new Dimension(HomeFrame.APP_WIDTH, HomeFrame.TOPPANEL_HEIGHT));
-        setBackground(Color.decode("#d7def8"));
+        setBackground(Color.decode("#94959b"));
         setBorder(new EmptyBorder(10, 10, 10, 10));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         topLabel = new JLabel("What do you want to do?");
