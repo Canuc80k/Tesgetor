@@ -60,7 +60,7 @@ public class Generator {
             tasks.add(inputGeneratorThread);
         }
 
-        ExecutorService threadPool = Executors.newFixedThreadPool(20);  
+        ExecutorService threadPool = Executors.newCachedThreadPool();  
         tasks.forEach((task) -> threadPool.execute(task));
         threadPool.shutdown();
     }
