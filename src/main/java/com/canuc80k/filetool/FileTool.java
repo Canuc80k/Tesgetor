@@ -1,4 +1,4 @@
-package filetool;
+package com.canuc80k.filetool;
 
 import java.io.File;
 

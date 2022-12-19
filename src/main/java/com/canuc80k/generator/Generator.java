@@ -9,9 +9,8 @@ import java.util.concurrent.Executors;
 
 import com.canuc80k.compiler.CPPCompiler;
 import com.canuc80k.constant.TestcaseFileNameType;
+import com.canuc80k.filetool.FileTool;
 import com.canuc80k.userinterface.ConfigPanel;
-
-import filetool.FileTool;
 
 public class Generator {
     private final File TEMP_FOLDER = new File("temp");
