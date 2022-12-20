@@ -1,6 +1,5 @@
 package com.canuc80k.userinterface;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.MouseEvent;
@@ -18,6 +17,7 @@ import javax.swing.event.MouseInputListener;
 
 import com.canuc80k.constant.TestcaseFileNameType;
 import com.canuc80k.generator.Generator;
+import com.canuc80k.theme.ThemeProperty;
 
 class GenerateTestPanel extends JPanel {
     private JLabel topLabel;
@@ -36,7 +36,7 @@ class GenerateTestPanel extends JPanel {
 
     private void buildUI() {
         setPreferredSize(new Dimension(HomeFrame.APP_WIDTH, HomeFrame.TOPPANEL_HEIGHT));
-        setBackground(Color.decode("#282a36"));
+        setBackground(ThemeProperty.getTopPanelColor());
         setBorder(new EmptyBorder(0, 10, 10, 10));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 

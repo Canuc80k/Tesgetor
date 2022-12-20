@@ -1,8 +1,10 @@
 package com.canuc80k.userinterface;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.util.ArrayList;
@@ -12,6 +14,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.MouseInputListener;
@@ -19,8 +22,11 @@ import javax.swing.event.MouseInputListener;
 import org.zeroturnaround.zip.ZipUtil;
 
 import com.canuc80k.generator.Generator;
+import com.canuc80k.theme.ThemeProperty;
 
 public class InitPanel extends JPanel {
+    private final int OPTION_NUMBERS = 4;
+
     private final int GENERATE_OPTION_INDEX = 0;
     private final int ZIP_OPTION_INDEX = 1;
     private final int CLEAR_OPTION_INDEX = 2;
@@ -40,16 +46,30 @@ public class InitPanel extends JPanel {
         setBorder(new EmptyBorder(10, 10, 10, 10));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         topLabel = new JLabel("What do you want to do?");
-        topLabel.setFont(new Font("Open Sans Bold", Font.PLAIN, 14));
+        topLabel.setAlignmentX(CENTER_ALIGNMENT);
+        topLabel.setForeground(ThemeProperty.getFontColor());
+        topLabel.setFont(new Font("Open Sans Bold", Font.PLAIN, 16));
         topLabel.setSize(new Dimension(HomeFrame.APP_WIDTH, 50));
         add(topLabel);
 
-        add(Box.createRigidArea(new Dimension(0, 10)));
+        add(Box.createRigidArea(new Dimension(0, 30)));
+        
+        JPanel optionsPanel = new JPanel();
+        optionsPanel.setBackground(ThemeProperty.getTopPanelColor());
+        optionsPanel.setLayout(new GridLayout(2, OPTION_NUMBERS / 2, 10, 10));
+        add(optionsPanel);
 
         options.forEach(option -> {
-            JLabel optionDescription = new JLabel(option);
-            optionDescription.setFont(new Font("Open Sans Regular", Font.PLAIN, 14));
-            optionDescription.setSize(new Dimension(HomeFrame.APP_WIDTH, 50));
+            JPanel optionPanel = new JPanel();
+            optionPanel.setLayout(new BorderLayout());
+            optionPanel.setBackground(ThemeProperty.getSingleOptionPannelColor());
+            optionsPanel.add(optionPanel);
+
+            JLabel optionDescription = new JLabel(option, SwingConstants.CENTER);
+            optionPanel.add(optionDescription, BorderLayout.CENTER);
+            optionDescription.setAlignmentX(CENTER_ALIGNMENT);
+            optionDescription.setFont(new Font("Open Sans Medium", Font.PLAIN, 14));
+            optionDescription.setForeground(ThemeProperty.getFontColor());
             optionDescription.addMouseListener(new MouseInputListener() {
                 public void mouseClicked(MouseEvent e) {
                     String choosedOption = ((JLabel) e.getSource()).getText();
@@ -90,7 +110,6 @@ public class InitPanel extends JPanel {
                 }
 
             });
-            this.add(optionDescription);
         });
     }
 }

@@ -9,6 +9,7 @@ public class Launcher {
         new OpenSansFontInitor().initFont();
 
         HomeFrame homeFrame = new HomeFrame();
+        homeFrame.pack();
         homeFrame.setVisible(true);
     }
 }

@@ -11,7 +11,7 @@ public class DracularTheme extends Theme {
         super.init();
         
         try {
-            UIManager.setLookAndFeel("com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatDraculaContrastIJTheme");
+            UIManager.setLookAndFeel("com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatDraculaIJTheme");
             UIManager.put("Button.arc", 10);
             UIManager.put("Component.arc", 20);
             UIManager.put("ProgressBar.arc", 20);

@@ -1,6 +1,5 @@
 package com.canuc80k.userinterface;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -24,6 +23,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.MouseInputListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
+import com.canuc80k.theme.ThemeProperty;
 
 @SuppressWarnings("unchecked")
 
@@ -50,7 +51,7 @@ public class ConfigPanel extends JPanel {
 
     private void buildUI() {
         setPreferredSize(new Dimension(HomeFrame.APP_WIDTH, HomeFrame.TOPPANEL_HEIGHT));
-        setBackground(Color.decode("#282a36"));
+        setBackground(ThemeProperty.getTopPanelColor());
         setBorder(new EmptyBorder(0, 10, 10, 10));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 

@@ -1,11 +1,12 @@
 package com.canuc80k.userinterface;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import com.canuc80k.theme.ThemeProperty;
 
 public class HomeFrame extends JFrame {
     protected static final int APP_WIDTH = 350;
@@ -21,14 +22,13 @@ public class HomeFrame extends JFrame {
         setResizable(false);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(10, 10, 10, 10));
-        contentPane.setBackground(Color.decode("#282a36"));
+        contentPane.setBackground(ThemeProperty.getBackgroundColor());
         contentPane.setLayout(new BorderLayout(0, 0));
         setContentPane(contentPane);
 
         contentPane.add(topPanel, BorderLayout.NORTH);
 
         JPanel bottomPanel = new JPanel();
-        bottomPanel.setBackground(Color.decode("#4ec3f3"));
         contentPane.add(bottomPanel, BorderLayout.SOUTH);
         bottomPanel.setLayout(new BorderLayout(0, 0));
     }
