@@ -2,6 +2,7 @@ package com.canuc80k.userinterface;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -61,6 +62,7 @@ public class InitPanel extends JPanel {
 
         options.forEach(option -> {
             JPanel optionPanel = new JPanel();
+            optionPanel.setCursor(new Cursor(Cursor.HAND_CURSOR));
             optionPanel.setLayout(new BorderLayout());
             optionPanel.setBackground(ThemeProperty.getSingleOptionPannelColor());
             optionsPanel.add(optionPanel);

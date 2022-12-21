@@ -20,6 +20,7 @@ public class HomeFrame extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(APP_WIDTH, APP_HEIGHT);
         setResizable(false);
+        setLocationRelativeTo(null);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(10, 10, 10, 10));
         contentPane.setBackground(ThemeProperty.getBackgroundColor());

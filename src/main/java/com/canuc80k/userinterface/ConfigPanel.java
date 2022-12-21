@@ -1,7 +1,10 @@
 package com.canuc80k.userinterface;
 
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -13,6 +16,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -56,14 +60,19 @@ public class ConfigPanel extends JPanel {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         inputGeneratorFileLabel = new JLabel("Input Generator File");
-        inputGeneratorFileLabel.setMinimumSize(new Dimension(HomeFrame.APP_WIDTH / 3 * 2, 50));
-        inputGeneratorFileLabel.setMaximumSize(new Dimension(HomeFrame.APP_WIDTH / 3 * 2, 50));
+        inputGeneratorFileLabel.setForeground(ThemeProperty.getFontColor());
+        inputGeneratorFileLabel.setFont(new Font("Open Sans Bold", Font.PLAIN, 14));
+        inputGeneratorFileLabel.setMinimumSize(new Dimension(HomeFrame.APP_WIDTH / 5 * 4, 45));
+        inputGeneratorFileLabel.setMaximumSize(new Dimension(HomeFrame.APP_WIDTH / 5 * 4, 45));
         inputGeneratorFileLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         add(inputGeneratorFileLabel);
 
         inputGeneratorFileButton = new JButton(configData.get(0));
-        inputGeneratorFileButton.setMinimumSize(new Dimension(HomeFrame.APP_WIDTH / 3 * 2, 50));
-        inputGeneratorFileButton.setMaximumSize(new Dimension(HomeFrame.APP_WIDTH / 3 * 2, 50));
+        inputGeneratorFileButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        inputGeneratorFileButton.setForeground(ThemeProperty.getFontHighLightColor());
+        inputGeneratorFileButton.setFont(new Font("Open Sans SemiBold", Font.PLAIN, 12));
+        inputGeneratorFileButton.setMinimumSize(new Dimension(HomeFrame.APP_WIDTH / 5 * 4, 45));
+        inputGeneratorFileButton.setMaximumSize(new Dimension(HomeFrame.APP_WIDTH / 5 * 4, 45));
         inputGeneratorFileButton.setAlignmentX(Component.LEFT_ALIGNMENT);
         inputGeneratorFileButton.addActionListener(e -> {
             chooseFile(e);
@@ -72,15 +81,22 @@ public class ConfigPanel extends JPanel {
         });
         add(inputGeneratorFileButton);
 
-        outputGeneratorFileLabel = new JLabel("Output Generator File");
-        outputGeneratorFileLabel.setMinimumSize(new Dimension(HomeFrame.APP_WIDTH / 3 * 2, 50));
-        outputGeneratorFileLabel.setMaximumSize(new Dimension(HomeFrame.APP_WIDTH / 3 * 2, 50));
+        add(Box.createRigidArea(new Dimension(0, 20)));
+
+        outputGeneratorFileLabel = new JLabel("Output Generator File");    
+        outputGeneratorFileLabel.setForeground(ThemeProperty.getFontColor());
+        outputGeneratorFileLabel.setFont(new Font("Open Sans Bold", Font.PLAIN, 14));
+        outputGeneratorFileLabel.setMinimumSize(new Dimension(HomeFrame.APP_WIDTH / 5 * 4, 45));
+        outputGeneratorFileLabel.setMaximumSize(new Dimension(HomeFrame.APP_WIDTH / 5 * 4, 45));
         outputGeneratorFileLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         add(outputGeneratorFileLabel);
 
         outputGeneratorFileButton = new JButton(configData.get(1));
-        outputGeneratorFileButton.setMinimumSize(new Dimension(HomeFrame.APP_WIDTH / 3 * 2, 50));
-        outputGeneratorFileButton.setMaximumSize(new Dimension(HomeFrame.APP_WIDTH / 3 * 2, 50));
+        outputGeneratorFileButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        outputGeneratorFileButton.setForeground(ThemeProperty.getFontHighLightColor());
+        outputGeneratorFileButton.setFont(new Font("Open Sans SemiBold", Font.PLAIN, 12));
+        outputGeneratorFileButton.setMinimumSize(new Dimension(HomeFrame.APP_WIDTH / 5 * 4, 45));
+        outputGeneratorFileButton.setMaximumSize(new Dimension(HomeFrame.APP_WIDTH / 5 * 4, 45));
         outputGeneratorFileButton.setAlignmentX(Component.LEFT_ALIGNMENT);
         outputGeneratorFileButton.addActionListener(e -> {
             chooseFile(e);
@@ -89,15 +105,22 @@ public class ConfigPanel extends JPanel {
         });
         add(outputGeneratorFileButton);
 
+        add(Box.createRigidArea(new Dimension(0, 20)));
+
         testcaseFolderLabel = new JLabel("Testcase Output Folder");
-        testcaseFolderLabel.setMinimumSize(new Dimension(HomeFrame.APP_WIDTH / 3 * 2, 50));
-        testcaseFolderLabel.setMaximumSize(new Dimension(HomeFrame.APP_WIDTH / 3 * 2, 50));
+        testcaseFolderLabel.setForeground(ThemeProperty.getFontColor());
+        testcaseFolderLabel.setFont(new Font("Open Sans Bold", Font.PLAIN, 14));
+        testcaseFolderLabel.setMinimumSize(new Dimension(HomeFrame.APP_WIDTH / 5 * 4, 45));
+        testcaseFolderLabel.setMaximumSize(new Dimension(HomeFrame.APP_WIDTH / 5 * 4, 45));
         testcaseFolderLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         add(testcaseFolderLabel);
 
         testcaseFolderButton = new JButton(configData.get(2));
-        testcaseFolderButton.setMinimumSize(new Dimension(HomeFrame.APP_WIDTH / 3 * 2, 50));
-        testcaseFolderButton.setMaximumSize(new Dimension(HomeFrame.APP_WIDTH / 3 * 2, 50));
+        testcaseFolderButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        testcaseFolderButton.setForeground(ThemeProperty.getFontHighLightColor());
+        testcaseFolderButton.setFont(new Font("Open Sans SemiBold", Font.PLAIN, 12));
+        testcaseFolderButton.setMinimumSize(new Dimension(HomeFrame.APP_WIDTH / 5 * 4, 45));
+        testcaseFolderButton.setMaximumSize(new Dimension(HomeFrame.APP_WIDTH / 5 * 4, 45));
         testcaseFolderButton.setAlignmentX(Component.LEFT_ALIGNMENT);
         testcaseFolderButton.addActionListener(e -> {
             chooseFolder(e);
@@ -106,9 +129,14 @@ public class ConfigPanel extends JPanel {
         });
         add(testcaseFolderButton);
         
-        backtoHome = new JLabel("Back to Home");
-        backtoHome.setMinimumSize(new Dimension(100, 50));
-        backtoHome.setMaximumSize(new Dimension(100, 50));
+        add(Box.createRigidArea(new Dimension(0, 20)));
+
+        backtoHome = new JLabel("<html><u><b>Back to Home</b></u></html>");
+        backtoHome.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        backtoHome.setForeground(Color.BLUE.darker());
+        backtoHome.setFont(new Font("Open Sans Bold", Font.PLAIN, 12));
+        backtoHome.setMinimumSize(new Dimension(100, 45));
+        backtoHome.setMaximumSize(new Dimension(100, 45));
         backtoHome.setAlignmentX(Component.LEFT_ALIGNMENT);
         backtoHome.addMouseListener(new MouseInputListener() {
             public void mouseClicked(MouseEvent e) {
