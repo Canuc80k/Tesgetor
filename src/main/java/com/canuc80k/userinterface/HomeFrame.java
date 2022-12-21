@@ -18,7 +18,7 @@ public class HomeFrame extends JFrame {
 
     public HomeFrame() {
         setTitle("dont_generatetest_me_pls");
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(APP_WIDTH, APP_HEIGHT);
         setResizable(false);
         setLocationRelativeTo(null);
