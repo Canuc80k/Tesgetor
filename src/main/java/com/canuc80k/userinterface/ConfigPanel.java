@@ -182,7 +182,14 @@ public class ConfigPanel extends JPanel {
         }
     }
 
+    private static void createConfigFolder() {
+        File configFolder = new File(CONFIG_FILE.getParent());
+        if (!configFolder.exists()) configFolder.mkdirs();
+    }
+
     private void serializeConfigData() {
+        createConfigFolder();
+
         try {
             ObjectOutputStream configFileObjectOutputStream = new ObjectOutputStream(new FileOutputStream(CONFIG_FILE));
             configFileObjectOutputStream.writeObject(configData);
@@ -194,6 +201,8 @@ public class ConfigPanel extends JPanel {
     }
 
     private static void deserializeConfigData() {
+        createConfigFolder();
+
         try {
             ObjectInputStream configFileObjectInputStream = new ObjectInputStream(new FileInputStream(CONFIG_FILE));
             configData = (List<String>) configFileObjectInputStream.readObject();
