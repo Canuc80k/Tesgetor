@@ -28,15 +28,19 @@ public class Generator {
     public Generator() {
         if (!TEMP_FOLDER.exists()) TEMP_FOLDER.mkdirs();
 
+        locateConfigFiles();        
+        cppCompiler = new CPPCompiler();
+    }
+
+    public synchronized void locateConfigFiles() {
         List<String> configData = ConfigPanel.getConfigData();
         inputGeneratorFile = new File(configData.get(0));
         outputGeneratorFile = new File(configData.get(1));
         testcaseFolder = new File(configData.get(2));
-        
-        cppCompiler = new CPPCompiler();
     }
 
     public synchronized void generate(int beginTestcaseIndex, int endTestcaseIndex, TestcaseFileNameType type, int lastTestcaseFileNameLength) throws IOException, InterruptedException {
+        locateConfigFiles();
         cppCompiler.compile_gplusplus(inputGeneratorFile, INPUT_GENERATOR_EXE_FILE);
         cppCompiler.compile_gplusplus(outputGeneratorFile, OUTPUT_GENERATOR_EXE_FILE);
         GenerateTestPanel.setTotalTestcase(endTestcaseIndex - beginTestcaseIndex + 1);
