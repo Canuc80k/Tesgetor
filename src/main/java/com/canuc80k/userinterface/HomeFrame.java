@@ -2,6 +2,7 @@ package com.canuc80k.userinterface;
 
 import java.awt.BorderLayout;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -17,6 +18,8 @@ public class HomeFrame extends JFrame {
     private JPanel topPanel = InitPanel.getInitPanel();
 
     public HomeFrame() {
+        ImageIcon img = new ImageIcon(HomeFrame.class.getResource("/image/icon.png"));
+        setIconImage(img.getImage());
         setTitle("dont_generatetest_me_pls");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(APP_WIDTH, APP_HEIGHT);
