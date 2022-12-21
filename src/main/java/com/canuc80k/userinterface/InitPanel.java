@@ -14,6 +14,7 @@ import java.util.List;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
@@ -81,11 +82,25 @@ public class InitPanel extends JPanel {
                         currentFrame.setTopPanel(new GenerateTestPanel());
                     }
                     if (choosedOption.equals(options.get(ZIP_OPTION_INDEX))) {
+                        int answer = JOptionPane.showConfirmDialog(
+                            currentFrame, 
+                            "Muốn Zip Testcase à?",
+                            "Hỏi lại cho chắc",
+                            JOptionPane.YES_NO_CANCEL_OPTION
+                        );
+                        if (answer != JOptionPane.YES_OPTION) return;
                         File testcaseFile = new File(ConfigPanel.getConfigData().get(2));
                         File testcaseZipFile = new File(testcaseFile.getAbsolutePath() + ".zip");
                         ZipUtil.pack(testcaseFile, testcaseZipFile);
                     }
                     if (choosedOption.equals(options.get(CLEAR_OPTION_INDEX))) {
+                        int answer = JOptionPane.showConfirmDialog(
+                            currentFrame, 
+                            "Muốn Xóa Test cũ à?",
+                            "Hỏi lại cho chắc",
+                            JOptionPane.YES_NO_CANCEL_OPTION
+                        );
+                        if (answer != JOptionPane.YES_OPTION) return;
                         new Generator().clear();
                     }
                     if (choosedOption.equals(options.get(CONFIG_OPTION_INDEX))) {

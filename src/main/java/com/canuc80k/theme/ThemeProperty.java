@@ -7,6 +7,8 @@ public class ThemeProperty {
     private static Color singleOptionPannelColor = Color.decode("#eeeeee");
     private static Color fontColor = Color.decode("#000000");
     private static Color fontHighLightColor = Color.decode("#fd93b7");
+    private static Color inverseFontColor = Color.decode("#83c8e1");
+
     public static Color getBackgroundColor() {
         return backgroundColor;
     }
@@ -25,5 +27,9 @@ public class ThemeProperty {
 
     public static Color getFontHighLightColor() {
         return fontHighLightColor;
+    }
+
+    public static Color getInverseFontColor() {
+        return inverseFontColor;
     }
 }

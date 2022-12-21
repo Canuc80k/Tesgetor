@@ -1,7 +1,10 @@
 package com.canuc80k.userinterface;
 
+import java.awt.Color;
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 
@@ -40,31 +43,41 @@ class GenerateTestPanel extends JPanel {
         setBorder(new EmptyBorder(0, 10, 10, 10));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        topLabel = new JLabel("Testcase index:");
-        topLabel.setMinimumSize(new Dimension(100, 50));
-        topLabel.setMaximumSize(new Dimension(100, 50));
+        topLabel = new JLabel("Testcase index");
+        topLabel.setFont(new Font("Open Sans Bold", Font.PLAIN, 14));
+        topLabel.setForeground(ThemeProperty.getFontColor());
+        topLabel.setMinimumSize(new Dimension(HomeFrame.APP_WIDTH, 50));
+        topLabel.setMaximumSize(new Dimension(HomeFrame.APP_WIDTH, 50));
         topLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         add(topLabel);
 
         fromLabel = new JLabel("From");
+        fromLabel.setFont(new Font("Open Sans Medium", Font.PLAIN, 14));
+        fromLabel.setForeground(ThemeProperty.getFontColor());
         fromLabel.setMinimumSize(new Dimension(100, 50));
         fromLabel.setMaximumSize(new Dimension(100, 50));
         fromLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         add(fromLabel);
 
         beginTestcaseIndexTextField = new JTextField();
+        beginTestcaseIndexTextField.setFont(new Font("Open Sans Medium", Font.PLAIN, 14));
+        beginTestcaseIndexTextField.setForeground(ThemeProperty.getInverseFontColor());
         beginTestcaseIndexTextField.setMinimumSize(new Dimension(100, 50));
         beginTestcaseIndexTextField.setMaximumSize(new Dimension(100, 50));
         beginTestcaseIndexTextField.setAlignmentX(Component.LEFT_ALIGNMENT);
         add(beginTestcaseIndexTextField);
 
         toLabel = new JLabel("To");
+        toLabel.setFont(new Font("Open Sans Medium", Font.PLAIN, 14));
+        toLabel.setForeground(ThemeProperty.getFontColor());
         toLabel.setMinimumSize(new Dimension(100, 50));
         toLabel.setMaximumSize(new Dimension(100, 50));
         toLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         add(toLabel);
 
         endTestcaseIndexTextField = new JTextField();
+        endTestcaseIndexTextField.setFont(new Font("Open Sans Medium", Font.PLAIN, 14));
+        endTestcaseIndexTextField.setForeground(ThemeProperty.getInverseFontColor());
         endTestcaseIndexTextField.setMinimumSize(new Dimension(100, 50));
         endTestcaseIndexTextField.setMaximumSize(new Dimension(100, 50));
         endTestcaseIndexTextField.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -72,7 +85,11 @@ class GenerateTestPanel extends JPanel {
 
         add(Box.createRigidArea(new Dimension(0, 30)));
 
-        generateButton = new JButton();
+        generateButton = new JButton("Run");
+        generateButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        generateButton.setBackground(ThemeProperty.getBackgroundColor());
+        generateButton.setFont(new Font("Open Sans Bold", Font.PLAIN, 12));
+        generateButton.setForeground(ThemeProperty.getFontHighLightColor());
         generateButton.setMinimumSize(new Dimension(100, 50));
         generateButton.setMaximumSize(new Dimension(100, 50));
         generateButton.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -93,9 +110,14 @@ class GenerateTestPanel extends JPanel {
         });
         add(generateButton);
 
-        backtoHome = new JLabel("Back to Home");
-        backtoHome.setMinimumSize(new Dimension(100, 50));
-        backtoHome.setMaximumSize(new Dimension(100, 50));
+        add(Box.createRigidArea(new Dimension(0, 20)));
+
+        backtoHome = new JLabel("<html><u><b>Back to Home</b></u></html>");
+        backtoHome.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        backtoHome.setForeground(Color.BLUE.darker());
+        backtoHome.setFont(new Font("Open Sans Bold", Font.PLAIN, 12));
+        backtoHome.setMinimumSize(new Dimension(100, 45));
+        backtoHome.setMaximumSize(new Dimension(100, 45));
         backtoHome.setAlignmentX(Component.LEFT_ALIGNMENT);
         backtoHome.addMouseListener(new MouseInputListener() {
             public void mouseClicked(MouseEvent e) {

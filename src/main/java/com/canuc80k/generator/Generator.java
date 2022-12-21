@@ -41,8 +41,7 @@ public class Generator {
         generateTestcases(beginTestcaseIndex, endTestcaseIndex, type, lastTestcaseFileNameLength);
     }
 
-    public synchronized void clear() {   
-        FileTool.deleteFolder(TEMP_FOLDER, FileTool.KEEP_CURRENT_FOLDER);
+    public synchronized void clear() {
         FileTool.deleteFolder(testcaseFolder, FileTool.KEEP_CURRENT_FOLDER);
     }
 
