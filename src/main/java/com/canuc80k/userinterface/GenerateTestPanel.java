@@ -24,31 +24,30 @@ import com.canuc80k.theme.ThemeProperty;
 import com.canuc80k.validator.DirectoryValidator;
 import com.canuc80k.validator.TestcaseIndexValidator;
 
-public class GenerateTestPanel extends JPanel {
+public class GenerateTestPanel {
+    private static JPanel generateTestPanel;
     private static int doneTestcase = 0;
     private static int totalTestcase = 0;
 
-    private JLabel topLabel;
-    private JLabel fromLabel;
-    private JLabel toLabel;
-    private JLabel backtoHome;
+    private static JLabel topLabel;
+    private static JLabel fromLabel;
+    private static JLabel toLabel;
+    private static JLabel backtoHome;
 
-    private JTextField beginTestcaseIndexTextField;
-    private JTextField endTestcaseIndexTextField;
+    private static JTextField beginTestcaseIndexTextField;
+    private static JTextField endTestcaseIndexTextField;
 
     private static JButton generateButton;
-    private Generator generator;
+    private static Generator generator;
 
-    GenerateTestPanel() {
+    private static void createGenerateTestPanel() {
         generator = new Generator();
-        buildUI();
-    }
-
-    private void buildUI() {
-        setPreferredSize(new Dimension(HomeFrame.APP_WIDTH, HomeFrame.TOPPANEL_HEIGHT));
-        setBackground(ThemeProperty.getTopPanelColor());
-        setBorder(new EmptyBorder(0, 10, 10, 10));
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        
+        generateTestPanel = new JPanel();
+        generateTestPanel.setPreferredSize(new Dimension(HomeFrame.APP_WIDTH, HomeFrame.TOPPANEL_HEIGHT));
+        generateTestPanel.setBackground(ThemeProperty.getTopPanelColor());
+        generateTestPanel.setBorder(new EmptyBorder(0, 10, 10, 10));
+        generateTestPanel.setLayout(new BoxLayout(generateTestPanel, BoxLayout.Y_AXIS));
 
         topLabel = new JLabel("Testcase index");
         topLabel.setFont(new Font("Open Sans Bold", Font.PLAIN, 14));
@@ -56,7 +55,7 @@ public class GenerateTestPanel extends JPanel {
         topLabel.setMinimumSize(new Dimension(HomeFrame.APP_WIDTH, 50));
         topLabel.setMaximumSize(new Dimension(HomeFrame.APP_WIDTH, 50));
         topLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        add(topLabel);
+        generateTestPanel.add(topLabel);
 
         fromLabel = new JLabel("From");
         fromLabel.setFont(new Font("Open Sans Medium", Font.PLAIN, 14));
@@ -64,7 +63,7 @@ public class GenerateTestPanel extends JPanel {
         fromLabel.setMinimumSize(new Dimension(100, 50));
         fromLabel.setMaximumSize(new Dimension(100, 50));
         fromLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        add(fromLabel);
+        generateTestPanel.add(fromLabel);
 
         beginTestcaseIndexTextField = new JTextField();
         beginTestcaseIndexTextField.setFont(new Font("Open Sans Medium", Font.PLAIN, 14));
@@ -72,7 +71,7 @@ public class GenerateTestPanel extends JPanel {
         beginTestcaseIndexTextField.setMinimumSize(new Dimension(100, 50));
         beginTestcaseIndexTextField.setMaximumSize(new Dimension(100, 50));
         beginTestcaseIndexTextField.setAlignmentX(Component.LEFT_ALIGNMENT);
-        add(beginTestcaseIndexTextField);
+        generateTestPanel.add(beginTestcaseIndexTextField);
 
         toLabel = new JLabel("To");
         toLabel.setFont(new Font("Open Sans Medium", Font.PLAIN, 14));
@@ -80,7 +79,7 @@ public class GenerateTestPanel extends JPanel {
         toLabel.setMinimumSize(new Dimension(100, 50));
         toLabel.setMaximumSize(new Dimension(100, 50));
         toLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        add(toLabel);
+        generateTestPanel.add(toLabel);
 
         endTestcaseIndexTextField = new JTextField();
         endTestcaseIndexTextField.setFont(new Font("Open Sans Medium", Font.PLAIN, 14));
@@ -88,9 +87,9 @@ public class GenerateTestPanel extends JPanel {
         endTestcaseIndexTextField.setMinimumSize(new Dimension(100, 50));
         endTestcaseIndexTextField.setMaximumSize(new Dimension(100, 50));
         endTestcaseIndexTextField.setAlignmentX(Component.LEFT_ALIGNMENT);
-        add(endTestcaseIndexTextField);
+        generateTestPanel.add(endTestcaseIndexTextField);
 
-        add(Box.createRigidArea(new Dimension(0, 30)));
+        generateTestPanel.add(Box.createRigidArea(new Dimension(0, 30)));
 
         generateButton = new JButton("Run");
         generateButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -123,9 +122,9 @@ public class GenerateTestPanel extends JPanel {
                 }
             }
         });
-        add(generateButton);
+        generateTestPanel.add(generateButton);
 
-        add(Box.createRigidArea(new Dimension(0, 20)));
+        generateTestPanel.add(Box.createRigidArea(new Dimension(0, 20)));
 
         backtoHome = new JLabel("<html><u><b>Back to Home</b></u></html>");
         backtoHome.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -137,7 +136,7 @@ public class GenerateTestPanel extends JPanel {
         backtoHome.addMouseListener(new MouseInputListener() {
             public void mouseClicked(MouseEvent e) {
                 HomeFrame currentFrame = (HomeFrame) SwingUtilities.windowForComponent(backtoHome);
-                currentFrame.setTopPanel(new InitPanel());
+                currentFrame.setTopPanel(InitPanel.getInitPanel());
             }
             public void mousePressed(MouseEvent e) {}
             public void mouseReleased(MouseEvent e) {}
@@ -146,7 +145,7 @@ public class GenerateTestPanel extends JPanel {
             public void mouseDragged(MouseEvent e) {}
             public void mouseMoved(MouseEvent e) {}
         });
-        add(backtoHome);
+        generateTestPanel.add(backtoHome);
     }
 
     public static void increaseDoneTestcase() {
@@ -166,5 +165,10 @@ public class GenerateTestPanel extends JPanel {
 
     public static synchronized void setGenerateButtonText(String text) {
         generateButton.setText(text);
+    }
+
+    public static JPanel getGenerateTestPanel() {
+        if (generateTestPanel == null) createGenerateTestPanel();
+        return generateTestPanel;
     }
 }

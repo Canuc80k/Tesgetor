@@ -2,6 +2,7 @@ package com.canuc80k.userinterface;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -27,40 +28,42 @@ import com.canuc80k.generator.Generator;
 import com.canuc80k.theme.ThemeProperty;
 import com.canuc80k.validator.DirectoryValidator;
 
-public class InitPanel extends JPanel {
-    private final int OPTION_NUMBERS = 4;
+public class InitPanel {
+    private static JPanel initPanel;
+    private final static int OPTION_NUMBERS = 4;
 
-    private final int GENERATE_OPTION_INDEX = 0;
-    private final int ZIP_OPTION_INDEX = 1;
-    private final int CLEAR_OPTION_INDEX = 2;
-    private final int CONFIG_OPTION_INDEX = 3;
+    private final static int GENERATE_OPTION_INDEX = 0;
+    private final static int ZIP_OPTION_INDEX = 1;
+    private final static int CLEAR_OPTION_INDEX = 2;
+    private final static int CONFIG_OPTION_INDEX = 3;
 
-    private JLabel topLabel;
-    private List<String> options = new ArrayList<String>();
+    private static JLabel topLabel;
+    private static List<String> options = new ArrayList<String>();
 
-    InitPanel() {
+    public static void createInitPanel() {
+        initPanel = new JPanel();
         options.add("Generate test");
         options.add("Zip");
         options.add("Clear");
         options.add("Config");
 
-        setPreferredSize(new Dimension(HomeFrame.APP_WIDTH, HomeFrame.TOPPANEL_HEIGHT));
-        setBackground(Color.decode("#94959b"));
-        setBorder(new EmptyBorder(10, 10, 10, 10));
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        initPanel.setPreferredSize(new Dimension(HomeFrame.APP_WIDTH, HomeFrame.TOPPANEL_HEIGHT));
+        initPanel.setBackground(Color.decode("#94959b"));
+        initPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+        initPanel.setLayout(new BoxLayout(initPanel, BoxLayout.Y_AXIS));
         topLabel = new JLabel("What do u wanna do");
-        topLabel.setAlignmentX(CENTER_ALIGNMENT);
+        topLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         topLabel.setForeground(ThemeProperty.getFontColor());
         topLabel.setFont(new Font("Open Sans Bold", Font.PLAIN, 16));
         topLabel.setSize(new Dimension(HomeFrame.APP_WIDTH, 50));
-        add(topLabel);
+        initPanel.add(topLabel);
 
-        add(Box.createRigidArea(new Dimension(0, 30)));
+        initPanel.add(Box.createRigidArea(new Dimension(0, 30)));
         
         JPanel optionsPanel = new JPanel();
         optionsPanel.setBackground(ThemeProperty.getTopPanelColor());
         optionsPanel.setLayout(new GridLayout(2, OPTION_NUMBERS / 2, 10, 10));
-        add(optionsPanel);
+        initPanel.add(optionsPanel);
 
         options.forEach(option -> {
             JPanel optionPanel = new JPanel();
@@ -71,7 +74,7 @@ public class InitPanel extends JPanel {
 
             JLabel optionDescription = new JLabel(option, SwingConstants.CENTER);
             optionPanel.add(optionDescription, BorderLayout.CENTER);
-            optionDescription.setAlignmentX(CENTER_ALIGNMENT);
+            optionDescription.setAlignmentX(Component.CENTER_ALIGNMENT);
             optionDescription.setFont(new Font("Open Sans Medium", Font.PLAIN, 14));
             optionDescription.setForeground(ThemeProperty.getFontColor());
             optionDescription.addMouseListener(new MouseInputListener() {
@@ -80,7 +83,7 @@ public class InitPanel extends JPanel {
 
                     HomeFrame currentFrame = (HomeFrame) SwingUtilities.windowForComponent(optionDescription);
                     if (choosedOption.equals(options.get(GENERATE_OPTION_INDEX))) {
-                        currentFrame.setTopPanel(new GenerateTestPanel());
+                        currentFrame.setTopPanel(GenerateTestPanel.getGenerateTestPanel());
                     }
                     if (choosedOption.equals(options.get(ZIP_OPTION_INDEX))) {
                         int answer = JOptionPane.showConfirmDialog(
@@ -119,7 +122,7 @@ public class InitPanel extends JPanel {
                         );
                     }
                     if (choosedOption.equals(options.get(CONFIG_OPTION_INDEX))) {
-                        currentFrame.setTopPanel(new ConfigPanel());
+                        currentFrame.setTopPanel(ConfigPanel.getConfigPanel());
                     }
                 }
 
@@ -143,5 +146,10 @@ public class InitPanel extends JPanel {
 
             });
         });
+    }
+
+    public static JPanel getInitPanel() {
+        if (initPanel == null) createInitPanel();
+        return initPanel;
     }
 }

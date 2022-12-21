@@ -32,35 +32,33 @@ import com.canuc80k.theme.ThemeProperty;
 
 @SuppressWarnings("unchecked")
 
-public class ConfigPanel extends JPanel {
+public class ConfigPanel {
+    private static JPanel configPanel;
     public static final int OUTPUT_GENERATEOR_INDEX = 0;
     public static final int INPUT_GENERATOR_INDEX = 1;
     public static final int TESTCASE_FOLDER_INDEX = 2;
     private static final File CONFIG_FILE = new File("config/config.cfg");
     private static List<String> configData;
 
-    private JButton inputGeneratorFileButton;
-    private JButton outputGeneratorFileButton;
-    private JButton testcaseFolderButton;
+    private static JButton inputGeneratorFileButton;
+    private static JButton outputGeneratorFileButton;
+    private static JButton testcaseFolderButton;
 
-    private JLabel inputGeneratorFileLabel;
-    private JLabel outputGeneratorFileLabel;
-    private JLabel testcaseFolderLabel;
-    private JLabel backtoHome;
+    private static JLabel inputGeneratorFileLabel;
+    private static JLabel outputGeneratorFileLabel;
+    private static JLabel testcaseFolderLabel;
+    private static JLabel backtoHome;
 
-    ConfigPanel() {
+    private static void createConfigPanel() {
         if (configData == null) {
             deserializeConfigData();
         }
-        
-        buildUI();
-    }
 
-    private void buildUI() {
-        setPreferredSize(new Dimension(HomeFrame.APP_WIDTH, HomeFrame.TOPPANEL_HEIGHT));
-        setBackground(ThemeProperty.getTopPanelColor());
-        setBorder(new EmptyBorder(0, 10, 10, 10));
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        configPanel = new JPanel();
+        configPanel.setPreferredSize(new Dimension(HomeFrame.APP_WIDTH, HomeFrame.TOPPANEL_HEIGHT));
+        configPanel.setBackground(ThemeProperty.getTopPanelColor());
+        configPanel.setBorder(new EmptyBorder(0, 10, 10, 10));
+        configPanel.setLayout(new BoxLayout(configPanel, BoxLayout.Y_AXIS));
 
         inputGeneratorFileLabel = new JLabel("Input Generator File");
         inputGeneratorFileLabel.setForeground(ThemeProperty.getFontColor());
@@ -68,7 +66,7 @@ public class ConfigPanel extends JPanel {
         inputGeneratorFileLabel.setMinimumSize(new Dimension(HomeFrame.APP_WIDTH / 5 * 4, 45));
         inputGeneratorFileLabel.setMaximumSize(new Dimension(HomeFrame.APP_WIDTH / 5 * 4, 45));
         inputGeneratorFileLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        add(inputGeneratorFileLabel);
+        configPanel.add(inputGeneratorFileLabel);
 
         inputGeneratorFileButton = new JButton(configData.get(0));
         inputGeneratorFileButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -82,9 +80,9 @@ public class ConfigPanel extends JPanel {
             configData.set(0, inputGeneratorFileButton.getText());
             serializeConfigData();
         });
-        add(inputGeneratorFileButton);
+        configPanel.add(inputGeneratorFileButton);
 
-        add(Box.createRigidArea(new Dimension(0, 20)));
+        configPanel.add(Box.createRigidArea(new Dimension(0, 20)));
 
         outputGeneratorFileLabel = new JLabel("Output Generator File");    
         outputGeneratorFileLabel.setForeground(ThemeProperty.getFontColor());
@@ -92,7 +90,7 @@ public class ConfigPanel extends JPanel {
         outputGeneratorFileLabel.setMinimumSize(new Dimension(HomeFrame.APP_WIDTH / 5 * 4, 45));
         outputGeneratorFileLabel.setMaximumSize(new Dimension(HomeFrame.APP_WIDTH / 5 * 4, 45));
         outputGeneratorFileLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        add(outputGeneratorFileLabel);
+        configPanel.add(outputGeneratorFileLabel);
 
         outputGeneratorFileButton = new JButton(configData.get(1));
         outputGeneratorFileButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -106,9 +104,9 @@ public class ConfigPanel extends JPanel {
             configData.set(1, outputGeneratorFileButton.getText());
             serializeConfigData();
         });
-        add(outputGeneratorFileButton);
+        configPanel.add(outputGeneratorFileButton);
 
-        add(Box.createRigidArea(new Dimension(0, 20)));
+        configPanel.add(Box.createRigidArea(new Dimension(0, 20)));
 
         testcaseFolderLabel = new JLabel("Testcase Output Folder");
         testcaseFolderLabel.setForeground(ThemeProperty.getFontColor());
@@ -116,7 +114,7 @@ public class ConfigPanel extends JPanel {
         testcaseFolderLabel.setMinimumSize(new Dimension(HomeFrame.APP_WIDTH / 5 * 4, 45));
         testcaseFolderLabel.setMaximumSize(new Dimension(HomeFrame.APP_WIDTH / 5 * 4, 45));
         testcaseFolderLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        add(testcaseFolderLabel);
+        configPanel.add(testcaseFolderLabel);
 
         testcaseFolderButton = new JButton(configData.get(2));
         testcaseFolderButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -130,9 +128,9 @@ public class ConfigPanel extends JPanel {
             configData.set(2, testcaseFolderButton.getText());
             serializeConfigData();
         });
-        add(testcaseFolderButton);
+        configPanel.add(testcaseFolderButton);
         
-        add(Box.createRigidArea(new Dimension(0, 20)));
+        configPanel.add(Box.createRigidArea(new Dimension(0, 20)));
 
         backtoHome = new JLabel("<html><u><b>Back to Home</b></u></html>");
         backtoHome.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -144,7 +142,7 @@ public class ConfigPanel extends JPanel {
         backtoHome.addMouseListener(new MouseInputListener() {
             public void mouseClicked(MouseEvent e) {
                 HomeFrame currentFrame = (HomeFrame) SwingUtilities.windowForComponent(backtoHome);
-                currentFrame.setTopPanel(new InitPanel());
+                currentFrame.setTopPanel(InitPanel.getInitPanel());
             }
             public void mousePressed(MouseEvent e) {}
             public void mouseReleased(MouseEvent e) {}
@@ -153,10 +151,10 @@ public class ConfigPanel extends JPanel {
             public void mouseDragged(MouseEvent e) {}
             public void mouseMoved(MouseEvent e) {}
         });
-        add(backtoHome);
+        configPanel.add(backtoHome);
     }
 
-    private void chooseFile(ActionEvent e) {
+    private static void chooseFile(ActionEvent e) {
         JButton sourceObject = (JButton) e.getSource();
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileFilter(new FileNameExtensionFilter("Testcase Generator File", "cpp"));
@@ -169,7 +167,7 @@ public class ConfigPanel extends JPanel {
         }
     }
 
-    private void chooseFolder(ActionEvent e) {
+    private static void chooseFolder(ActionEvent e) {
         JButton sourceObject = (JButton) e.getSource();
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -187,7 +185,7 @@ public class ConfigPanel extends JPanel {
         if (!configFolder.exists()) configFolder.mkdirs();
     }
 
-    private void serializeConfigData() {
+    private static void serializeConfigData() {
         createConfigFolder();
 
         try {
@@ -216,5 +214,10 @@ public class ConfigPanel extends JPanel {
     public static List<String> getConfigData() {
         if (configData == null) deserializeConfigData();
         return configData;
+    }
+
+    public static JPanel getConfigPanel() {
+        if (configPanel == null) createConfigPanel();
+        return configPanel;
     }
 }

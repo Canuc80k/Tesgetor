@@ -14,7 +14,7 @@ public class HomeFrame extends JFrame {
     protected static final int TOPPANEL_HEIGHT = APP_HEIGHT / 7 * 5;
 
     private JPanel contentPane;
-    private JPanel topPanel = new InitPanel();
+    private JPanel topPanel = InitPanel.getInitPanel();
 
     public HomeFrame() {
         setTitle("dont_generatetest_me_pls");
