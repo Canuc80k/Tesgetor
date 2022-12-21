@@ -21,6 +21,8 @@ import javax.swing.event.MouseInputListener;
 import com.canuc80k.constant.TestcaseFileNameType;
 import com.canuc80k.generator.Generator;
 import com.canuc80k.theme.ThemeProperty;
+import com.canuc80k.validator.DirectoryValidator;
+import com.canuc80k.validator.TestcaseIndexValidator;
 
 class GenerateTestPanel extends JPanel {
     private JLabel topLabel;
@@ -97,7 +99,10 @@ class GenerateTestPanel extends JPanel {
             TestcaseFileNameType type = TestcaseFileNameType.NORMAL;
             String beginIndex = beginTestcaseIndexTextField.getText().trim();
             String endIndex = endTestcaseIndexTextField.getText().trim();
-            
+
+            if (!DirectoryValidator.validateConfigFiles()) return;
+            if (!TestcaseIndexValidator.validate(beginIndex, endIndex)) return;
+
             if (beginIndex.length() == endIndex.length()) {
                 type = TestcaseFileNameType.LEXICOGRAPHICAL_ORDER;
             }

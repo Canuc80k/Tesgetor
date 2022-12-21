@@ -25,6 +25,7 @@ import org.zeroturnaround.zip.ZipUtil;
 
 import com.canuc80k.generator.Generator;
 import com.canuc80k.theme.ThemeProperty;
+import com.canuc80k.validator.DirectoryValidator;
 
 public class InitPanel extends JPanel {
     private final int OPTION_NUMBERS = 4;
@@ -89,19 +90,33 @@ public class InitPanel extends JPanel {
                             JOptionPane.YES_NO_CANCEL_OPTION
                         );
                         if (answer != JOptionPane.YES_OPTION) return;
+
+                        if (!DirectoryValidator.validateTestcaseFiles()) return;
                         File testcaseFile = new File(ConfigPanel.getConfigData().get(2));
                         File testcaseZipFile = new File(testcaseFile.getAbsolutePath() + ".zip");
                         ZipUtil.pack(testcaseFile, testcaseZipFile);
+                        JOptionPane.showMessageDialog(
+                            null,
+                            "Mission accomplished",
+                            "It's done, sir",
+                            JOptionPane.NO_OPTION
+                        );
                     }
                     if (choosedOption.equals(options.get(CLEAR_OPTION_INDEX))) {
                         int answer = JOptionPane.showConfirmDialog(
-                            currentFrame, 
-                            "Wanna clear old tests in test folder?",
+                            null, 
+                            "Wanna clear old tests in test folder and delete old zip testcase folder?",
                             "Ask again to be sure .-.",
                             JOptionPane.YES_NO_CANCEL_OPTION
                         );
                         if (answer != JOptionPane.YES_OPTION) return;
                         new Generator().clear();
+                        JOptionPane.showMessageDialog(
+                            null,
+                            "Mission accomplished",
+                            "It's done, sir",
+                            JOptionPane.NO_OPTION
+                        );
                     }
                     if (choosedOption.equals(options.get(CONFIG_OPTION_INDEX))) {
                         currentFrame.setTopPanel(new ConfigPanel());

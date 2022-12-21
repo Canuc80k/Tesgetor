@@ -43,6 +43,7 @@ public class Generator {
 
     public synchronized void clear() {
         FileTool.deleteFolder(testcaseFolder, FileTool.KEEP_CURRENT_FOLDER);
+        new File(testcaseFolder.getAbsolutePath() + ".zip").delete();
     }
 
     private synchronized void generateTestcases(int beginTestcaseIndex, int endTestcaseIndex, TestcaseFileNameType type, int lastTestcaseFileNameLength) throws IOException, InterruptedException { 

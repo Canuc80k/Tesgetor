@@ -33,6 +33,9 @@ import com.canuc80k.theme.ThemeProperty;
 @SuppressWarnings("unchecked")
 
 public class ConfigPanel extends JPanel {
+    public static final int OUTPUT_GENERATEOR_INDEX = 0;
+    public static final int INPUT_GENERATOR_INDEX = 1;
+    public static final int TESTCASE_FOLDER_INDEX = 2;
     private static final File CONFIG_FILE = new File("config/config.cfg");
     private static List<String> configData;
 
