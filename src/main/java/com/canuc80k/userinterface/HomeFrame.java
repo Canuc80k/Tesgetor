@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 
 import com.canuc80k.theme.ThemeProperty;
 
+@SuppressWarnings("serial")
 public class HomeFrame extends JFrame {
     protected static final int APP_WIDTH = 350;
     protected static final int APP_HEIGHT = 550;
