@@ -14,10 +14,12 @@ public abstract class FontInitor {
         ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
     }
 
-    protected void initFont(List<String> font_paths) {
+    protected void initFont(List<File> fonts) {
         try {
-            for (String font_path : font_paths)
-                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, new File(font_path)));
+            for (File font : fonts) {
+                System.out.println(Font.createFont(Font.TRUETYPE_FONT, font));
+                ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, font));
+            }
         } catch (FontFormatException | IOException e) {
             e.printStackTrace();
         }

@@ -19,7 +19,7 @@ public class HomeFrame extends JFrame {
     private JPanel topPanel = InitPanel.getInitPanel();
 
     public HomeFrame() {
-        ImageIcon img = new ImageIcon(HomeFrame.class.getResource("/image/icon.png"));
+        ImageIcon img = new ImageIcon("image/icon.png");
         setIconImage(img.getImage());
         setTitle("dont_generatetest_me_pls");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
