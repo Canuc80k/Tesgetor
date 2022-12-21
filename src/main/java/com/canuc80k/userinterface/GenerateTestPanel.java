@@ -24,7 +24,10 @@ import com.canuc80k.theme.ThemeProperty;
 import com.canuc80k.validator.DirectoryValidator;
 import com.canuc80k.validator.TestcaseIndexValidator;
 
-class GenerateTestPanel extends JPanel {
+public class GenerateTestPanel extends JPanel {
+    private static int doneTestcase = 0;
+    private static int totalTestcase = 0;
+
     private JLabel topLabel;
     private JLabel fromLabel;
     private JLabel toLabel;
@@ -33,9 +36,11 @@ class GenerateTestPanel extends JPanel {
     private JTextField beginTestcaseIndexTextField;
     private JTextField endTestcaseIndexTextField;
 
-    private JButton generateButton;
+    private static JButton generateButton;
+    private Generator generator;
 
     GenerateTestPanel() {
+        generator = new Generator();
         buildUI();
     }
 
@@ -96,21 +101,26 @@ class GenerateTestPanel extends JPanel {
         generateButton.setMaximumSize(new Dimension(100, 50));
         generateButton.setAlignmentX(Component.LEFT_ALIGNMENT);
         generateButton.addActionListener(e -> {
-            TestcaseFileNameType type = TestcaseFileNameType.NORMAL;
-            String beginIndex = beginTestcaseIndexTextField.getText().trim();
-            String endIndex = endTestcaseIndexTextField.getText().trim();
+            if (doneTestcase == totalTestcase) {
+                TestcaseFileNameType type = TestcaseFileNameType.NORMAL;
+                String beginIndex = beginTestcaseIndexTextField.getText().trim();
+                String endIndex = endTestcaseIndexTextField.getText().trim();
 
-            if (!DirectoryValidator.validateConfigFiles()) return;
-            if (!TestcaseIndexValidator.validate(beginIndex, endIndex)) return;
+                if (!DirectoryValidator.validateConfigFiles())
+                    return;
+                if (!TestcaseIndexValidator.validate(beginIndex, endIndex))
+                    return;
 
-            if (beginIndex.length() == endIndex.length()) {
-                type = TestcaseFileNameType.LEXICOGRAPHICAL_ORDER;
-            }
+                if (beginIndex.length() == endIndex.length()) {
+                    type = TestcaseFileNameType.LEXICOGRAPHICAL_ORDER;
+                }
 
-            try {
-                new Generator().generate(Integer.parseInt(beginIndex), Integer.parseInt(endIndex), type, endIndex.length());
-            } catch (NumberFormatException | IOException | InterruptedException e1) {
-                e1.printStackTrace();
+                try {
+                    generator.generate(Integer.parseInt(beginIndex), Integer.parseInt(endIndex), type,
+                            endIndex.length());
+                } catch (NumberFormatException | IOException | InterruptedException e1) {
+                    e1.printStackTrace();
+                }
             }
         });
         add(generateButton);
@@ -137,5 +147,24 @@ class GenerateTestPanel extends JPanel {
             public void mouseMoved(MouseEvent e) {}
         });
         add(backtoHome);
+    }
+
+    public static void increaseDoneTestcase() {
+        doneTestcase ++;
+        if (totalTestcase == doneTestcase) {
+            doneTestcase = totalTestcase = 0;
+            generateButton.setText("RUN");
+            return;
+        }
+        generateButton.setText(doneTestcase + "/" + totalTestcase);
+    }
+
+    public static void setTotalTestcase(int newTotalTestcase) {
+        totalTestcase = newTotalTestcase;
+        generateButton.setText(0 + "/" + totalTestcase);
+    }
+
+    public static synchronized void setGenerateButtonText(String text) {
+        generateButton.setText(text);
     }
 }

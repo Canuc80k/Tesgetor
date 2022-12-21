@@ -11,6 +11,7 @@ import com.canuc80k.compiler.CPPCompiler;
 import com.canuc80k.constant.TestcaseFileNameType;
 import com.canuc80k.filetool.FileTool;
 import com.canuc80k.userinterface.ConfigPanel;
+import com.canuc80k.userinterface.GenerateTestPanel;
 
 public class Generator {
     private final File TEMP_FOLDER = new File("temp");
@@ -22,6 +23,7 @@ public class Generator {
     private File testcaseFolder;
 
     private CPPCompiler cppCompiler;
+    private ExecutorService threadPool;
 
     public Generator() {
         if (!TEMP_FOLDER.exists()) TEMP_FOLDER.mkdirs();
@@ -37,6 +39,7 @@ public class Generator {
     public synchronized void generate(int beginTestcaseIndex, int endTestcaseIndex, TestcaseFileNameType type, int lastTestcaseFileNameLength) throws IOException, InterruptedException {
         cppCompiler.compile_gplusplus(inputGeneratorFile, INPUT_GENERATOR_EXE_FILE);
         cppCompiler.compile_gplusplus(outputGeneratorFile, OUTPUT_GENERATOR_EXE_FILE);
+        GenerateTestPanel.setTotalTestcase(endTestcaseIndex - beginTestcaseIndex + 1);
 
         generateTestcases(beginTestcaseIndex, endTestcaseIndex, type, lastTestcaseFileNameLength);
     }
@@ -47,9 +50,9 @@ public class Generator {
     }
 
     private synchronized void generateTestcases(int beginTestcaseIndex, int endTestcaseIndex, TestcaseFileNameType type, int lastTestcaseFileNameLength) throws IOException, InterruptedException { 
-        List<Runnable> tasks = new ArrayList<Runnable>();
+        List<GeneratorTask> tasks = new ArrayList<GeneratorTask>();
         for (int i = beginTestcaseIndex; i <= endTestcaseIndex; i ++) {
-            Runnable inputGeneratorThread 
+            GeneratorTask inputGeneratorThread 
                 = new GeneratorTask(
                     cppCompiler, 
                     INPUT_GENERATOR_EXE_FILE, 
@@ -60,7 +63,7 @@ public class Generator {
             tasks.add(inputGeneratorThread);
         }
 
-        ExecutorService threadPool = Executors.newCachedThreadPool();  
+        threadPool = Executors.newCachedThreadPool();  
         tasks.forEach((task) -> threadPool.execute(task));
         threadPool.shutdown();
     }
