@@ -17,6 +17,7 @@ public class HomeFrame extends JFrame {
     private JPanel topPanel = new InitPanel();
 
     public HomeFrame() {
+        setTitle("dont_generatetest_me_pls");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(APP_WIDTH, APP_HEIGHT);
         setResizable(false);

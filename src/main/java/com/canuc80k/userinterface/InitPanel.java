@@ -47,7 +47,7 @@ public class InitPanel extends JPanel {
         setBackground(Color.decode("#94959b"));
         setBorder(new EmptyBorder(10, 10, 10, 10));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        topLabel = new JLabel("What do you want to do?");
+        topLabel = new JLabel("What do u wanna do");
         topLabel.setAlignmentX(CENTER_ALIGNMENT);
         topLabel.setForeground(ThemeProperty.getFontColor());
         topLabel.setFont(new Font("Open Sans Bold", Font.PLAIN, 16));
@@ -84,8 +84,8 @@ public class InitPanel extends JPanel {
                     if (choosedOption.equals(options.get(ZIP_OPTION_INDEX))) {
                         int answer = JOptionPane.showConfirmDialog(
                             currentFrame, 
-                            "Muốn Zip Testcase à?",
-                            "Hỏi lại cho chắc",
+                            "Wanna zip test folder?",
+                            "Ask again to be sure .-.",
                             JOptionPane.YES_NO_CANCEL_OPTION
                         );
                         if (answer != JOptionPane.YES_OPTION) return;
@@ -96,8 +96,8 @@ public class InitPanel extends JPanel {
                     if (choosedOption.equals(options.get(CLEAR_OPTION_INDEX))) {
                         int answer = JOptionPane.showConfirmDialog(
                             currentFrame, 
-                            "Muốn Xóa Test cũ à?",
-                            "Hỏi lại cho chắc",
+                            "Wanna clear old tests in test folder?",
+                            "Ask again to be sure .-.",
                             JOptionPane.YES_NO_CANCEL_OPTION
                         );
                         if (answer != JOptionPane.YES_OPTION) return;

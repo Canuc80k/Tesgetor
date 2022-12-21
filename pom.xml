@@ -38,6 +38,7 @@
 		</dependency>
 	</dependencies>
     <properties>
+        <java.version>8</java.version>
         <maven.compiler.source>15</maven.compiler.source>
         <maven.compiler.target>15</maven.compiler.target>
     </properties>
