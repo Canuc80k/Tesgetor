@@ -5,6 +5,8 @@ import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 
@@ -12,6 +14,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
@@ -99,26 +102,29 @@ public class GenerateTestPanel {
         generateButton.setMinimumSize(new Dimension(100, 50));
         generateButton.setMaximumSize(new Dimension(100, 50));
         generateButton.setAlignmentX(Component.LEFT_ALIGNMENT);
-        generateButton.addActionListener(e -> {
-            if (doneTestcase == totalTestcase) {
-                TestcaseFileNameType type = TestcaseFileNameType.NORMAL;
-                String beginIndex = beginTestcaseIndexTextField.getText().trim();
-                String endIndex = endTestcaseIndexTextField.getText().trim();
+        generateButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (doneTestcase == totalTestcase) {
+                    TestcaseFileNameType type = TestcaseFileNameType.NORMAL;
+                    String beginIndex = beginTestcaseIndexTextField.getText().trim();
+                    String endIndex = endTestcaseIndexTextField.getText().trim();
 
-                if (!DirectoryValidator.validateConfigFiles())
-                    return;
-                if (!TestcaseIndexValidator.validate(beginIndex, endIndex))
-                    return;
+                    if (!DirectoryValidator.validateConfigFiles())
+                        return;
+                    if (!TestcaseIndexValidator.validate(beginIndex, endIndex))
+                        return;
 
-                if (beginIndex.length() == endIndex.length()) {
-                    type = TestcaseFileNameType.LEXICOGRAPHICAL_ORDER;
-                }
+                    if (beginIndex.length() == endIndex.length()) {
+                        type = TestcaseFileNameType.LEXICOGRAPHICAL_ORDER;
+                    }
 
-                try {
-                    generator.generate(Integer.parseInt(beginIndex), Integer.parseInt(endIndex), type,
-                            endIndex.length());
-                } catch (NumberFormatException | IOException | InterruptedException e1) {
-                    e1.printStackTrace();
+                    try {
+                        generator.generate(Integer.parseInt(beginIndex), Integer.parseInt(endIndex), type,
+                                endIndex.length());
+                    } catch (NumberFormatException | IOException | InterruptedException e1) {
+                        e1.printStackTrace();
+                    }
                 }
             }
         });
@@ -151,6 +157,13 @@ public class GenerateTestPanel {
     public static void increaseDoneTestcase() {
         doneTestcase ++;
         if (totalTestcase == doneTestcase) {
+            JOptionPane.showMessageDialog(
+                null,
+                "Mission accomplished",
+                "It's done, sir",
+                JOptionPane.NO_OPTION
+            );
+            
             doneTestcase = totalTestcase = 0;
             generateButton.setText("RUN");
             return;
