@@ -24,6 +24,7 @@ pom.xml.next
 pom.xml.bak
 release.properties
 dependency-reduced-pom.xml
+tempCodeRunnerFile.xml
 buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
