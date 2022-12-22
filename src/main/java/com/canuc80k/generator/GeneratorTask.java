@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import com.canuc80k.compiler.CPPCompiler;
-import com.canuc80k.userinterface.GenerateTestPanel;
+import com.canuc80k.launcher.GlobalResource;
 
 public class GeneratorTask implements Runnable {
     private final File inputgeneratorExeFile;
@@ -26,7 +26,7 @@ public class GeneratorTask implements Runnable {
         try {
             cppCompiler.run(inputgeneratorExeFile, inputTescaseFilePath);
             cppCompiler.run(outputgeneratorExeFile, inputTescaseFilePath, outputTescaseFilePath);
-            GenerateTestPanel.increaseDoneTestcase();
+            GlobalResource.getGenerateTestPanel().increaseDoneTestcase();
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }

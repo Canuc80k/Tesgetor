@@ -1,4 +1,4 @@
-package com.canuc80k.constant;
+package com.canuc80k.testcase;
 
 public enum TestcaseFileNameType {
     NORMAL,

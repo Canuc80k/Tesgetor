@@ -7,8 +7,13 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 public class DracularTheme extends Theme {
-    public void init() {
-        super.init();
+    public void applyTheme() {
+        setBackgroundColor(Color.decode("#282a36"));
+        setTopPanelColor(Color.decode("#94959b"));
+        setSingleOptionPannelColor(Color.decode("#eeeeee"));
+        setFontColor(Color.decode("#000000"));
+        setFontHighLightColor(Color.decode("#fd93b7"));
+        setInverseFontColor(Color.decode("#83c8e1"));
         
         try {
             UIManager.setLookAndFeel("com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatDraculaIJTheme");

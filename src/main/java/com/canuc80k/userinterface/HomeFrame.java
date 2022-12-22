@@ -9,16 +9,15 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import com.canuc80k.theme.ThemeProperty;
+import com.canuc80k.launcher.GlobalResource;
 
-@SuppressWarnings("serial")
 public class HomeFrame extends JFrame {
     protected static final int APP_WIDTH = 350;
     protected static final int APP_HEIGHT = 550;
     protected static final int TOPPANEL_HEIGHT = APP_HEIGHT / 7 * 5;
 
     private JPanel contentPane;
-    private JPanel topPanel = InitPanel.getInitPanel();
+    private JPanel topPanel = GlobalResource.getInitPanel();
 
     public HomeFrame() {
         try {
@@ -35,7 +34,7 @@ public class HomeFrame extends JFrame {
         setLocationRelativeTo(null);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(10, 10, 10, 10));
-        contentPane.setBackground(ThemeProperty.getBackgroundColor());
+        contentPane.setBackground(GlobalResource.getTheme().getBackgroundColor());
         contentPane.setLayout(new BorderLayout(0, 0));
         setContentPane(contentPane);
 

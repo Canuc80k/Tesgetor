@@ -8,15 +8,13 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import com.canuc80k.compiler.CPPCompiler;
-import com.canuc80k.constant.TestcaseFileNameType;
 import com.canuc80k.filetool.FileTool;
-import com.canuc80k.userinterface.ConfigPanel;
-import com.canuc80k.userinterface.GenerateTestPanel;
+import com.canuc80k.launcher.GlobalResource;
+import com.canuc80k.testcase.TestcaseFileNameType;
 
 public class Generator {
-    private final File TEMP_FOLDER = new File("temp");
-    private final File INPUT_GENERATOR_EXE_FILE = new File(TEMP_FOLDER.getAbsolutePath() + "/inputGenerator.exe");
-    private final File OUTPUT_GENERATOR_EXE_FILE = new File(TEMP_FOLDER.getAbsolutePath() + "/outputGenerator.exe");
+    private final File INPUT_GENERATOR_EXE_FILE = new File(GlobalResource.getTempFolder().getAbsolutePath() + "/inputGenerator.exe");
+    private final File OUTPUT_GENERATOR_EXE_FILE = new File(GlobalResource.getTempFolder().getAbsolutePath() + "/outputGenerator.exe");
 
     private File inputGeneratorFile;
     private File outputGeneratorFile;
@@ -26,14 +24,14 @@ public class Generator {
     private ExecutorService threadPool;
 
     public Generator() {
-        if (!TEMP_FOLDER.exists()) TEMP_FOLDER.mkdirs();
+        if (!GlobalResource.getTempFolder().exists()) GlobalResource.getTempFolder().mkdirs();
 
         locateConfigFiles();        
         cppCompiler = new CPPCompiler();
     }
 
     public synchronized void locateConfigFiles() {
-        List<String> configData = ConfigPanel.getConfigData();
+        List<String> configData = GlobalResource.getConfigData();
         inputGeneratorFile = new File(configData.get(0));
         outputGeneratorFile = new File(configData.get(1));
         testcaseFolder = new File(configData.get(2));
@@ -43,7 +41,7 @@ public class Generator {
         locateConfigFiles();
         cppCompiler.compile_gplusplus(inputGeneratorFile, INPUT_GENERATOR_EXE_FILE);
         cppCompiler.compile_gplusplus(outputGeneratorFile, OUTPUT_GENERATOR_EXE_FILE);
-        GenerateTestPanel.setTotalTestcase(endTestcaseIndex - beginTestcaseIndex + 1);
+        GlobalResource.getGenerateTestPanel().setTotalTestcase(endTestcaseIndex - beginTestcaseIndex + 1);
 
         generateTestcases(beginTestcaseIndex, endTestcaseIndex, type, lastTestcaseFileNameLength);
     }

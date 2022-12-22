@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -24,66 +23,65 @@ import javax.swing.event.MouseInputListener;
 
 import org.zeroturnaround.zip.ZipUtil;
 
+import com.canuc80k.font.FontSize;
 import com.canuc80k.generator.Generator;
-import com.canuc80k.theme.ThemeProperty;
+import com.canuc80k.launcher.GlobalResource;
 import com.canuc80k.validator.DirectoryValidator;
 
-public class InitPanel {
-    private static JPanel initPanel;
-    private final static int OPTION_NUMBERS = 4;
+public class InitPanel extends JPanel {
+    private final int OPTION_NUMBERS = 4;
 
-    private final static int GENERATE_OPTION_INDEX = 0;
-    private final static int ZIP_OPTION_INDEX = 1;
-    private final static int CLEAR_OPTION_INDEX = 2;
-    private final static int CONFIG_OPTION_INDEX = 3;
+    private final int GENERATE_OPTION_INDEX = 0;
+    private final int ZIP_OPTION_INDEX = 1;
+    private final int CLEAR_OPTION_INDEX = 2;
+    private final int CONFIG_OPTION_INDEX = 3;
 
-    private static JLabel topLabel;
-    private static List<String> options = new ArrayList<String>();
+    private JLabel topLabel;
+    private List<String> options = new ArrayList<String>();
 
-    public static void createInitPanel() {
-        initPanel = new JPanel();
+    public InitPanel() {
         options.add("Generate test");
         options.add("Zip");
         options.add("Clear");
         options.add("Config");
 
-        initPanel.setPreferredSize(new Dimension(HomeFrame.APP_WIDTH, HomeFrame.TOPPANEL_HEIGHT));
-        initPanel.setBackground(Color.decode("#94959b"));
-        initPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
-        initPanel.setLayout(new BoxLayout(initPanel, BoxLayout.Y_AXIS));
+        setPreferredSize(new Dimension(HomeFrame.APP_WIDTH, HomeFrame.TOPPANEL_HEIGHT));
+        setBackground(Color.decode("#94959b"));
+        setBorder(new EmptyBorder(10, 10, 10, 10));
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         topLabel = new JLabel("What do u wanna do");
         topLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        topLabel.setForeground(ThemeProperty.getFontColor());
-        topLabel.setFont(new Font("Open Sans Bold", Font.PLAIN, 16));
+        topLabel.setForeground(GlobalResource.getTheme().getFontColor());
+        topLabel.setFont(GlobalResource.getFont().getBoldFont(FontSize.LARGE));
         topLabel.setSize(new Dimension(HomeFrame.APP_WIDTH, 50));
-        initPanel.add(topLabel);
+        add(topLabel);
 
-        initPanel.add(Box.createRigidArea(new Dimension(0, 30)));
+        add(Box.createRigidArea(new Dimension(0, 30)));
         
         JPanel optionsPanel = new JPanel();
-        optionsPanel.setBackground(ThemeProperty.getTopPanelColor());
+        optionsPanel.setBackground(GlobalResource.getTheme().getTopPanelColor());
         optionsPanel.setLayout(new GridLayout(2, OPTION_NUMBERS / 2, 10, 10));
-        initPanel.add(optionsPanel);
+        add(optionsPanel);
 
         options.forEach(option -> {
             JPanel optionPanel = new JPanel();
             optionPanel.setCursor(new Cursor(Cursor.HAND_CURSOR));
             optionPanel.setLayout(new BorderLayout());
-            optionPanel.setBackground(ThemeProperty.getSingleOptionPannelColor());
+            optionPanel.setBackground(GlobalResource.getTheme().getSingleOptionPannelColor());
             optionsPanel.add(optionPanel);
 
             JLabel optionDescription = new JLabel(option, SwingConstants.CENTER);
             optionPanel.add(optionDescription, BorderLayout.CENTER);
             optionDescription.setAlignmentX(Component.CENTER_ALIGNMENT);
-            optionDescription.setFont(new Font("Open Sans Medium", Font.PLAIN, 14));
-            optionDescription.setForeground(ThemeProperty.getFontColor());
+            optionDescription.setFont(GlobalResource.getFont().getMediumFont(FontSize.MEDIUM));
+            optionDescription.setForeground(GlobalResource.getTheme().getFontColor());
             optionDescription.addMouseListener(new MouseInputListener() {
                 public void mouseClicked(MouseEvent e) {
                     String choosedOption = ((JLabel) e.getSource()).getText();
 
                     HomeFrame currentFrame = (HomeFrame) SwingUtilities.windowForComponent(optionDescription);
                     if (choosedOption.equals(options.get(GENERATE_OPTION_INDEX))) {
-                        currentFrame.setTopPanel(GenerateTestPanel.getGenerateTestPanel());
+                        currentFrame.setTopPanel(GlobalResource.getGenerateTestPanel());
                     }
                     if (choosedOption.equals(options.get(ZIP_OPTION_INDEX))) {
                         int answer = JOptionPane.showConfirmDialog(
@@ -95,7 +93,7 @@ public class InitPanel {
                         if (answer != JOptionPane.YES_OPTION) return;
 
                         if (!DirectoryValidator.validateTestcaseFiles()) return;
-                        File testcaseFile = new File(ConfigPanel.getConfigData().get(2));
+                        File testcaseFile = new File(GlobalResource.getConfigData().get(GlobalResource.TESTCASE_FOLDER_INDEX));
                         File testcaseZipFile = new File(testcaseFile.getAbsolutePath() + ".zip");
                         ZipUtil.pack(testcaseFile, testcaseZipFile);
                         JOptionPane.showMessageDialog(
@@ -122,7 +120,7 @@ public class InitPanel {
                         );
                     }
                     if (choosedOption.equals(options.get(CONFIG_OPTION_INDEX))) {
-                        currentFrame.setTopPanel(ConfigPanel.getConfigPanel());
+                        currentFrame.setTopPanel(GlobalResource.getConfigPanel());
                     }
                 }
 
@@ -146,10 +144,5 @@ public class InitPanel {
 
             });
         });
-    }
-
-    public static JPanel getInitPanel() {
-        if (initPanel == null) createInitPanel();
-        return initPanel;
     }
 }

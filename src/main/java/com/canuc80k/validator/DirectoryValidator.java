@@ -5,11 +5,11 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
-import com.canuc80k.userinterface.ConfigPanel;
+import com.canuc80k.launcher.GlobalResource;
 
 public class DirectoryValidator {
     public static boolean validateConfigFiles() {
-        List<String> paths = ConfigPanel.getConfigData();
+        List<String> paths = GlobalResource.getConfigData();
 
         for (int i = 0; i < paths.size(); i ++) {
             File file = new File(paths.get(i));
@@ -27,8 +27,8 @@ public class DirectoryValidator {
         return true;
     }
     public static boolean validateTestcaseFiles() {
-        List<String> paths = ConfigPanel.getConfigData();
-        File testcaseFolder = new File(paths.get(ConfigPanel.TESTCASE_FOLDER_INDEX));
+        List<String> paths = GlobalResource.getConfigData();
+        File testcaseFolder = new File(paths.get(GlobalResource.TESTCASE_FOLDER_INDEX));
         File zipFolder = new File(testcaseFolder.getAbsolutePath() + ".zip");
 
         if (zipFolder.exists()) {
