@@ -1,7 +1,9 @@
 package com.canuc80k.userinterface;
 
 import java.awt.BorderLayout;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -19,8 +21,13 @@ public class HomeFrame extends JFrame {
     private JPanel topPanel = InitPanel.getInitPanel();
 
     public HomeFrame() {
-        ImageIcon img = new ImageIcon("image/icon.png");
-        setIconImage(img.getImage());
+        try {
+            ImageIcon icon = new ImageIcon(ImageIO.read(HomeFrame.class.getResourceAsStream("/image/icon.png")));
+            setIconImage(icon.getImage());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
         setTitle("dont_generatetest_me_pls");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(APP_WIDTH, APP_HEIGHT);
