@@ -1,4 +1,4 @@
-package com.datastructure;
+package com.canuc80k.datastructure;
 
 public class Pair {
     public Object firstElement;

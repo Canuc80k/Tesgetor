@@ -4,8 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.canuc80k.datastructure.Pair;
 import com.canuc80k.filetool.FileTool;
-import com.datastructure.Pair;
 
 public class OpenSansFont extends ExtendedFont {
     private List<Pair> fonts, sizes;
