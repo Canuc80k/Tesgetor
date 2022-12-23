@@ -3,6 +3,8 @@ package com.canuc80k.compiler;
 import java.io.IOException;
 import java.util.List;
 
+import com.canuc80k.exception.CompileErrorException;
+
 public abstract class Compiler {
     protected ProcessBuilder builder;
     private List<String> commands;
@@ -11,10 +13,11 @@ public abstract class Compiler {
         builder = new ProcessBuilder();
     }
 
-    public synchronized void executeCommand(String command) throws IOException, InterruptedException {
+    public synchronized void executeCommand(String command) throws IOException, InterruptedException, CompileErrorException {
         commands.add(command);
 
-        builder.command(commands).inheritIO().start().waitFor();
+        int exit_code = builder.command(commands).start().waitFor();
+        if (exit_code != 0) throw new CompileErrorException();
         commands.remove(commands.size() - 1);
     }
 

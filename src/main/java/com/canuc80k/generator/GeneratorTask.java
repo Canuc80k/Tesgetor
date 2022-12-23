@@ -3,7 +3,10 @@ package com.canuc80k.generator;
 import java.io.File;
 import java.io.IOException;
 
+import javax.swing.JOptionPane;
+
 import com.canuc80k.compiler.CPPCompiler;
+import com.canuc80k.exception.CompileErrorException;
 import com.canuc80k.launcher.GlobalResource;
 
 public class GeneratorTask implements Runnable {
@@ -29,6 +32,13 @@ public class GeneratorTask implements Runnable {
             GlobalResource.getGenerateTestPanel().increaseDoneTestcase();
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
+        } catch (CompileErrorException e) {
+            JOptionPane.showMessageDialog(
+                null, 
+                "Errors occur when generate test",
+                "Check your testcase generator files",
+                JOptionPane.NO_OPTION
+            );
         }
     }
 }

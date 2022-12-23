@@ -7,7 +7,10 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import javax.swing.JOptionPane;
+
 import com.canuc80k.compiler.CPPCompiler;
+import com.canuc80k.exception.CompileErrorException;
 import com.canuc80k.filetool.FileTool;
 import com.canuc80k.launcher.GlobalResource;
 import com.canuc80k.testcase.TestcaseFileNameType;
@@ -26,8 +29,7 @@ public class Generator {
     public Generator() {
         if (!GlobalResource.getTempFolder().exists()) GlobalResource.getTempFolder().mkdirs();
 
-        locateConfigFiles();        
-        cppCompiler = new CPPCompiler();
+        locateConfigFiles();
     }
 
     public synchronized void locateConfigFiles() {
@@ -38,10 +40,21 @@ public class Generator {
     }
 
     public synchronized void generate(int beginTestcaseIndex, int endTestcaseIndex, TestcaseFileNameType type, int lastTestcaseFileNameLength) throws IOException, InterruptedException {
+        cppCompiler = new CPPCompiler();
         locateConfigFiles();
         FileTool.deleteFolder(GlobalResource.getTempFolder(), FileTool.KEEP_CURRENT_FOLDER);
-        cppCompiler.compile_gplusplus(inputGeneratorFile, INPUT_GENERATOR_EXE_FILE);
-        cppCompiler.compile_gplusplus(outputGeneratorFile, OUTPUT_GENERATOR_EXE_FILE);
+        try {
+            cppCompiler.compile_gplusplus(inputGeneratorFile, INPUT_GENERATOR_EXE_FILE);
+            cppCompiler.compile_gplusplus(outputGeneratorFile, OUTPUT_GENERATOR_EXE_FILE);
+        } catch (CompileErrorException e) {
+            JOptionPane.showMessageDialog(
+                null, 
+                "Errors occur when compile testcase generator files",
+                "Check your testcase generator files",
+                JOptionPane.NO_OPTION
+            );
+            return;
+        }
         GlobalResource.getGenerateTestPanel().setTotalTestcase(endTestcaseIndex - beginTestcaseIndex + 1);
 
         generateTestcases(beginTestcaseIndex, endTestcaseIndex, type, lastTestcaseFileNameLength);
