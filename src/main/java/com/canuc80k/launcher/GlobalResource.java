@@ -26,7 +26,8 @@ public class GlobalResource {
     private static File configFolder;
     private static File configFile;
     private static File tempFolder;
-    
+    private static File projectFolder;
+
     private static Theme theme;
     private static ExtendedFont font;
     
@@ -46,13 +47,16 @@ public class GlobalResource {
         
         font = openSansFont;
 
-        tempFolder = new File("temp");
+        projectFolder = new File(System.getenv("LOCALAPPDATA") + "/dont_generatetest_me_pls");
+        if (!projectFolder.exists()) projectFolder.mkdirs();
+
+        tempFolder = new File(projectFolder.getAbsolutePath() + "/temp");
         if (!tempFolder.exists()) tempFolder.mkdirs();
 
-        configFolder = new File("config");
+        configFolder = new File(projectFolder.getAbsolutePath() + "/config");
         if (!configFolder.exists()) configFolder.mkdirs();
         
-        configFile = new File("config/config.cfg");
+        configFile = new File(configFolder.getAbsolutePath() + "/config.cfg");
 
         configPanel = new ConfigPanel();
         generateTestPanel = new GenerateTestPanel();

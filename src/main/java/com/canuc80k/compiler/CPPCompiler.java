@@ -25,12 +25,12 @@ public class CPPCompiler extends Compiler {
     }
 
     public synchronized void run(File runFile, String arg) throws IOException, InterruptedException {
-        String runCommand = "\"" + runFile.getAbsolutePath() + "\" \"" + arg + "\"";
+        String runCommand = "c: && \"" + runFile.getAbsolutePath() + "\" \"" + arg + "\"";
         executeCommand(runCommand);
     }
 
     public synchronized void run(File runFile, String arg1, String arg2) throws IOException, InterruptedException {
-        String runCommand = "\"" + runFile.getAbsolutePath() + "\" \"" + arg1 + "\" \"" + arg2 + "\"";
+        String runCommand = "c: && \"" + runFile.getAbsolutePath() + "\" \"" + arg1 + "\" \"" + arg2 + "\"";
         executeCommand(runCommand);
     }
 }
