@@ -12,7 +12,6 @@ public abstract class Compiler {
     }
 
     public synchronized void executeCommand(String command) throws IOException, InterruptedException {
-        System.out.println(command);
         commands.add(command);
 
         builder.command(commands).inheritIO().start().waitFor();
