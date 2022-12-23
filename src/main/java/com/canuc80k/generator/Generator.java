@@ -30,6 +30,7 @@ public class Generator {
         if (!GlobalResource.getTempFolder().exists()) GlobalResource.getTempFolder().mkdirs();
 
         locateConfigFiles();
+        cppCompiler = new CPPCompiler();
     }
 
     public synchronized void locateConfigFiles() {
@@ -40,7 +41,6 @@ public class Generator {
     }
 
     public synchronized void generate(int beginTestcaseIndex, int endTestcaseIndex, TestcaseFileNameType type, int lastTestcaseFileNameLength) throws IOException, InterruptedException {
-        cppCompiler = new CPPCompiler();
         locateConfigFiles();
         FileTool.deleteFolder(GlobalResource.getTempFolder(), FileTool.KEEP_CURRENT_FOLDER);
         try {

@@ -17,8 +17,9 @@ public abstract class Compiler {
         commands.add(command);
 
         int exit_code = builder.command(commands).start().waitFor();
-        if (exit_code != 0) throw new CompileErrorException();
         commands.remove(commands.size() - 1);
+        
+        if (exit_code != 0) throw new CompileErrorException();
     }
 
     public List<String> getCommands() {
