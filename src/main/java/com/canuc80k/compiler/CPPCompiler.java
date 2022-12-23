@@ -15,7 +15,7 @@ public class CPPCompiler extends Compiler {
     }
 
     public synchronized void compile_gplusplus(File sourceFile, File outputFile) throws IOException, InterruptedException {
-        String compileCommand = "g++ " + sourceFile.getAbsolutePath() + " -o " + "\"" + outputFile.getAbsolutePath() + "\"";
+        String compileCommand = "g++ \"" + sourceFile.getAbsolutePath() + "\" -o " + "\"" + outputFile.getAbsolutePath() + "\"";
         executeCommand(compileCommand);
     }
 
@@ -25,12 +25,12 @@ public class CPPCompiler extends Compiler {
     }
 
     public synchronized void run(File runFile, String arg) throws IOException, InterruptedException {
-        String runCommand = runFile.getAbsolutePath() + " " + arg;
+        String runCommand = "\"" + runFile.getAbsolutePath() + "\" \"" + arg + "\"";
         executeCommand(runCommand);
     }
 
     public synchronized void run(File runFile, String arg1, String arg2) throws IOException, InterruptedException {
-        String runCommand = runFile.getAbsolutePath() + " " + arg1 + " " + arg2;
+        String runCommand = "\"" + runFile.getAbsolutePath() + "\" \"" + arg1 + "\" \"" + arg2 + "\"";
         executeCommand(runCommand);
     }
 }

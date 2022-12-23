@@ -12,9 +12,10 @@ public abstract class Compiler {
     }
 
     public synchronized void executeCommand(String command) throws IOException, InterruptedException {
+        System.out.println(command);
         commands.add(command);
 
-        builder.command(commands).start().waitFor();
+        builder.command(commands).inheritIO().start().waitFor();
         commands.remove(commands.size() - 1);
     }
 
