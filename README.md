@@ -1,3 +1,4 @@
+
 # dont_generatetest_me_pls
 ![](https://img.shields.io/badge/java-1.8%2B-orange) ![](https://img.shields.io/badge/window-7%2B-blue)
 
@@ -24,23 +25,21 @@ Hiện tại, chỉ mới hỗ trợ file sinh test dùng ngôn ngữ C++.
 &emsp;&emsp;Cái cuối là thư mục sẽ chứa testcase, nhớ là chọn thư mục **rỗng**, đừng chứa mấy file linh tinh khác.
 
 * #### Bước 3: Set up trên file sinh input và output
-	**1) Thêm command line argument**: Thay vì **int main()** thì sửa lại thành
+&emsp;&emsp;**1) Thêm command line argument**: Thay vì **int main()** thì sửa lại thành
  
- <br/>
- &emsp;&emsp;![](https://i.ibb.co/5RGwFZp/Untitled.png)
+ &emsp;&emsp; ![](https://i.ibb.co/5RGwFZp/Untitled.png)
  
  <br/>
  
 &emsp;&emsp;**2) Thêm freopen**
- <br/>
- <br/>
  &emsp;&emsp;Ở file sinh input thêm dòng: <br/> 
 &emsp;&emsp; ``` freopen(argv[1], "w", stdout); ```
 &emsp;&emsp;<br/>
 
 &emsp;&emsp;Ở file sinh output 2 thêm dòng:<br/>
 &emsp;&emsp;```freopen(argv[1], "r", stdin);```<br/>
-&emsp;&emsp;```freopen(argv[2], "w", stdout);```
+&emsp;&emsp;```freopen(argv[2], "w", stdout);```<br/>
+<br/>
 
 &emsp;&emsp;**3)** Nhớ dùng **high_resolution_clock** để sinh seed thay vì **srand**
  
