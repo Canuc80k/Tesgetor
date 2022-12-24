@@ -76,105 +76,62 @@ public class ExtendedFont {
         }
     }
 
-    public Font getBoldFont(float fontSize) {
-        return boldFont.deriveFont(fontSize);
+    public Font getExtendedFont(FontType type, FontSize size) {
+        Font font = regularFont;
+        switch (type) {
+            case BOLD: 
+                font = boldFont;
+                break;
+            case EXTRA_BOLD: 
+                font = extraBoldFont;
+                break;
+            case SEMI_BOLD: 
+                font = semiBoldFont;
+                break;
+            case MEDIUM: 
+                font = mediumFont;
+                break;
+            case REGULAR: 
+                font = regularFont;
+                break;
+            case LIGHT: 
+                font = lightFont;
+                break; 
+        }
+        switch (size) {
+            case LARGE: 
+                return font.deriveFont(largeSize);
+            case MEDIUM: 
+                return font.deriveFont(mediumSize);
+            case SMALL:
+                return font.deriveFont(smallSize);
+        }
+        return font;
     }
 
-    public Font getBoldFont(FontSize fontSize) {
-        switch (fontSize) {
-            case LARGE: 
-                return boldFont.deriveFont(largeSize);
+    public Font getExtendedFont(FontType type, float size) {
+        Font font = regularFont;
+        switch (type) {
+            case BOLD: 
+                font = boldFont;
+                break;
+            case EXTRA_BOLD: 
+                font = extraBoldFont;
+                break;
+            case SEMI_BOLD: 
+                font = semiBoldFont;
+                break;
             case MEDIUM: 
-                return boldFont.deriveFont(mediumSize);
-            case SMALL:
-                return boldFont.deriveFont(smallSize);
+                font = mediumFont;
+                break;
+            case REGULAR: 
+                font = regularFont;
+                break;
+            case LIGHT: 
+                font = lightFont;
+                break; 
         }
 
-        return boldFont;
-    }
-
-    public Font getExtraBoldFont(float fontSize) {
-        return extraBoldFont.deriveFont(fontSize);
-    }
-
-    public Font getExtraBoldFont(FontSize fontSize) {
-        switch (fontSize) {
-            case LARGE: 
-                return extraBoldFont.deriveFont(largeSize);
-            case MEDIUM: 
-                return extraBoldFont.deriveFont(mediumSize);
-            case SMALL:
-                return extraBoldFont.deriveFont(smallSize);
-        }
-
-        return extraBoldFont;
-    }
-
-    public Font getSemiBoldFont(float fontSize) {
-        return semiBoldFont.deriveFont(fontSize);
-    }
-
-    public Font getSemiBoldFont(FontSize fontSize) {
-        switch (fontSize) {
-            case LARGE: 
-                return semiBoldFont.deriveFont(largeSize);
-            case MEDIUM: 
-                return semiBoldFont.deriveFont(mediumSize);
-            case SMALL:
-                return semiBoldFont.deriveFont(smallSize);
-        }
-
-        return semiBoldFont;
-    }
-
-    public Font getMediumFont(float fontSize) {
-        return mediumFont.deriveFont(fontSize);
-    }
-
-    public Font getMediumFont(FontSize fontSize) {
-        switch (fontSize) {
-            case LARGE: 
-                return mediumFont.deriveFont(largeSize);
-            case MEDIUM: 
-                return mediumFont.deriveFont(mediumSize);
-            case SMALL:
-                return mediumFont.deriveFont(smallSize);
-        }
-
-        return mediumFont;
-    }
-
-    public Font getRegularFont(float fontSize) {
-        return regularFont.deriveFont(fontSize);
-    }
-
-    public Font getRegularFont(FontSize fontSize) {
-        switch (fontSize) {
-            case LARGE: 
-                return regularFont.deriveFont(largeSize);
-            case MEDIUM: 
-                return regularFont.deriveFont(mediumSize);
-            case SMALL:
-                return regularFont.deriveFont(smallSize);
-        }
-
-        return regularFont;
-    }
-
-    public Font getLightFont(float fontSize) {
-        return lightFont.deriveFont(fontSize);
-    }
-
-    public Font getLightFont(FontSize fontSize) {
-        switch (fontSize) {
-            case LARGE: 
-                return lightFont.deriveFont(largeSize);
-            case MEDIUM: 
-                return lightFont.deriveFont(mediumSize);
-            case SMALL:
-                return lightFont.deriveFont(smallSize);
-        }
-
-        return lightFont;
+        return font.deriveFont(size);
     }
 }

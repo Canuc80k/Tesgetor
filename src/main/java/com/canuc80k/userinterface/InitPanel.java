@@ -24,6 +24,7 @@ import javax.swing.event.MouseInputListener;
 import org.zeroturnaround.zip.ZipUtil;
 
 import com.canuc80k.font.FontSize;
+import com.canuc80k.font.FontType;
 import com.canuc80k.generator.Generator;
 import com.canuc80k.launcher.GlobalResource;
 import com.canuc80k.validator.DirectoryValidator;
@@ -52,7 +53,7 @@ public class InitPanel extends JPanel {
         topLabel = new JLabel("What do u wanna do");
         topLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         topLabel.setForeground(GlobalResource.getTheme().getFontColor());
-        topLabel.setFont(GlobalResource.getFont().getBoldFont(FontSize.LARGE));
+        topLabel.setFont(GlobalResource.getFont().getExtendedFont(FontType.BOLD, FontSize.LARGE));
         topLabel.setSize(new Dimension(HomeFrame.APP_WIDTH, 50));
         add(topLabel);
 
@@ -73,7 +74,7 @@ public class InitPanel extends JPanel {
             JLabel optionDescription = new JLabel(option, SwingConstants.CENTER);
             optionPanel.add(optionDescription, BorderLayout.CENTER);
             optionDescription.setAlignmentX(Component.CENTER_ALIGNMENT);
-            optionDescription.setFont(GlobalResource.getFont().getMediumFont(FontSize.MEDIUM));
+            optionDescription.setFont(GlobalResource.getFont().getExtendedFont(FontType.MEDIUM, FontSize.MEDIUM));
             optionDescription.setForeground(GlobalResource.getTheme().getFontColor());
             optionDescription.addMouseListener(new MouseInputListener() {
                 public void mouseClicked(MouseEvent e) {
