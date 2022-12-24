@@ -25,13 +25,14 @@ Hiện tại, chỉ mới hỗ trợ file sinh test dùng ngôn ngữ C++.
 &emsp;&emsp;Cái cuối là thư mục sẽ chứa testcase, nhớ là chọn thư mục **rỗng**, đừng chứa mấy file linh tinh khác.
 
 * #### Bước 3: Set up trên file sinh input và output
-&emsp;&emsp;**1) Thêm command line argument**: Thay vì **int main()** thì sửa lại thành
+&emsp;&emsp;**1) Thêm command line argument**:
+&emsp;&emsp;Thay vì **int main()** thì sửa lại thành
  
  &emsp;&emsp; ![](https://i.ibb.co/5RGwFZp/Untitled.png)
  
  <br/>
  
-&emsp;&emsp;**2) Thêm freopen**
+&emsp;&emsp;**2) Thêm freopen**<br/>
  &emsp;&emsp;Ở file sinh input thêm dòng: <br/> 
 &emsp;&emsp; ``` freopen(argv[1], "w", stdout); ```
 &emsp;&emsp;<br/>
