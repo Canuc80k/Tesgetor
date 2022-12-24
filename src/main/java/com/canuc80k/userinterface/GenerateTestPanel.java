@@ -22,7 +22,6 @@ import javax.swing.event.MouseInputListener;
 
 import com.canuc80k.font.FontSize;
 import com.canuc80k.font.FontType;
-import com.canuc80k.generator.Generator;
 import com.canuc80k.launcher.GlobalResource;
 import com.canuc80k.testcase.TestcaseFileNameType;
 import com.canuc80k.validator.DirectoryValidator;
