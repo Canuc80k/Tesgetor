@@ -11,6 +11,8 @@ import javax.swing.JOptionPane;
 
 import com.canuc80k.compiler.CPPCompiler;
 import com.canuc80k.exception.CompileErrorException;
+import com.canuc80k.exception.RuntimeErrorException;
+import com.canuc80k.exception.TimeoutException;
 import com.canuc80k.filetool.FileTool;
 import com.canuc80k.launcher.GlobalResource;
 import com.canuc80k.testcase.TestcaseFileNameType;
@@ -25,6 +27,8 @@ public class Generator {
 
     private CPPCompiler cppCompiler;
     private ExecutorService threadPool;
+
+    private String errorInformation;
 
     public Generator() {
         if (!GlobalResource.getTempFolder().exists()) GlobalResource.getTempFolder().mkdirs();
@@ -46,7 +50,7 @@ public class Generator {
         try {
             cppCompiler.compile_gplusplus(inputGeneratorFile, INPUT_GENERATOR_EXE_FILE);
             cppCompiler.compile_gplusplus(outputGeneratorFile, OUTPUT_GENERATOR_EXE_FILE);
-        } catch (CompileErrorException e) {
+        } catch (CompileErrorException | TimeoutException | RuntimeErrorException e) {
             JOptionPane.showMessageDialog(
                 null, 
                 "Errors occur when compile testcase generator files",
@@ -79,8 +83,17 @@ public class Generator {
             tasks.add(inputGeneratorThread);
         }
 
+        errorInformation = "";
         threadPool = Executors.newCachedThreadPool();  
         tasks.forEach((task) -> threadPool.execute(task));
         threadPool.shutdown();
+    }
+
+    public synchronized void notifyError(Exception e) {
+        errorInformation = e.getClass().getSimpleName();
+    }
+
+    public String getErrorInformation() {
+        return errorInformation;
     }
 }

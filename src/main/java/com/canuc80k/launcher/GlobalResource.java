@@ -11,6 +11,7 @@ import java.util.List;
 
 import com.canuc80k.font.ExtendedFont;
 import com.canuc80k.font.OpenSansFont;
+import com.canuc80k.generator.Generator;
 import com.canuc80k.theme.DracularTheme;
 import com.canuc80k.theme.Theme;
 import com.canuc80k.userinterface.ConfigPanel;
@@ -36,6 +37,8 @@ public class GlobalResource {
     private static InitPanel initPanel;
     private static List<String> configData;
 
+    private static Generator generator;
+    
     protected static void init() {
         DracularTheme dracularTheme = new DracularTheme();
         dracularTheme.applyTheme();
@@ -61,6 +64,8 @@ public class GlobalResource {
         configPanel = new ConfigPanel();
         generateTestPanel = new GenerateTestPanel();
         initPanel = new InitPanel();
+    
+        generator = new Generator();
     }
 
     public static Theme getTheme() {
@@ -97,6 +102,10 @@ public class GlobalResource {
 
     public static List<String> getConfigData() {
         return configData;
+    }
+
+    public static Generator getGenerator() {
+        return generator;
     }
 
     public static void serializeConfigData() {

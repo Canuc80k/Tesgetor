@@ -41,11 +41,8 @@ public class GenerateTestPanel extends JPanel {
     private JTextField endTestcaseIndexTextField;
 
     private JButton generateButton;
-    private Generator generator;
 
     public GenerateTestPanel() {
-        generator = new Generator();
-        
         setPreferredSize(new Dimension(HomeFrame.APP_WIDTH, HomeFrame.TOPPANEL_HEIGHT));
         setBackground(GlobalResource.getTheme().getTopPanelColor());
         setBorder(new EmptyBorder(0, 10, 10, 10));
@@ -119,7 +116,7 @@ public class GenerateTestPanel extends JPanel {
                     }
 
                     try {
-                        generator.generate(Integer.parseInt(beginIndex), Integer.parseInt(endIndex), type,
+                        GlobalResource.getGenerator().generate(Integer.parseInt(beginIndex), Integer.parseInt(endIndex), type,
                                 endIndex.length());
                     } catch (NumberFormatException | IOException | InterruptedException e1) {
                         e1.printStackTrace();
@@ -159,12 +156,22 @@ public class GenerateTestPanel extends JPanel {
             doneTestcase = totalTestcase = 0;
             generateButton.setText("RUN");
             
-            JOptionPane.showMessageDialog(
-                null,
-                "Mission accomplished",
-                "It's done, sir",
-                JOptionPane.NO_OPTION
-            );
+            String errorInformation = GlobalResource.getGenerator().getErrorInformation();
+            if (errorInformation.length() == 0) {
+                JOptionPane.showMessageDialog(
+                    null,
+                    "Mission accomplished",
+                    "It's done, sir",
+                    JOptionPane.NO_OPTION
+                );
+            } else {
+                JOptionPane.showMessageDialog(
+                    null,
+                    errorInformation + " has occured in generate test process, error testcases have been deleted, check your testcase folder",
+                    "Check your testcase generator files",
+                    JOptionPane.NO_OPTION
+                );
+            }
             return;
         }
         generateButton.setText(doneTestcase + "/" + totalTestcase);
