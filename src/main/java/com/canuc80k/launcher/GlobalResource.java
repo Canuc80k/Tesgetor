@@ -40,16 +40,6 @@ public class GlobalResource {
     private static Generator generator;
     
     protected static void init() {
-        DracularTheme dracularTheme = new DracularTheme();
-        dracularTheme.applyTheme();
-
-        theme = dracularTheme;
-    
-        OpenSansFont openSansFont = new OpenSansFont();
-        openSansFont.init();
-        
-        extendedFont = openSansFont;
-
         projectFolder = new File(System.getenv("LOCALAPPDATA") + "/dont_generatetest_me_pls");
         if (!projectFolder.exists()) projectFolder.mkdirs();
 
@@ -60,6 +50,16 @@ public class GlobalResource {
         if (!configFolder.exists()) configFolder.mkdirs();
         
         configFile = new File(configFolder.getAbsolutePath() + "/config.cfg");
+        
+        DracularTheme dracularTheme = new DracularTheme();
+        dracularTheme.applyTheme();
+
+        theme = dracularTheme;
+    
+        OpenSansFont openSansFont = new OpenSansFont();
+        openSansFont.init();
+        
+        extendedFont = openSansFont;
 
         configPanel = new ConfigPanel();
         generateTestPanel = new GenerateTestPanel();
