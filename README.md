@@ -1,4 +1,5 @@
 
+
 # dont_generatetest_me_pls
 ![](https://img.shields.io/badge/java-1.8%2B-orange) ![](https://img.shields.io/badge/window-7%2B-blue)
 
@@ -45,8 +46,8 @@ Hiện tại, chỉ mới hỗ trợ file sinh test dùng ngôn ngữ C++.
 &emsp;&emsp;**3)** Nhớ dùng **high_resolution_clock** để sinh seed thay vì **srand**
  
 &emsp;&emsp;Tui để 2 file sinh input và output mẫu ở [đây](https://drive.google.com/drive/folders/1SLv9eGQN5Eh60MwKaBsic2K9VwB4bn71?usp=sharing) cho dễ tham khảo.
- 
-&emsp;&emsp;**4) Sinh test**
+ <br/>
+ * #### Bước 4: Sinh test  
   
   &emsp;&emsp;![](https://i.ibb.co/CKbTJGH/Untitled.png)
   
