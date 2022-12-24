@@ -53,7 +53,7 @@ public class InitPanel extends JPanel {
         topLabel = new JLabel("What do u wanna do");
         topLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         topLabel.setForeground(GlobalResource.getTheme().getFontColor());
-        topLabel.setFont(GlobalResource.getFont().getExtendedFont(FontType.BOLD, FontSize.LARGE));
+        topLabel.setFont(GlobalResource.getExtendedFont().getFont(FontType.BOLD, FontSize.LARGE));
         topLabel.setSize(new Dimension(HomeFrame.APP_WIDTH, 50));
         add(topLabel);
 
@@ -74,7 +74,7 @@ public class InitPanel extends JPanel {
             JLabel optionDescription = new JLabel(option, SwingConstants.CENTER);
             optionPanel.add(optionDescription, BorderLayout.CENTER);
             optionDescription.setAlignmentX(Component.CENTER_ALIGNMENT);
-            optionDescription.setFont(GlobalResource.getFont().getExtendedFont(FontType.MEDIUM, FontSize.MEDIUM));
+            optionDescription.setFont(GlobalResource.getExtendedFont().getFont(FontType.MEDIUM, FontSize.MEDIUM));
             optionDescription.setForeground(GlobalResource.getTheme().getFontColor());
             optionDescription.addMouseListener(new MouseInputListener() {
                 public void mouseClicked(MouseEvent e) {

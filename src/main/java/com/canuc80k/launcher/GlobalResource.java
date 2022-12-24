@@ -29,7 +29,7 @@ public class GlobalResource {
     private static File projectFolder;
 
     private static Theme theme;
-    private static ExtendedFont font;
+    private static ExtendedFont extendedFont;
     
     private static GenerateTestPanel generateTestPanel;
     private static ConfigPanel configPanel;
@@ -45,7 +45,7 @@ public class GlobalResource {
         OpenSansFont openSansFont = new OpenSansFont();
         openSansFont.init();
         
-        font = openSansFont;
+        extendedFont = openSansFont;
 
         projectFolder = new File(System.getenv("LOCALAPPDATA") + "/dont_generatetest_me_pls");
         if (!projectFolder.exists()) projectFolder.mkdirs();
@@ -67,8 +67,8 @@ public class GlobalResource {
         return theme;
     }
 
-    public static ExtendedFont getFont() {
-        return font;
+    public static ExtendedFont getExtendedFont() {
+        return extendedFont;
     }
 
     public static File getTempFolder() {

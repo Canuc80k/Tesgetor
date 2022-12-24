@@ -76,7 +76,7 @@ public class ExtendedFont {
         }
     }
 
-    public Font getExtendedFont(FontType type, FontSize size) {
+    public Font getFont(FontType type, FontSize size) {
         Font font = regularFont;
         switch (type) {
             case BOLD: 
@@ -109,7 +109,7 @@ public class ExtendedFont {
         return font;
     }
 
-    public Font getExtendedFont(FontType type, float size) {
+    public Font getFont(FontType type, float size) {
         Font font = regularFont;
         switch (type) {
             case BOLD: 

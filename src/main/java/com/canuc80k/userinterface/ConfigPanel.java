@@ -45,7 +45,7 @@ public class ConfigPanel extends JPanel {
 
         inputGeneratorFileLabel = new JLabel("Input Generator File");
         inputGeneratorFileLabel.setForeground(GlobalResource.getTheme().getFontColor());
-        inputGeneratorFileLabel.setFont(GlobalResource.getFont().getExtendedFont(FontType.BOLD, FontSize.MEDIUM));
+        inputGeneratorFileLabel.setFont(GlobalResource.getExtendedFont().getFont(FontType.BOLD, FontSize.MEDIUM));
         inputGeneratorFileLabel.setMinimumSize(new Dimension(HomeFrame.APP_WIDTH / 5 * 4, 45));
         inputGeneratorFileLabel.setMaximumSize(new Dimension(HomeFrame.APP_WIDTH / 5 * 4, 45));
         inputGeneratorFileLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -54,7 +54,7 @@ public class ConfigPanel extends JPanel {
         inputGeneratorFileButton = new JButton(GlobalResource.getConfigData().get(0));
         inputGeneratorFileButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         inputGeneratorFileButton.setForeground(GlobalResource.getTheme().getFontHighLightColor());
-        inputGeneratorFileButton.setFont(GlobalResource.getFont().getExtendedFont(FontType.BOLD, FontSize.SMALL));
+        inputGeneratorFileButton.setFont(GlobalResource.getExtendedFont().getFont(FontType.SEMI_BOLD, FontSize.SMALL));
         inputGeneratorFileButton.setMinimumSize(new Dimension(HomeFrame.APP_WIDTH / 5 * 4, 45));
         inputGeneratorFileButton.setMaximumSize(new Dimension(HomeFrame.APP_WIDTH / 5 * 4, 45));
         inputGeneratorFileButton.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -69,7 +69,7 @@ public class ConfigPanel extends JPanel {
 
         outputGeneratorFileLabel = new JLabel("Output Generator File");    
         outputGeneratorFileLabel.setForeground(GlobalResource.getTheme().getFontColor());
-        outputGeneratorFileLabel.setFont(GlobalResource.getFont().getExtendedFont(FontType.BOLD, FontSize.MEDIUM));
+        outputGeneratorFileLabel.setFont(GlobalResource.getExtendedFont().getFont(FontType.BOLD, FontSize.MEDIUM));
         outputGeneratorFileLabel.setMinimumSize(new Dimension(HomeFrame.APP_WIDTH / 5 * 4, 45));
         outputGeneratorFileLabel.setMaximumSize(new Dimension(HomeFrame.APP_WIDTH / 5 * 4, 45));
         outputGeneratorFileLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -78,7 +78,7 @@ public class ConfigPanel extends JPanel {
         outputGeneratorFileButton = new JButton(GlobalResource.getConfigData().get(1));
         outputGeneratorFileButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         outputGeneratorFileButton.setForeground(GlobalResource.getTheme().getFontHighLightColor());
-        outputGeneratorFileButton.setFont(GlobalResource.getFont().getExtendedFont(FontType.SEMI_BOLD, FontSize.SMALL));
+        outputGeneratorFileButton.setFont(GlobalResource.getExtendedFont().getFont(FontType.SEMI_BOLD, FontSize.SMALL));
         outputGeneratorFileButton.setMinimumSize(new Dimension(HomeFrame.APP_WIDTH / 5 * 4, 45));
         outputGeneratorFileButton.setMaximumSize(new Dimension(HomeFrame.APP_WIDTH / 5 * 4, 45));
         outputGeneratorFileButton.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -93,7 +93,7 @@ public class ConfigPanel extends JPanel {
 
         testcaseFolderLabel = new JLabel("Testcase Output Folder");
         testcaseFolderLabel.setForeground(GlobalResource.getTheme().getFontColor());
-        testcaseFolderLabel.setFont(GlobalResource.getFont().getExtendedFont(FontType.BOLD, FontSize.MEDIUM));
+        testcaseFolderLabel.setFont(GlobalResource.getExtendedFont().getFont(FontType.BOLD, FontSize.MEDIUM));
         testcaseFolderLabel.setMinimumSize(new Dimension(HomeFrame.APP_WIDTH / 5 * 4, 45));
         testcaseFolderLabel.setMaximumSize(new Dimension(HomeFrame.APP_WIDTH / 5 * 4, 45));
         testcaseFolderLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -102,7 +102,7 @@ public class ConfigPanel extends JPanel {
         testcaseFolderButton = new JButton(GlobalResource.getConfigData().get(2));
         testcaseFolderButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         testcaseFolderButton.setForeground(GlobalResource.getTheme().getFontHighLightColor());
-        testcaseFolderButton.setFont(GlobalResource.getFont().getExtendedFont(FontType.SEMI_BOLD, FontSize.SMALL));
+        testcaseFolderButton.setFont(GlobalResource.getExtendedFont().getFont(FontType.SEMI_BOLD, FontSize.SMALL));
         testcaseFolderButton.setMinimumSize(new Dimension(HomeFrame.APP_WIDTH / 5 * 4, 45));
         testcaseFolderButton.setMaximumSize(new Dimension(HomeFrame.APP_WIDTH / 5 * 4, 45));
         testcaseFolderButton.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -118,7 +118,7 @@ public class ConfigPanel extends JPanel {
         backtoHome = new JLabel("<html><u><b>Back to Home</b></u></html>");
         backtoHome.setCursor(new Cursor(Cursor.HAND_CURSOR));
         backtoHome.setForeground(Color.BLUE.darker());
-        backtoHome.setFont(GlobalResource.getFont().getExtendedFont(FontType.BOLD, FontSize.SMALL));
+        backtoHome.setFont(GlobalResource.getExtendedFont().getFont(FontType.BOLD, FontSize.SMALL));
         backtoHome.setMinimumSize(new Dimension(100, 45));
         backtoHome.setMaximumSize(new Dimension(100, 45));
         backtoHome.setAlignmentX(Component.LEFT_ALIGNMENT);

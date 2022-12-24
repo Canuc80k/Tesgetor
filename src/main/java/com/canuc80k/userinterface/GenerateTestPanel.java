@@ -52,7 +52,7 @@ public class GenerateTestPanel extends JPanel {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         topLabel = new JLabel("Testcase index");
-        topLabel.setFont(GlobalResource.getFont().getExtendedFont(FontType.BOLD, FontSize.MEDIUM));
+        topLabel.setFont(GlobalResource.getExtendedFont().getFont(FontType.BOLD, FontSize.MEDIUM));
         topLabel.setForeground(GlobalResource.getTheme().getFontColor());
         topLabel.setMinimumSize(new Dimension(HomeFrame.APP_WIDTH, 50));
         topLabel.setMaximumSize(new Dimension(HomeFrame.APP_WIDTH, 50));
@@ -60,7 +60,7 @@ public class GenerateTestPanel extends JPanel {
         add(topLabel);
 
         fromLabel = new JLabel("From");
-        fromLabel.setFont(GlobalResource.getFont().getExtendedFont(FontType.MEDIUM, FontSize.MEDIUM));
+        fromLabel.setFont(GlobalResource.getExtendedFont().getFont(FontType.MEDIUM, FontSize.MEDIUM));
         fromLabel.setForeground(GlobalResource.getTheme().getFontColor());
         fromLabel.setMinimumSize(new Dimension(100, 50));
         fromLabel.setMaximumSize(new Dimension(100, 50));
@@ -68,7 +68,7 @@ public class GenerateTestPanel extends JPanel {
         add(fromLabel);
 
         beginTestcaseIndexTextField = new JTextField();
-        beginTestcaseIndexTextField.setFont(GlobalResource.getFont().getExtendedFont(FontType.MEDIUM, FontSize.MEDIUM));
+        beginTestcaseIndexTextField.setFont(GlobalResource.getExtendedFont().getFont(FontType.MEDIUM, FontSize.MEDIUM));
         beginTestcaseIndexTextField.setForeground(GlobalResource.getTheme().getInverseFontColor());
         beginTestcaseIndexTextField.setMinimumSize(new Dimension(100, 50));
         beginTestcaseIndexTextField.setMaximumSize(new Dimension(100, 50));
@@ -76,7 +76,7 @@ public class GenerateTestPanel extends JPanel {
         add(beginTestcaseIndexTextField);
 
         toLabel = new JLabel("To");
-        toLabel.setFont(GlobalResource.getFont().getExtendedFont(FontType.MEDIUM, FontSize.MEDIUM));
+        toLabel.setFont(GlobalResource.getExtendedFont().getFont(FontType.MEDIUM, FontSize.MEDIUM));
         toLabel.setForeground(GlobalResource.getTheme().getFontColor());
         toLabel.setMinimumSize(new Dimension(100, 50));
         toLabel.setMaximumSize(new Dimension(100, 50));
@@ -84,7 +84,7 @@ public class GenerateTestPanel extends JPanel {
         add(toLabel);
 
         endTestcaseIndexTextField = new JTextField();
-        endTestcaseIndexTextField.setFont(GlobalResource.getFont().getExtendedFont(FontType.MEDIUM, FontSize.MEDIUM));
+        endTestcaseIndexTextField.setFont(GlobalResource.getExtendedFont().getFont(FontType.MEDIUM, FontSize.MEDIUM));
         endTestcaseIndexTextField.setForeground(GlobalResource.getTheme().getInverseFontColor());
         endTestcaseIndexTextField.setMinimumSize(new Dimension(100, 50));
         endTestcaseIndexTextField.setMaximumSize(new Dimension(100, 50));
@@ -96,7 +96,7 @@ public class GenerateTestPanel extends JPanel {
         generateButton = new JButton("Run");
         generateButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         generateButton.setBackground(GlobalResource.getTheme().getBackgroundColor());
-        generateButton.setFont(GlobalResource.getFont().getExtendedFont(FontType.BOLD, FontSize.SMALL));
+        generateButton.setFont(GlobalResource.getExtendedFont().getFont(FontType.BOLD, FontSize.SMALL));
         generateButton.setForeground(GlobalResource.getTheme().getFontHighLightColor());
         generateButton.setMinimumSize(new Dimension(100, 50));
         generateButton.setMaximumSize(new Dimension(100, 50));
@@ -134,7 +134,7 @@ public class GenerateTestPanel extends JPanel {
         backtoHome = new JLabel("<html><u><b>Back to Home</b></u></html>");
         backtoHome.setCursor(new Cursor(Cursor.HAND_CURSOR));
         backtoHome.setForeground(Color.BLUE.darker());
-        backtoHome.setFont(GlobalResource.getFont().getExtendedFont(FontType.BOLD, FontSize.SMALL));
+        backtoHome.setFont(GlobalResource.getExtendedFont().getFont(FontType.BOLD, FontSize.SMALL));
         backtoHome.setMinimumSize(new Dimension(100, 45));
         backtoHome.setMaximumSize(new Dimension(100, 45));
         backtoHome.setAlignmentX(Component.LEFT_ALIGNMENT);
