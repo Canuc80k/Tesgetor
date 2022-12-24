@@ -12,47 +12,50 @@ Hiện tại, chỉ mới hỗ trợ file sinh test dùng ngôn ngữ C++.
 ㅤ
 ## Cài đặt
 * #### Bước 1: Tải Java  
-Vào [java.com](https://www.java.com/ "java.com") tải bản mới nhất về.\
-Rồi [cài đặt biến môi trường JAVA_HOME](https://viblo.asia/p/how-to-set-up-java-home-in-window-os-XL6lAvNp5ek "")\
-Gì chứ, cái này tui thấy mấy đứa lớp 3 tự mò để chơi minecraft ầm ầm rồi ._.
+&emsp;&emsp;Vào [java.com](https://www.java.com/ "java.com") tải bản mới nhất về.\
+&emsp;&emsp;Rồi [cài đặt biến môi trường JAVA_HOME](https://viblo.asia/p/how-to-set-up-java-home-in-window-os-XL6lAvNp5ek "")\
+&emsp;&emsp;Gì chứ, cái này tui thấy mấy đứa lớp 3 tự mò để chơi minecraft ầm ầm rồi ._.
 
 * #### Bước 2: Chỉnh config
-![](https://i.ibb.co/1MQhHvx/Untitled1.png)
+&emsp;&emsp;![](https://i.ibb.co/1MQhHvx/Untitled1.png)
 
- Mục đầu chọn **file sinh input**\
-Thứ hai chọn **file sinh output**\
-Cái cuối là thư mục sẽ chứa testcase, nhớ là chọn thư mục **rỗng**, đừng chứa mấy file linh tinh khác.
+&emsp;&emsp;Mục đầu chọn **file sinh input**\
+&emsp;&emsp;Thứ hai chọn **file sinh output**\
+&emsp;&emsp;Cái cuối là thư mục sẽ chứa testcase, nhớ là chọn thư mục **rỗng**, đừng chứa mấy file linh tinh khác.
 
 * #### Bước 3: Set up trên file sinh input và output
- **1) Thêm command line argument**: Thay vì **int main()** thì sửa lại thành
+	**1) Thêm command line argument**: Thay vì **int main()** thì sửa lại thành
  
- \
- ![](https://i.ibb.co/5RGwFZp/Untitled.png)
+ <br/>
+ &emsp;&emsp;![](https://i.ibb.co/5RGwFZp/Untitled.png)
  
- <br>
+ <br/>
  
- **2) Thêm freopen**\
- \
- Ở file sinh input thêm dòng: 
-        freopen(argv[1], "w", stdout);
- Ở file sinh output 2 thêm dòng:
-		freopen(argv[1], "r", stdin);
-		freopen(argv[2], "w", stdout);
+&emsp;&emsp;**2) Thêm freopen**
+ <br/>
+ <br/>
+ &emsp;&emsp;Ở file sinh input thêm dòng: <br/> 
+&emsp;&emsp; ``` freopen(argv[1], "w", stdout); ```
+&emsp;&emsp;<br/>
 
- **3)** Nhớ dùng **high_resolution_clock** để sinh seed thay vì **srand**
+&emsp;&emsp;Ở file sinh output 2 thêm dòng:<br/>
+&emsp;&emsp;```freopen(argv[1], "r", stdin);```<br/>
+&emsp;&emsp;```freopen(argv[2], "w", stdout);```
+
+&emsp;&emsp;**3)** Nhớ dùng **high_resolution_clock** để sinh seed thay vì **srand**
  
- Tui để 2 file sinh input và output mẫu ở [đây](https://drive.google.com/drive/folders/1SLv9eGQN5Eh60MwKaBsic2K9VwB4bn71?usp=sharing) cho dễ tham khảo.
+&emsp;&emsp;Tui để 2 file sinh input và output mẫu ở [đây](https://drive.google.com/drive/folders/1SLv9eGQN5Eh60MwKaBsic2K9VwB4bn71?usp=sharing) cho dễ tham khảo.
  
-  **4) Sinh test**
+&emsp;&emsp;**4) Sinh test**
   
-  ![](https://i.ibb.co/CKbTJGH/Untitled.png)
+  &emsp;&emsp;![](https://i.ibb.co/CKbTJGH/Untitled.png)
   
-  Ví dụ muốn sinh các testcase có số thứ tự từ 1 -> 10:
-  * Nếu nhập [1, 10] các file sinh ra sẽ có dạng: 1, 2, 3, ..., 10
-  * Nếu nhập [01, 10] các file sinh ra sẽ có dạng: 01, 02, 03, ..., 10
-  * Nếu nhập [001, 100] các file sinh ra sẽ có dạng: 001, 002, 003, ..., 010
+  &emsp;&emsp;Ví dụ muốn sinh các testcase có số thứ tự từ 1 -> 10:<br/>
+  &emsp;&emsp; * Nếu nhập [1, 10] các file sinh ra sẽ có dạng: 1, 2, 3, ..., 10<br/>
+  &emsp;&emsp; * Nếu nhập [01, 10] các file sinh ra sẽ có dạng: 01, 02, 03, ..., 10<br/>
+  &emsp;&emsp; * Nếu nhập [001, 100] các file sinh ra sẽ có dạng: 001, 002, 003, ..., 010<br/>
  
- Lưu ý là nếu sinh các test mà đã xuất hiện trong testcase folder (hay nói dễ hiểu hơn là sinh các test có trùng số thứ tự), những file test mới sinh sẽ ghi đè lên file cũ. 
+ &emsp;&emsp;Lưu ý là nếu sinh các test mà đã xuất hiện trong testcase folder (hay nói dễ hiểu hơn là sinh các test có trùng số thứ tự), những file test mới sinh sẽ ghi đè lên file cũ. 
  
  
 ## Những câu hỏi thường gặp
