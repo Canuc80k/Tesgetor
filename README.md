@@ -1,36 +1,40 @@
-#dont_generatetest_me_pls
+# dont_generatetest_me_pls
 ![](https://img.shields.io/badge/java-1.8%2B-orange) ![](https://img.shields.io/badge/window-7%2B-blue)
 
-##Tính năng
+## Tính năng
 	Sinh test 
 
-##Thì biết rồi, nhưng sinh test như nào .-.
+## Thì biết rồi, nhưng sinh test như nào .-.
 
-Phần mềm sẽ sử dụng file sinh input và output của người dùng để sinh ra các testcase.
+Phần mềm sẽ sử dụng file sinh input và output của người dùng để sinh ra các testcase.\
 Hiện tại, chỉ mới hỗ trợ file sinh test dùng ngôn ngữ C++.
 ![](https://i.ibb.co/RgLX0rT/Untitled.png)
 ㅤ
-##Cài đặt
-* ####Bước 1: Tải Java 
-Vào [java.com](https://www.java.com/ "java.com") tải bản mới nhất về.
-Rồi [cài đặt biến môi trường JAVA_HOME](https://viblo.asia/p/how-to-set-up-java-home-in-window-os-XL6lAvNp5ek "")
+## Cài đặt
+* #### Bước 1: Tải Java  
+Vào [java.com](https://www.java.com/ "java.com") tải bản mới nhất về.\
+Rồi [cài đặt biến môi trường JAVA_HOME](https://viblo.asia/p/how-to-set-up-java-home-in-window-os-XL6lAvNp5ek "")\
 Gì chứ, cái này tui thấy mấy đứa lớp 3 tự mò để chơi minecraft ầm ầm rồi ._.
 
-* ####Bước 2: Chỉnh config
+* #### Bước 2: Chỉnh config
 ![](https://i.ibb.co/1MQhHvx/Untitled1.png)
 
- Mục đầu chọn **file sinh input**
-Thứ hai chọn **file sinh output**
+ Mục đầu chọn **file sinh input**\
+Thứ hai chọn **file sinh output**\
 Cái cuối là thư mục sẽ chứa testcase, nhớ là chọn thư mục **rỗng**, đừng chứa mấy file linh tinh khác.
 
-* ####Bước 3: Set up trên file sinh input và output
-**1) Thêm command line argument**: Thay vì **int main()** thì sửa lại thành
-
+* #### Bước 3: Set up trên file sinh input và output
+ **1) Thêm command line argument**: Thay vì **int main()** thì sửa lại thành
+ 
+ \
  ![](https://i.ibb.co/5RGwFZp/Untitled.png)
  
- **2) Thêm freopen**
+ <br>
+ 
+ **2) Thêm freopen**\
+ \
  Ở file sinh input thêm dòng: 
-	 	freopen(argv[1], "w", stdout);
+        freopen(argv[1], "w", stdout);
  Ở file sinh output 2 thêm dòng:
 		freopen(argv[1], "r", stdin);
 		freopen(argv[2], "w", stdout);
@@ -51,5 +55,5 @@ Cái cuối là thư mục sẽ chứa testcase, nhớ là chọn thư mục **r
  Lưu ý là nếu sinh các test mà đã xuất hiện trong testcase folder (hay nói dễ hiểu hơn là sinh các test có trùng số thứ tự), những file test mới sinh sẽ ghi đè lên file cũ. 
  
  
-##Những câu hỏi thường gặp
+## Những câu hỏi thường gặp
 Để [đây](https://docs.google.com/document/d/1w9JIjzzNQg1ZDh0nMADl1f9dTTImvJUBrhCzo2S_EGM/edit?usp=sharing) lần sau có sửa lại gì thì đỡ phải commit :D
