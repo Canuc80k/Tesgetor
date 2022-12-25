@@ -54,7 +54,7 @@ Hiện tại, chỉ mới hỗ trợ file sinh test dùng ngôn ngữ C++.
   &emsp;&emsp;Ví dụ muốn sinh các testcase có số thứ tự từ 1 -> 10:<br/>
   &emsp;&emsp; * Nếu nhập [1, 10] các file sinh ra sẽ có dạng: 1, 2, 3, ..., 10<br/>
   &emsp;&emsp; * Nếu nhập [01, 10] các file sinh ra sẽ có dạng: 01, 02, 03, ..., 10<br/>
-  &emsp;&emsp; * Nếu nhập [001, 100] các file sinh ra sẽ có dạng: 001, 002, 003, ..., 010<br/>
+  &emsp;&emsp; * Nếu nhập [001, 010] các file sinh ra sẽ có dạng: 001, 002, 003, ..., 010<br/>
  
  &emsp;&emsp;Lưu ý là nếu sinh các test mà đã xuất hiện trong testcase folder (hay nói dễ hiểu hơn là sinh các test có trùng số thứ tự), những file test mới sinh sẽ ghi đè lên file cũ. 
  

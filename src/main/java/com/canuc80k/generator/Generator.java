@@ -31,8 +31,6 @@ public class Generator {
     private String errorInformation;
 
     public Generator() {
-        if (!GlobalResource.getTempFolder().exists()) GlobalResource.getTempFolder().mkdirs();
-
         locateConfigFiles();
         cppCompiler = new CPPCompiler();
     }

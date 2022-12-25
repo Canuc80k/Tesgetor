@@ -32,12 +32,7 @@ public class GeneratorTask implements Runnable {
             GlobalResource.getGenerateTestPanel().increaseDoneTestcase();
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
-        } catch (RuntimeErrorException e) {
-            GlobalResource.getGenerator().notifyError(e);
-            new File(inputTescaseFilePath).delete();
-            new File(outputTescaseFilePath).delete();
-            GlobalResource.getGenerateTestPanel().increaseDoneTestcase();
-        } catch (TimeoutException e) {
+        } catch (RuntimeErrorException | TimeoutException e) {
             GlobalResource.getGenerator().notifyError(e);
             new File(inputTescaseFilePath).delete();
             new File(outputTescaseFilePath).delete();
