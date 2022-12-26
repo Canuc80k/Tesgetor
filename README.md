@@ -38,8 +38,8 @@ Hiện tại, chỉ mới hỗ trợ file sinh test dùng ngôn ngữ C++.
 
  * ####  Bước 2: Thêm Path cho MinGW 
  &emsp;&emsp;Để cái [link hướng dẫn](https://www.youtube.com/watch?v=mQra00mT3Dg) ở đây cho dễ :b<br/>
- &emsp;&emsp;Nhớ là phải restart máy sau khi thêm path
- &emsp;&emsp;Và phải nhớ chọn bản MinGW nào hỗ trợ C++ 11
+ &emsp;&emsp;Nhớ là phải restart máy sau khi thêm path<br/>
+ &emsp;&emsp;Và phải nhớ chọn bản MinGW nào hỗ trợ C++ 11<br/>
 
 * ####  Bước 3: Chỉnh config
 
