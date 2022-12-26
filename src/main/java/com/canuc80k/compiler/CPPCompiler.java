@@ -19,7 +19,7 @@ public class CPPCompiler extends Compiler {
     }
 
     public synchronized void compile_gplusplus(File sourceFile, File outputFile) throws IOException, InterruptedException, CompileErrorException, TimeoutException, RuntimeErrorException {
-        String compileCommand = "g++ \"" + sourceFile.getAbsolutePath() + "\" -o " + "\"" + outputFile.getAbsolutePath() + "\"";
+        String compileCommand = "g++ -std=c++11 \"" + sourceFile.getAbsolutePath() + "\" -o " + "\"" + outputFile.getAbsolutePath() + "\"";
         executeCommand(compileCommand, CompileAction.COMPILE);
     }
 
