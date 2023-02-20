@@ -15,7 +15,7 @@ public class DirectoryValidator {
             File file = new File(paths.get(i));
             if (!file.exists()) {
                 JOptionPane.showMessageDialog(
-                    null, 
+                    GlobalResource.getTopDialog(),
                     "One or more configuration files are missing or inaccessible.",
                     "Check your config files",
                     JOptionPane.NO_OPTION
@@ -33,7 +33,7 @@ public class DirectoryValidator {
 
         if (zipFolder.exists()) {
             JOptionPane.showMessageDialog(
-                null, 
+                GlobalResource.getTopDialog(),
                 "Testcase folder has already ziped",
                 "Use clear to delete the old one first",
                 JOptionPane.NO_OPTION
@@ -43,7 +43,7 @@ public class DirectoryValidator {
 
         if (!testcaseFolder.exists()) {
             JOptionPane.showMessageDialog(
-                null, 
+                GlobalResource.getTopDialog(),
                 "Testcase folder is missing or inaccessible.",
                 "Check your testcase folder in config files",
                 JOptionPane.NO_OPTION
@@ -54,7 +54,7 @@ public class DirectoryValidator {
         File[] tests = testcaseFolder.listFiles();
         if (tests == null || tests.length == 0) {
             JOptionPane.showMessageDialog(
-                null, 
+                GlobalResource.getTopDialog(),
                 "Testcase folder is empty",
                 "Generate some testcases bro",
                 JOptionPane.NO_OPTION

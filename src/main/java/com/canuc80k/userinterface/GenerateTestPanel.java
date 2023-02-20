@@ -158,14 +158,14 @@ public class GenerateTestPanel extends JPanel {
             String errorInformation = GlobalResource.getGenerator().getErrorInformation();
             if (errorInformation.length() == 0) {
                 JOptionPane.showMessageDialog(
-                    null,
+                    GlobalResource.getTopDialog(),
                     "Mission accomplished",
                     "It's done, sir",
                     JOptionPane.NO_OPTION
                 );
             } else {
                 JOptionPane.showMessageDialog(
-                    null,
+                    GlobalResource.getTopDialog(),
                     errorInformation + " has occured in generate test process, error testcases have been deleted, check your testcase folder",
                     "Check your testcase generator files",
                     JOptionPane.NO_OPTION

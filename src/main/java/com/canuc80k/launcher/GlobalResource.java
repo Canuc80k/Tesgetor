@@ -9,6 +9,8 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JDialog;
+
 import com.canuc80k.font.ExtendedFont;
 import com.canuc80k.font.OpenSansFont;
 import com.canuc80k.generator.Generator;
@@ -38,7 +40,8 @@ public class GlobalResource {
     private static List<String> configData;
 
     private static Generator generator;
-    
+    private static JDialog topDialog;
+
     protected static void init() {
         projectFolder = new File(System.getenv("LOCALAPPDATA") + "/dont_generatetest_me_pls");
         if (!projectFolder.exists()) projectFolder.mkdirs();
@@ -66,6 +69,9 @@ public class GlobalResource {
         initPanel = new InitPanel();
     
         generator = new Generator();
+    
+        topDialog = new JDialog();
+        topDialog.setAlwaysOnTop(true); 
     }
 
     public static Theme getTheme() {
@@ -106,6 +112,10 @@ public class GlobalResource {
 
     public static Generator getGenerator() {
         return generator;
+    }
+
+    public static JDialog getTopDialog() {
+        return topDialog;
     }
 
     public static void serializeConfigData() {

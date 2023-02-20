@@ -98,7 +98,7 @@ public class InitPanel extends JPanel {
                         File testcaseZipFile = new File(testcaseFile.getAbsolutePath() + ".zip");
                         ZipUtil.pack(testcaseFile, testcaseZipFile);
                         JOptionPane.showMessageDialog(
-                            null,
+                            GlobalResource.getTopDialog(),
                             "Mission accomplished",
                             "It's done, sir",
                             JOptionPane.NO_OPTION
@@ -106,7 +106,7 @@ public class InitPanel extends JPanel {
                     }
                     if (choosedOption.equals(options.get(CLEAR_OPTION_INDEX))) {
                         int answer = JOptionPane.showConfirmDialog(
-                            null, 
+                            GlobalResource.getTopDialog(),
                             "Wanna clear old tests in test folder and delete old zip testcase folder?",
                             "Ask again to be sure .-.",
                             JOptionPane.YES_NO_CANCEL_OPTION
@@ -114,7 +114,7 @@ public class InitPanel extends JPanel {
                         if (answer != JOptionPane.YES_OPTION) return;
                         new Generator().clear();
                         JOptionPane.showMessageDialog(
-                            null,
+                            GlobalResource.getTopDialog(),
                             "Mission accomplished",
                             "It's done, sir",
                             JOptionPane.NO_OPTION

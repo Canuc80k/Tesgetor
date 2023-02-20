@@ -50,7 +50,7 @@ public class Generator {
             cppCompiler.compile_gplusplus(outputGeneratorFile, OUTPUT_GENERATOR_EXE_FILE);
         } catch (CompileErrorException | TimeoutException | RuntimeErrorException e) {
             JOptionPane.showMessageDialog(
-                null, 
+                GlobalResource.getTopDialog(), 
                 "Errors occur when compile testcase generator files",
                 "Check your testcase generator files",
                 JOptionPane.NO_OPTION
