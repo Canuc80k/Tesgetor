@@ -55,7 +55,7 @@
 
     <groupId>com.canuc80k</groupId>
     <artifactId>dont_generatetest_me_pls</artifactId>
-    <version>v1.0.0</version>
+    <version>v1.1.0</version>
 	<dependencies>
 		<dependency>
 			<groupId>com.formdev</groupId>
