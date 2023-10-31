@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "dont_generatetest_me_pls"
-#define MyAppVersion "1.1"
+#define MyAppVersion "v1.1.0"
 #define MyAppPublisher "Canuc80k"
 #define MyAppURL "https://github.com/Canuc80k/dont_generatetest_me_pls"
 #define MyAppExeName "dont_generatetest_me_pls-v1.1.0.exe"
@@ -13,7 +13,7 @@
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application. Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={{27C80C07-5DFC-440C-8C57-1F2FE07C29DC}
+AppId={{D7607EED-A9EB-4292-8101-9BB7DFF747FF}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 ;AppVerName={#MyAppName} {#MyAppVersion}
@@ -27,7 +27,9 @@ DisableProgramGroupPage=yes
 InfoAfterFile=D:\Project\dont_generatetest_me_pls\README.md
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
-OutputBaseFilename=mysetup
+OutputDir=C:\Users\Lenovo\Desktop\New folder
+OutputBaseFilename=dont_generatetest_me_pls_v1.1.0
+SetupIconFile=D:\Project\dont_generatetest_me_pls\src\main\resources\image\icon.ico
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern

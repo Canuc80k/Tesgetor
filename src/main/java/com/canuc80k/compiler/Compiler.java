@@ -9,7 +9,7 @@ import com.canuc80k.exception.RuntimeErrorException;
 import com.canuc80k.exception.TimeoutException;
 
 public abstract class Compiler {
-    private static int TIME_OUT_SECONDS = 5;
+    private static int TIME_OUT_SECONDS = 100;
 
     protected ProcessBuilder builder;
     private List<String> commands;
