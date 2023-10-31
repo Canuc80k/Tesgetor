@@ -27,7 +27,7 @@ public class HomeFrame extends JFrame {
             e.printStackTrace();
         }
         
-        setTitle("dont_generatetest_me_pls");
+        setTitle("tesgetor");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(APP_WIDTH, APP_HEIGHT);
         setResizable(false);

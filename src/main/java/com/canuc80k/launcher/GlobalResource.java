@@ -43,7 +43,7 @@ public class GlobalResource {
     private static JDialog topDialog;
 
     protected static void init() {
-        projectFolder = new File(System.getenv("LOCALAPPDATA") + "/dont_generatetest_me_pls");
+        projectFolder = new File(System.getenv("LOCALAPPDATA") + "/tesgetor");
         if (!projectFolder.exists()) projectFolder.mkdirs();
 
         tempFolder = new File(projectFolder.getAbsolutePath() + "/temp");
