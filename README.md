@@ -1,4 +1,7 @@
-#  dont_generatetest_me_pls
+#  tesgetor
+
+# Lời cảm ơn: 
+gửi lời cảm ơn chân thành nhất đến [@CarlavierVN](https://github.com/CarlavierVN) vì đã dành nhiều ngày cuối tuần làm QC không lương >_<
 
 ![](https://img.shields.io/badge/java-1.8%2B-orange) ![](https://img.shields.io/badge/window-7%2B-blue)
 
