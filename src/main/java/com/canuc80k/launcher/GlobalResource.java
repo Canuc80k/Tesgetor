@@ -13,7 +13,7 @@ import javax.swing.JDialog;
 
 import com.canuc80k.font.ExtendedFont;
 import com.canuc80k.font.OpenSansFont;
-import com.canuc80k.generator.Generator;
+import com.canuc80k.generator.CPPGenerator;
 import com.canuc80k.theme.DracularTheme;
 import com.canuc80k.theme.Theme;
 import com.canuc80k.userinterface.ConfigPanel;
@@ -39,7 +39,7 @@ public class GlobalResource {
     private static InitPanel initPanel;
     private static List<String> configData;
 
-    private static Generator generator;
+    private static CPPGenerator cppGenerator;
     private static JDialog topDialog;
 
     protected static void init() {
@@ -68,7 +68,7 @@ public class GlobalResource {
         generateTestPanel = new GenerateTestPanel();
         initPanel = new InitPanel();
     
-        generator = new Generator();
+        cppGenerator = new CPPGenerator();
     
         topDialog = new JDialog();
         topDialog.setAlwaysOnTop(true); 
@@ -110,8 +110,8 @@ public class GlobalResource {
         return configData;
     }
 
-    public static Generator getGenerator() {
-        return generator;
+    public static CPPGenerator getCPPGenerator() {
+        return cppGenerator;
     }
 
     public static JDialog getTopDialog() {

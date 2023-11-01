@@ -18,7 +18,15 @@ public abstract class Compiler {
         builder = new ProcessBuilder();
     }
 
-    public synchronized void executeCommand(String command, CompileAction action) throws IOException, InterruptedException, CompileErrorException, TimeoutException, RuntimeErrorException {
+    public synchronized void compile(String command) throws IOException, InterruptedException, CompileErrorException, TimeoutException, RuntimeErrorException {
+        executeCommand(command, CompileAction.COMPILE);
+    }
+
+    public synchronized void run(String command) throws IOException, InterruptedException, CompileErrorException, TimeoutException, RuntimeErrorException {
+        executeCommand(command, CompileAction.RUN);
+    }
+
+    private synchronized void executeCommand(String command, CompileAction action) throws IOException, InterruptedException, CompileErrorException, TimeoutException, RuntimeErrorException {
         commands.add(command);
 
         Process process = builder.command(commands).start();

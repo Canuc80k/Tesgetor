@@ -25,7 +25,7 @@ import org.zeroturnaround.zip.ZipUtil;
 
 import com.canuc80k.font.FontSize;
 import com.canuc80k.font.FontType;
-import com.canuc80k.generator.Generator;
+import com.canuc80k.generator.CPPGenerator;
 import com.canuc80k.launcher.GlobalResource;
 import com.canuc80k.validator.DirectoryValidator;
 
@@ -112,7 +112,7 @@ public class InitPanel extends JPanel {
                             JOptionPane.YES_NO_CANCEL_OPTION
                         );
                         if (answer != JOptionPane.YES_OPTION) return;
-                        new Generator().clear();
+                        new CPPGenerator().clear();
                         JOptionPane.showMessageDialog(
                             GlobalResource.getTopDialog(),
                             "Mission accomplished",

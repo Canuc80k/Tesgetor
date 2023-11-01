@@ -142,7 +142,7 @@ public class GenerateTestPanel extends JPanel {
                         type = TestcaseFileNameType.LEXICOGRAPHICAL_ORDER;
 
                     try {
-                        GlobalResource.getGenerator().generate(
+                        GlobalResource.getCPPGenerator().generate(
                             Integer.parseInt(beginIndex), 
                             Integer.parseInt(endIndex), 
                             type, 
@@ -253,7 +253,7 @@ public class GenerateTestPanel extends JPanel {
             doneTestcase = totalTestcase = 0;
             generateButton.setText("RUN");
             
-            String errorInformation = GlobalResource.getGenerator().getErrorInformation();
+            String errorInformation = GlobalResource.getCPPGenerator().getErrorInformation();
             if (errorInformation.length() == 0) {
                 JOptionPane.showMessageDialog(
                     GlobalResource.getTopDialog(),

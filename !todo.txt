@@ -1,0 +1,1 @@
+Fix stupid clear function 

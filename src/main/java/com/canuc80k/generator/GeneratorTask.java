@@ -33,7 +33,7 @@ public class GeneratorTask implements Runnable {
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         } catch (RuntimeErrorException | TimeoutException e) {
-            GlobalResource.getGenerator().notifyError(e);
+            GlobalResource.getCPPGenerator().notifyError(e);
             new File(inputTescaseFilePath).delete();
             new File(outputTescaseFilePath).delete();
             GlobalResource.getGenerateTestPanel().increaseDoneTestcase();
