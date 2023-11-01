@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.canuc80k.constant.LanguageConstant;
+import com.canuc80k.constant.OsConstant;
 import com.canuc80k.exception.CompileErrorException;
 import com.canuc80k.exception.RuntimeErrorException;
 import com.canuc80k.exception.TimeoutException;
@@ -18,8 +20,13 @@ public class CPPCompiler extends Compiler {
         setCommands(initCommands);
     }
 
-    public synchronized void compile(File sourceFile, File outputFile) throws IOException, InterruptedException, CompileErrorException, TimeoutException, RuntimeErrorException {
-        String compileCommand = "g++ -std=c++11 \"" + sourceFile.getAbsolutePath() + "\" -o " + "\"" + outputFile.getAbsolutePath() + "\"";
+    public synchronized void compile(File sourceFile, File outputFile, String language, String os) throws IOException, InterruptedException, CompileErrorException, TimeoutException, RuntimeErrorException {
+        String cppversion = LanguageConstant.getExecuteCommand(language);
+        String compileCommand = "";
+        if (os.equals(OsConstant.WINDOW))  
+            compileCommand = "g++ " + cppversion + " \"" + sourceFile.getAbsolutePath() + "\" -o " + "\"" + outputFile.getAbsolutePath() + "\"";
+
+        System.out.println(compileCommand);
         compile(compileCommand);
     }
 

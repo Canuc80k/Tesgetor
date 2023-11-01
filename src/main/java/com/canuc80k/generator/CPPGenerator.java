@@ -30,7 +30,8 @@ public class CPPGenerator extends Generator {
     @Override
     public void generate(int beginTestcaseIndex, int endTestcaseIndex, TestcaseFileNameType type, int lastTestcaseFileNameLength, String os, String language, int timeout) throws IOException, InterruptedException {
         deleteOldExecuteFiles();
-        compileCplusplusGeneratorFiles();
+        Boolean compileSuccessfully = compileCplusplusGeneratorFiles(language, os);
+        if (!compileSuccessfully) return;
         GlobalResource.getGenerateTestPanel().setTotalTestcase(endTestcaseIndex - beginTestcaseIndex + 1);
         runExcuteFilesToCreateTestcase(beginTestcaseIndex, endTestcaseIndex, type, lastTestcaseFileNameLength);
     }
@@ -40,10 +41,10 @@ public class CPPGenerator extends Generator {
         FileTool.deleteFolder(GlobalResource.getTempFolder(), FileTool.KEEP_CURRENT_FOLDER);
     }
     
-    private synchronized void compileCplusplusGeneratorFiles() throws IOException, InterruptedException {
+    private synchronized Boolean compileCplusplusGeneratorFiles(String language, String os) throws IOException, InterruptedException {
         try {
-            cppCompiler.compile(inputGeneratorFile, INPUT_GENERATOR_EXE_FILE);
-            cppCompiler.compile(outputGeneratorFile, OUTPUT_GENERATOR_EXE_FILE);
+            cppCompiler.compile(inputGeneratorFile, INPUT_GENERATOR_EXE_FILE, language, os);
+            cppCompiler.compile(outputGeneratorFile, OUTPUT_GENERATOR_EXE_FILE, language, os);
         } catch (CompileErrorException | TimeoutException | RuntimeErrorException e) {
             JOptionPane.showMessageDialog(
                 GlobalResource.getTopDialog(), 
@@ -51,8 +52,9 @@ public class CPPGenerator extends Generator {
                 "Check your testcase generator files",
                 JOptionPane.NO_OPTION
             );
-            return;
+            return false;
         }
+        return true;
     }
 
     private synchronized void runExcuteFilesToCreateTestcase(int beginTestcaseIndex, int endTestcaseIndex, TestcaseFileNameType type, int lastTestcaseFileNameLength) {
