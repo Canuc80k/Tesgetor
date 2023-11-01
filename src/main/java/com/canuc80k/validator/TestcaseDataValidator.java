@@ -4,27 +4,81 @@ import javax.swing.JOptionPane;
 
 import com.canuc80k.launcher.GlobalResource;
 
-public class TestcaseIndexValidator {
-    public static boolean validate(String beginIndex, String endIndex) {
-        if (beginIndex.length() == 0) {
+public class TestcaseDataValidator {
+    public static boolean validateTimeout(String timeout) {
+        if (timeout.length() == 0) {
             JOptionPane.showMessageDialog(
                     GlobalResource.getTopDialog(),
-                    "Begin index can't be ur wallet",
-                    "R u dumb?",
+                    "Timout can't be ur wallet",
+                    "Timeout Error",
                     JOptionPane.NO_OPTION
                 );
-            
+            return false;
+        }
+        
+        for (int i = 0; i < timeout.length(); i ++)
+            if ((timeout.charAt(i) > '9' || timeout.charAt(i) < '0') && timeout.charAt(i) != '-')  {
+                JOptionPane.showMessageDialog(
+                    GlobalResource.getTopDialog(),
+                    "Don't know what a number look like?",
+                    "Timeout Error",
+                    JOptionPane.NO_OPTION
+                );
+                return false;
+            }
+
+        if (timeout.length() > 9) {
+            JOptionPane.showMessageDialog(
+                    GlobalResource.getTopDialog(),
+                    "Bruh, want to be a tester?",
+                    "Timeout Error",
+                    JOptionPane.NO_OPTION
+                );    
+            return false;
+        }  
+        
+        if (Integer.parseInt(timeout) < 1) {
+            JOptionPane.showMessageDialog(
+                GlobalResource.getTopDialog(),
+                "Only serve children over 1 years old",
+                "Timeout Error",
+                JOptionPane.NO_OPTION
+            );
+        
+            return false;
+        }
+        
+        if (Integer.parseInt(timeout) > 1000) {
+            JOptionPane.showMessageDialog(
+                GlobalResource.getTopDialog(),
+                "Hate ur computer that much ?",
+                "Timeout Error",
+                JOptionPane.NO_OPTION
+            );        
+            return false;
+        }
+
+        return true;
+    }
+
+    public static boolean validateIndex(String beginIndex, String endIndex) {
+        if (beginIndex.length() == 0) {
+            JOptionPane.showMessageDialog(
+                GlobalResource.getTopDialog(),
+                "Begin index can't be ur wallet",
+                "Testcase Index Error",
+                JOptionPane.NO_OPTION
+            );
             return false;
         }
 
         if (endIndex.length() == 0) {
             JOptionPane.showMessageDialog(
-                    GlobalResource.getTopDialog(),
-                    "End index can't be ur wallet",
-                    "R u dumb?",
-                    JOptionPane.NO_OPTION
-                );
-            
+                GlobalResource.getTopDialog(),
+                "End index can't be ur wallet",
+                "Testcase Index Error",
+                JOptionPane.NO_OPTION
+            );
             return false;
         }
 
@@ -33,7 +87,7 @@ public class TestcaseIndexValidator {
                 JOptionPane.showMessageDialog(
                     GlobalResource.getTopDialog(),
                     "Don't know what a number look like?",
-                    "R u dumb?",
+                    "Testcase Index Error",
                     JOptionPane.NO_OPTION
                 );
                 return false;
@@ -44,7 +98,7 @@ public class TestcaseIndexValidator {
                 JOptionPane.showMessageDialog(
                     GlobalResource.getTopDialog(),
                     "Don't know what a number look like?",
-                    "R u dumb?",
+                    "Testcase Index Error",
                     JOptionPane.NO_OPTION
                 );
                 return false;
@@ -54,10 +108,9 @@ public class TestcaseIndexValidator {
             JOptionPane.showMessageDialog(
                     GlobalResource.getTopDialog(),
                     "Bruh, want to be a tester?",
-                    "R u dumb?",
+                    "Testcase Index Error",
                     JOptionPane.NO_OPTION
-                );
-            
+                );    
             return false;
         }  
 
@@ -65,7 +118,7 @@ public class TestcaseIndexValidator {
             JOptionPane.showMessageDialog(
                 GlobalResource.getTopDialog(),
                 "Only serve children over 0 years old",
-                "R u dumb?",
+                "Testcase Index Error",
                 JOptionPane.NO_OPTION
             );
         
@@ -76,10 +129,9 @@ public class TestcaseIndexValidator {
             JOptionPane.showMessageDialog(
                     GlobalResource.getTopDialog(),
                     "Begin index can't be larger than end index",
-                    "R u dumb?",
+                    "Testcase Index Error",
                     JOptionPane.NO_OPTION
                 );
-            
             return false;
         }
 
@@ -87,10 +139,9 @@ public class TestcaseIndexValidator {
             JOptionPane.showMessageDialog(
                 GlobalResource.getTopDialog(),
                 "Hate ur computer that much ?",
-                "Coldhearted",
+                "Testcase Index Error",
                 JOptionPane.NO_OPTION
-            );
-        
+            );        
             return false;
         }
         return true;

@@ -27,7 +27,7 @@ import com.canuc80k.font.FontType;
 import com.canuc80k.launcher.GlobalResource;
 import com.canuc80k.testcase.TestcaseFileNameType;
 import com.canuc80k.validator.DirectoryValidator;
-import com.canuc80k.validator.TestcaseIndexValidator;
+import com.canuc80k.validator.TestcaseDataValidator;
 
 public class GenerateTestPanel extends JPanel {
     private int doneTestcase = 0;
@@ -40,12 +40,12 @@ public class GenerateTestPanel extends JPanel {
     private JLabel backtoHome;
     private JLabel advancedSettingLabel;
     private JLabel languageLabel;
-    private JLabel timeOutLabel;
+    private JLabel timeoutLabel;
     private JLabel osLabel;
 
     private JTextField beginTestcaseIndexTextField;
     private JTextField endTestcaseIndexTextField;
-    private JTextField timeOutTextField;
+    private JTextField timeoutTextField;
 
     private JComboBox<String> languageComboBox;
     private JComboBox<String> osComboBox;
@@ -128,16 +128,26 @@ public class GenerateTestPanel extends JPanel {
                     TestcaseFileNameType type = TestcaseFileNameType.NORMAL;
                     String beginIndex = beginTestcaseIndexTextField.getText().trim();
                     String endIndex = endTestcaseIndexTextField.getText().trim();
+                    String os = (String) osComboBox.getSelectedItem();
+                    String language = (String) languageComboBox.getSelectedItem();
+                    String timeout = timeoutTextField.getText().trim();
+                    
+                    System.out.println(os + " " + language + " " + timeout);
 
                     if (!DirectoryValidator.validateConfigFiles()) return;
-                    if (!TestcaseIndexValidator.validate(beginIndex, endIndex)) return;
+                    if (!TestcaseDataValidator.validateIndex(beginIndex, endIndex)) return;
+                    if (!TestcaseDataValidator.validateTimeout(timeout)) return;
 
                     if (beginIndex.length() == endIndex.length()) 
                         type = TestcaseFileNameType.LEXICOGRAPHICAL_ORDER;
 
                     try {
-                        GlobalResource.getGenerator().generate(Integer.parseInt(beginIndex), 
-                            Integer.parseInt(endIndex), type, endIndex.length());
+                        GlobalResource.getGenerator().generate(
+                            Integer.parseInt(beginIndex), 
+                            Integer.parseInt(endIndex), 
+                            type, 
+                            endIndex.length()
+                        );
                     } catch (NumberFormatException | IOException | InterruptedException e1) {
                         e1.printStackTrace();
                     }
@@ -202,21 +212,21 @@ public class GenerateTestPanel extends JPanel {
         languageComboBox.addItem("C++ 2a");
         advancedSettingPanel.add(languageComboBox);
 
-        timeOutLabel = new JLabel("Timeout");
-        timeOutLabel.setFont(GlobalResource.getExtendedFont().getFont(FontType.MEDIUM, FontSize.MEDIUM));
-        timeOutLabel.setForeground(GlobalResource.getTheme().getFontColor());
-        timeOutLabel.setMinimumSize(new Dimension(200, HomeFrame.APP_HEIGHT / 100 * 9));
-        timeOutLabel.setMaximumSize(new Dimension(200, HomeFrame.APP_HEIGHT / 100 * 9));
-        timeOutLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        advancedSettingPanel.add(timeOutLabel);
+        timeoutLabel = new JLabel("Timeout");
+        timeoutLabel.setFont(GlobalResource.getExtendedFont().getFont(FontType.MEDIUM, FontSize.MEDIUM));
+        timeoutLabel.setForeground(GlobalResource.getTheme().getFontColor());
+        timeoutLabel.setMinimumSize(new Dimension(200, HomeFrame.APP_HEIGHT / 100 * 9));
+        timeoutLabel.setMaximumSize(new Dimension(200, HomeFrame.APP_HEIGHT / 100 * 9));
+        timeoutLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        advancedSettingPanel.add(timeoutLabel);
    
-        timeOutTextField = new JTextField();
-        timeOutTextField.setFont(GlobalResource.getExtendedFont().getFont(FontType.MEDIUM, FontSize.MEDIUM));
-        timeOutTextField.setForeground(GlobalResource.getTheme().getInverseFontColor());
-        timeOutTextField.setMinimumSize(new Dimension(100, HomeFrame.APP_HEIGHT / 100 * 9));
-        timeOutTextField.setMaximumSize(new Dimension(100, HomeFrame.APP_HEIGHT / 100 * 9));
-        timeOutTextField.setAlignmentX(Component.LEFT_ALIGNMENT);
-        advancedSettingPanel.add(timeOutTextField);
+        timeoutTextField = new JTextField();
+        timeoutTextField.setFont(GlobalResource.getExtendedFont().getFont(FontType.MEDIUM, FontSize.MEDIUM));
+        timeoutTextField.setForeground(GlobalResource.getTheme().getInverseFontColor());
+        timeoutTextField.setMinimumSize(new Dimension(100, HomeFrame.APP_HEIGHT / 100 * 9));
+        timeoutTextField.setMaximumSize(new Dimension(100, HomeFrame.APP_HEIGHT / 100 * 9));
+        timeoutTextField.setAlignmentX(Component.LEFT_ALIGNMENT);
+        advancedSettingPanel.add(timeoutTextField);
         
         osLabel = new JLabel("OS");
         osLabel.setFont(GlobalResource.getExtendedFont().getFont(FontType.MEDIUM, FontSize.MEDIUM));
