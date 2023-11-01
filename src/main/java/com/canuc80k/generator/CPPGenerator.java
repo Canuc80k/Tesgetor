@@ -32,23 +32,7 @@ public class CPPGenerator extends Generator {
         deleteOldExecuteFiles();
         compileCplusplusGeneratorFiles();
         GlobalResource.getGenerateTestPanel().setTotalTestcase(endTestcaseIndex - beginTestcaseIndex + 1);
-
-        List<GeneratorTask> tasks = new ArrayList<GeneratorTask>();
-        for (int i = beginTestcaseIndex; i <= endTestcaseIndex; i ++) {
-            GeneratorTask inputGeneratorThread = new GeneratorTask(
-                cppCompiler, 
-                INPUT_GENERATOR_EXE_FILE, 
-                OUTPUT_GENERATOR_EXE_FILE,
-                testcaseFolder.getAbsolutePath() + "\\" + TestcaseFileNameType.getFileName(type, i, lastTestcaseFileNameLength) + ".INP",
-                testcaseFolder.getAbsolutePath() + "\\" + TestcaseFileNameType.getFileName(type, i, lastTestcaseFileNameLength) + ".OUT"
-            );
-            tasks.add(inputGeneratorThread);
-        }
-
-        errorInformation = "";
-        threadPool = Executors.newCachedThreadPool();  
-        tasks.forEach((task) -> threadPool.execute(task));
-        threadPool.shutdown();
+        runExcuteFilesToCreateTestcase(beginTestcaseIndex, endTestcaseIndex, type, lastTestcaseFileNameLength);
     }
 
     private synchronized void deleteOldExecuteFiles() {
@@ -69,5 +53,24 @@ public class CPPGenerator extends Generator {
             );
             return;
         }
+    }
+
+    private synchronized void runExcuteFilesToCreateTestcase(int beginTestcaseIndex, int endTestcaseIndex, TestcaseFileNameType type, int lastTestcaseFileNameLength) {
+        List<CPPGeneratorTask> tasks = new ArrayList<CPPGeneratorTask>();
+        for (int i = beginTestcaseIndex; i <= endTestcaseIndex; i ++) {
+            CPPGeneratorTask inputGeneratorThread = new CPPGeneratorTask(
+                cppCompiler,
+                INPUT_GENERATOR_EXE_FILE,
+                OUTPUT_GENERATOR_EXE_FILE,
+                testcaseFolder.getAbsolutePath() + "\\" + TestcaseFileNameType.getFileName(type, i, lastTestcaseFileNameLength) + ".INP",
+                testcaseFolder.getAbsolutePath() + "\\" + TestcaseFileNameType.getFileName(type, i, lastTestcaseFileNameLength) + ".OUT"
+            );
+            tasks.add(inputGeneratorThread);
+        }
+
+        errorInformation = "";
+        threadPool = Executors.newCachedThreadPool();  
+        tasks.forEach((task) -> threadPool.execute(task));
+        threadPool.shutdown();
     }
 }

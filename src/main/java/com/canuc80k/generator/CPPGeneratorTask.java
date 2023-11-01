@@ -9,15 +9,15 @@ import com.canuc80k.exception.RuntimeErrorException;
 import com.canuc80k.exception.TimeoutException;
 import com.canuc80k.launcher.GlobalResource;
 
-public class GeneratorTask implements Runnable {
+public class CPPGeneratorTask implements Runnable {
     private final File inputgeneratorExeFile;
     private final File outputgeneratorExeFile;
-    private CPPCompiler cppCompiler;
+    private CPPCompiler compiler;
 
     private String inputTescaseFilePath, outputTescaseFilePath;
 
-    GeneratorTask(CPPCompiler cppCompiler, File inputgeneratorExeFile, File outputgeneratorExeFile, String inputTescaseFilePath, String outputTescaseFilePath) {
-        this.cppCompiler = cppCompiler;
+    CPPGeneratorTask(CPPCompiler compiler, File inputgeneratorExeFile, File outputgeneratorExeFile, String inputTescaseFilePath, String outputTescaseFilePath) {
+        this.compiler = compiler;
         this.inputgeneratorExeFile = inputgeneratorExeFile;
         this.outputgeneratorExeFile = outputgeneratorExeFile;
         this.inputTescaseFilePath = inputTescaseFilePath;
@@ -27,8 +27,8 @@ public class GeneratorTask implements Runnable {
     @Override
     public synchronized void run() {
         try {
-            cppCompiler.run(inputgeneratorExeFile, inputTescaseFilePath);
-            cppCompiler.run(outputgeneratorExeFile, inputTescaseFilePath, outputTescaseFilePath);
+            compiler.run(inputgeneratorExeFile, inputTescaseFilePath);
+            compiler.run(outputgeneratorExeFile, inputTescaseFilePath, outputTescaseFilePath);
             GlobalResource.getGenerateTestPanel().increaseDoneTestcase();
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();

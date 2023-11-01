@@ -142,15 +142,17 @@ public class GenerateTestPanel extends JPanel {
                         type = TestcaseFileNameType.LEXICOGRAPHICAL_ORDER;
 
                     try {
-                        GlobalResource.getCPPGenerator().generate(
-                            Integer.parseInt(beginIndex), 
-                            Integer.parseInt(endIndex), 
-                            type, 
-                            endIndex.length(),
-                            os,
-                            language,
-                            Integer.parseInt(timeout)
-                        );
+                        if (LanguageConstant.getGeneralLanguage(language).equals("C++")) {
+                            GlobalResource.getCPPGenerator().generate(
+                                Integer.parseInt(beginIndex), 
+                                Integer.parseInt(endIndex), 
+                                type, 
+                                endIndex.length(),
+                                os,
+                                language,
+                                Integer.parseInt(timeout)
+                            );
+                        }
                     } catch (NumberFormatException | IOException | InterruptedException e1) {
                         e1.printStackTrace();
                     }
