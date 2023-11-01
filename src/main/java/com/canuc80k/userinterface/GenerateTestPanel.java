@@ -22,6 +22,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.MouseInputListener;
 
+import com.canuc80k.constant.LanguageConstant;
+import com.canuc80k.constant.OsConstant;
 import com.canuc80k.font.FontSize;
 import com.canuc80k.font.FontType;
 import com.canuc80k.launcher.GlobalResource;
@@ -131,8 +133,6 @@ public class GenerateTestPanel extends JPanel {
                     String os = (String) osComboBox.getSelectedItem();
                     String language = (String) languageComboBox.getSelectedItem();
                     String timeout = timeoutTextField.getText().trim();
-                    
-                    System.out.println(os + " " + language + " " + timeout);
 
                     if (!DirectoryValidator.validateConfigFiles()) return;
                     if (!TestcaseDataValidator.validateIndex(beginIndex, endIndex)) return;
@@ -146,7 +146,10 @@ public class GenerateTestPanel extends JPanel {
                             Integer.parseInt(beginIndex), 
                             Integer.parseInt(endIndex), 
                             type, 
-                            endIndex.length()
+                            endIndex.length(),
+                            os,
+                            language,
+                            Integer.parseInt(timeout)
                         );
                     } catch (NumberFormatException | IOException | InterruptedException e1) {
                         e1.printStackTrace();
@@ -204,12 +207,8 @@ public class GenerateTestPanel extends JPanel {
         languageComboBox.setMinimumSize(new Dimension(120, HomeFrame.APP_HEIGHT / 100 * 9));
         languageComboBox.setMaximumSize(new Dimension(120, HomeFrame.APP_HEIGHT / 100 * 9));
         languageComboBox.setAlignmentX(Component.LEFT_ALIGNMENT);
-        languageComboBox.addItem("C++");
-        languageComboBox.addItem("C++ 11");
-        languageComboBox.addItem("C++ 14");
-        languageComboBox.addItem("C++ 17");
-        languageComboBox.addItem("C++ 20");
-        languageComboBox.addItem("C++ 2a");
+        for (int i = 0; i < LanguageConstant.LANGUAGE.length; i ++)
+            languageComboBox.addItem(LanguageConstant.LANGUAGE[i]);
         advancedSettingPanel.add(languageComboBox);
 
         timeoutLabel = new JLabel("Timeout");
@@ -243,8 +242,8 @@ public class GenerateTestPanel extends JPanel {
         osComboBox.setMinimumSize(new Dimension(120, HomeFrame.APP_HEIGHT / 100 * 9));
         osComboBox.setMaximumSize(new Dimension(120, HomeFrame.APP_HEIGHT / 100 * 9));
         osComboBox.setAlignmentX(Component.LEFT_ALIGNMENT);
-        osComboBox.addItem("Window");
-        osComboBox.addItem("Linux");
+        for (int i = 0; i < OsConstant.OS.length; i ++)
+            osComboBox.addItem(OsConstant.OS[i]);
         advancedSettingPanel.add(osComboBox);
     }
 

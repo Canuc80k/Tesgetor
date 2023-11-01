@@ -10,6 +10,7 @@ import java.util.concurrent.Executors;
 import javax.swing.JOptionPane;
 
 import com.canuc80k.compiler.CPPCompiler;
+import com.canuc80k.constant.LanguageConstant;
 import com.canuc80k.exception.CompileErrorException;
 import com.canuc80k.exception.RuntimeErrorException;
 import com.canuc80k.exception.TimeoutException;
@@ -42,24 +43,33 @@ public class Generator {
         testcaseFolder = new File(configData.get(2));
     }
 
-    public synchronized void generate(int beginTestcaseIndex, int endTestcaseIndex, TestcaseFileNameType type, int lastTestcaseFileNameLength) throws IOException, InterruptedException {
-        locateConfigFiles();
-        FileTool.deleteFolder(GlobalResource.getTempFolder(), FileTool.KEEP_CURRENT_FOLDER);
-        try {
-            cppCompiler.compile_gplusplus(inputGeneratorFile, INPUT_GENERATOR_EXE_FILE);
-            cppCompiler.compile_gplusplus(outputGeneratorFile, OUTPUT_GENERATOR_EXE_FILE);
-        } catch (CompileErrorException | TimeoutException | RuntimeErrorException e) {
-            JOptionPane.showMessageDialog(
-                GlobalResource.getTopDialog(), 
-                "Errors occur when compile testcase generator files",
-                "Check your testcase generator files",
-                JOptionPane.NO_OPTION
-            );
-            return;
+    /**
+     * @do:
+     *      - Delete old run file
+     *      - Compile input & output file
+     *      - Run input & output file
+     */
+    public synchronized void generate(int beginTestcaseIndex, int endTestcaseIndex, TestcaseFileNameType type, 
+        int lastTestcaseFileNameLength, String os, String language, int timeout) throws IOException, InterruptedException {
+        
+        if (LanguageConstant.getGeneralLanguage(language) == "C++") {
+            locateConfigFiles();
+            FileTool.deleteFolder(GlobalResource.getTempFolder(), FileTool.KEEP_CURRENT_FOLDER);
+            try {
+                cppCompiler.compile_gplusplus(inputGeneratorFile, INPUT_GENERATOR_EXE_FILE);
+                cppCompiler.compile_gplusplus(outputGeneratorFile, OUTPUT_GENERATOR_EXE_FILE);
+            } catch (CompileErrorException | TimeoutException | RuntimeErrorException e) {
+                JOptionPane.showMessageDialog(
+                    GlobalResource.getTopDialog(), 
+                    "Errors occur when compile testcase generator files",
+                    "Check your testcase generator files",
+                    JOptionPane.NO_OPTION
+                );
+                return;
+            }
+            GlobalResource.getGenerateTestPanel().setTotalTestcase(endTestcaseIndex - beginTestcaseIndex + 1);
+            generateTestcases(beginTestcaseIndex, endTestcaseIndex, type, lastTestcaseFileNameLength);
         }
-        GlobalResource.getGenerateTestPanel().setTotalTestcase(endTestcaseIndex - beginTestcaseIndex + 1);
-
-        generateTestcases(beginTestcaseIndex, endTestcaseIndex, type, lastTestcaseFileNameLength);
     }
 
     public synchronized void clear() {
