@@ -30,18 +30,18 @@ public class CPPCompiler extends Compiler {
         compile(compileCommand);
     }
 
-    public synchronized void run(File runFile) throws IOException, InterruptedException, CompileErrorException, TimeoutException, RuntimeErrorException {
+    public synchronized void run(File runFile, int timeout) throws IOException, InterruptedException, CompileErrorException, TimeoutException, RuntimeErrorException {
         String runCommand = runFile.getAbsolutePath();
-        run(runCommand);
+        run(runCommand, timeout);
     }
 
-    public synchronized void run(File runFile, String arg) throws IOException, InterruptedException, CompileErrorException, TimeoutException, RuntimeErrorException {
+    public synchronized void run(File runFile, String arg, int timeout) throws IOException, InterruptedException, CompileErrorException, TimeoutException, RuntimeErrorException {
         String runCommand = "c: && \"" + runFile.getAbsolutePath() + "\" \"" + arg + "\"";
-        run(runCommand);
+        run(runCommand, timeout);
     }
 
-    public synchronized void run(File runFile, String arg1, String arg2) throws IOException, InterruptedException, CompileErrorException, TimeoutException, RuntimeErrorException {
+    public synchronized void run(File runFile, String arg1, String arg2, int timeout) throws IOException, InterruptedException, CompileErrorException, TimeoutException, RuntimeErrorException {
         String runCommand = "c: && \"" + runFile.getAbsolutePath() + "\" \"" + arg1 + "\" \"" + arg2 + "\"";
-        run(runCommand);
+        run(runCommand, timeout);
     }
 }

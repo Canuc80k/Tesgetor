@@ -13,22 +13,24 @@ public class CPPGeneratorTask implements Runnable {
     private final File inputgeneratorExeFile;
     private final File outputgeneratorExeFile;
     private CPPCompiler compiler;
+    private int timeout;
 
     private String inputTescaseFilePath, outputTescaseFilePath;
 
-    CPPGeneratorTask(CPPCompiler compiler, File inputgeneratorExeFile, File outputgeneratorExeFile, String inputTescaseFilePath, String outputTescaseFilePath) {
+    CPPGeneratorTask(CPPCompiler compiler, File inputgeneratorExeFile, File outputgeneratorExeFile, String inputTescaseFilePath, String outputTescaseFilePath, int timeout) {
         this.compiler = compiler;
         this.inputgeneratorExeFile = inputgeneratorExeFile;
         this.outputgeneratorExeFile = outputgeneratorExeFile;
         this.inputTescaseFilePath = inputTescaseFilePath;
         this.outputTescaseFilePath = outputTescaseFilePath;
+        this.timeout = timeout;
     }
 
     @Override
     public synchronized void run() {
         try {
-            compiler.run(inputgeneratorExeFile, inputTescaseFilePath);
-            compiler.run(outputgeneratorExeFile, inputTescaseFilePath, outputTescaseFilePath);
+            compiler.run(inputgeneratorExeFile, inputTescaseFilePath, timeout);
+            compiler.run(outputgeneratorExeFile, inputTescaseFilePath, outputTescaseFilePath, timeout);
             GlobalResource.getGenerateTestPanel().increaseDoneTestcase();
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();

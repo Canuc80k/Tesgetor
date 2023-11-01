@@ -33,7 +33,7 @@ public class CPPGenerator extends Generator {
         Boolean compileSuccessfully = compileCplusplusGeneratorFiles(language, os);
         if (!compileSuccessfully) return;
         GlobalResource.getGenerateTestPanel().setTotalTestcase(endTestcaseIndex - beginTestcaseIndex + 1);
-        runExcuteFilesToCreateTestcase(beginTestcaseIndex, endTestcaseIndex, type, lastTestcaseFileNameLength);
+        runExcuteFilesToCreateTestcase(beginTestcaseIndex, endTestcaseIndex, type, lastTestcaseFileNameLength, timeout);
     }
 
     private synchronized void deleteOldExecuteFiles() {
@@ -57,7 +57,7 @@ public class CPPGenerator extends Generator {
         return true;
     }
 
-    private synchronized void runExcuteFilesToCreateTestcase(int beginTestcaseIndex, int endTestcaseIndex, TestcaseFileNameType type, int lastTestcaseFileNameLength) {
+    private synchronized void runExcuteFilesToCreateTestcase(int beginTestcaseIndex, int endTestcaseIndex, TestcaseFileNameType type, int lastTestcaseFileNameLength, int timeout) {
         List<CPPGeneratorTask> tasks = new ArrayList<CPPGeneratorTask>();
         for (int i = beginTestcaseIndex; i <= endTestcaseIndex; i ++) {
             CPPGeneratorTask inputGeneratorThread = new CPPGeneratorTask(
@@ -65,7 +65,8 @@ public class CPPGenerator extends Generator {
                 INPUT_GENERATOR_EXE_FILE,
                 OUTPUT_GENERATOR_EXE_FILE,
                 testcaseFolder.getAbsolutePath() + "\\" + TestcaseFileNameType.getFileName(type, i, lastTestcaseFileNameLength) + ".INP",
-                testcaseFolder.getAbsolutePath() + "\\" + TestcaseFileNameType.getFileName(type, i, lastTestcaseFileNameLength) + ".OUT"
+                testcaseFolder.getAbsolutePath() + "\\" + TestcaseFileNameType.getFileName(type, i, lastTestcaseFileNameLength) + ".OUT",
+                timeout
             );
             tasks.add(inputGeneratorThread);
         }

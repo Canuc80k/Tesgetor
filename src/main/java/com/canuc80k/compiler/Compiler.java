@@ -9,8 +9,6 @@ import com.canuc80k.exception.RuntimeErrorException;
 import com.canuc80k.exception.TimeoutException;
 
 public abstract class Compiler {
-    private static int TIME_OUT_SECONDS = 100;
-
     protected ProcessBuilder builder;
     private List<String> commands;
 
@@ -19,18 +17,18 @@ public abstract class Compiler {
     }
 
     public synchronized void compile(String command) throws IOException, InterruptedException, CompileErrorException, TimeoutException, RuntimeErrorException {
-        executeCommand(command, CompileAction.COMPILE);
+        executeCommand(command, CompileAction.COMPILE, Integer.MAX_VALUE);
     }
 
-    public synchronized void run(String command) throws IOException, InterruptedException, CompileErrorException, TimeoutException, RuntimeErrorException {
-        executeCommand(command, CompileAction.RUN);
+    public synchronized void run(String command, int timeout) throws IOException, InterruptedException, CompileErrorException, TimeoutException, RuntimeErrorException {
+        executeCommand(command, CompileAction.RUN, timeout);
     }
 
-    private synchronized void executeCommand(String command, CompileAction action) throws IOException, InterruptedException, CompileErrorException, TimeoutException, RuntimeErrorException {
+    private synchronized void executeCommand(String command, CompileAction action, int timeout) throws IOException, InterruptedException, CompileErrorException, TimeoutException, RuntimeErrorException {
         commands.add(command);
 
         Process process = builder.command(commands).start();
-        boolean isRunCompletely = process.waitFor(TIME_OUT_SECONDS, TimeUnit.SECONDS);
+        boolean isRunCompletely = process.waitFor(timeout, TimeUnit.SECONDS);
         commands.remove(commands.size() - 1);
         
         if (!isRunCompletely) {
