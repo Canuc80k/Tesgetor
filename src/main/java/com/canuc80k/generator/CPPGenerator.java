@@ -66,13 +66,34 @@ public class CPPGenerator extends Generator {
                 OUTPUT_GENERATOR_EXE_FILE,
                 testcaseFolder.getAbsolutePath() + "\\" + TestcaseFileNameType.getFileName(type, i, lastTestcaseFileNameLength) + ".INP",
                 testcaseFolder.getAbsolutePath() + "\\" + TestcaseFileNameType.getFileName(type, i, lastTestcaseFileNameLength) + ".OUT",
-                timeout
+                timeout,
+                true
             );
             tasks.add(inputGeneratorThread);
         }
 
         errorInformation = "";
-        threadPool = Executors.newCachedThreadPool();  
+        final Boolean CHOICE = true; 
+        if (!CHOICE) runSequentially(tasks, timeout);
+        else runParallel(tasks);
+    }
+
+    private synchronized void runSequentially(List<CPPGeneratorTask> tasks, int timeout) {
+        for (int i = 0; i < tasks.size(); i ++) {
+            Thread thread = new Thread(tasks.get(i));
+            try {
+                thread.start();
+                thread.join();
+
+                System.out.println(errorInformation);
+            } catch(InterruptedException e) {
+                // GlobalResource.getGenerateTestPanel().stopGenerateTestcase();
+            }
+        }
+    }
+
+    private synchronized void runParallel(List<CPPGeneratorTask> tasks) {
+        threadPool = Executors.newCachedThreadPool();
         tasks.forEach((task) -> threadPool.execute(task));
         threadPool.shutdown();
     }

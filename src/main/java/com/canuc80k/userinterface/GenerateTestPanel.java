@@ -252,28 +252,33 @@ public class GenerateTestPanel extends JPanel {
     public void increaseDoneTestcase() {
         doneTestcase ++;
         if (totalTestcase == doneTestcase) {
-            doneTestcase = totalTestcase = 0;
-            generateButton.setText("RUN");
-            
-            String errorInformation = GlobalResource.getCPPGenerator().getErrorInformation();
-            if (errorInformation.length() == 0) {
-                JOptionPane.showMessageDialog(
-                    GlobalResource.getTopDialog(),
-                    "Mission accomplished",
-                    "It's done, sir",
-                    JOptionPane.NO_OPTION
-                );
-            } else {
-                JOptionPane.showMessageDialog(
-                    GlobalResource.getTopDialog(),
-                    errorInformation + " has occured in generate test process, error testcases have been deleted, check your testcase folder",
-                    "Check your testcase generator files",
-                    JOptionPane.NO_OPTION
-                );
-            }
+            stopGenerateTestcase();
             return;
         }
+        System.out.println(doneTestcase + "/" + totalTestcase);
         generateButton.setText(doneTestcase + "/" + totalTestcase);
+    }
+
+    public void stopGenerateTestcase() {
+        doneTestcase = totalTestcase = 0;
+        generateButton.setText("Run");
+        
+        String errorInformation = GlobalResource.getCPPGenerator().getErrorInformation();
+        if (errorInformation.length() == 0) {
+            JOptionPane.showMessageDialog(
+                GlobalResource.getTopDialog(),
+                "Mission accomplished",
+                "It's done, sir",
+                JOptionPane.NO_OPTION
+            );
+        } else {
+            JOptionPane.showMessageDialog(
+                GlobalResource.getTopDialog(),
+                errorInformation + " has occured in generate test process, error testcases have been deleted, check your testcase folder",
+                "Check your testcase generator files",
+                JOptionPane.NO_OPTION
+            );
+        }
     }
 
     public void setTotalTestcase(int newTotalTestcase) {
