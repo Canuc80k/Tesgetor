@@ -39,16 +39,19 @@ public class GenerateTestPanel extends JPanel {
     private JLabel toLabel;
     private JLabel backtoHome;
     private JLabel advancedSettingLabel;
-    private JLabel cplusplusVersionLabel;
+    private JLabel languageLabel;
     private JLabel timeOutLabel;
+    private JLabel osLabel;
 
     private JTextField beginTestcaseIndexTextField;
     private JTextField endTestcaseIndexTextField;
     private JTextField timeOutTextField;
 
-    private JButton generateButton;
-    private JComboBox<String> cplusplusVersionComboBox;
+    private JComboBox<String> languageComboBox;
+    private JComboBox<String> osComboBox;
 
+    private JButton generateButton;
+    
     public GenerateTestPanel() {
         setPreferredSize(new Dimension(HomeFrame.APP_WIDTH, HomeFrame.TOPPANEL_HEIGHT));
         setBackground(GlobalResource.getTheme().getTopPanelColor());
@@ -177,28 +180,28 @@ public class GenerateTestPanel extends JPanel {
         advancedSettingLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         advancedSettingPanel.add(advancedSettingLabel);
 
-        cplusplusVersionLabel = new JLabel("C++ Version");
-        cplusplusVersionLabel.setFont(GlobalResource.getExtendedFont().getFont(FontType.MEDIUM, FontSize.MEDIUM));
-        cplusplusVersionLabel.setForeground(GlobalResource.getTheme().getFontColor());
-        cplusplusVersionLabel.setMinimumSize(new Dimension(200, HomeFrame.APP_HEIGHT / 100 * 9));
-        cplusplusVersionLabel.setMaximumSize(new Dimension(200, HomeFrame.APP_HEIGHT / 100 * 9));
-        cplusplusVersionLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        advancedSettingPanel.add(cplusplusVersionLabel);
+        languageLabel = new JLabel("Language");
+        languageLabel.setFont(GlobalResource.getExtendedFont().getFont(FontType.MEDIUM, FontSize.MEDIUM));
+        languageLabel.setForeground(GlobalResource.getTheme().getFontColor());
+        languageLabel.setMinimumSize(new Dimension(200, HomeFrame.APP_HEIGHT / 100 * 9));
+        languageLabel.setMaximumSize(new Dimension(200, HomeFrame.APP_HEIGHT / 100 * 9));
+        languageLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        advancedSettingPanel.add(languageLabel);
 
-        cplusplusVersionComboBox = new JComboBox<String>();
-        cplusplusVersionComboBox.setFont(GlobalResource.getExtendedFont().getFont(FontType.MEDIUM, FontSize.MEDIUM));
-        cplusplusVersionComboBox.setBackground(GlobalResource.getTheme().getBackgroundColor());
-        cplusplusVersionComboBox.setForeground(GlobalResource.getTheme().getInverseFontColor());
-        cplusplusVersionComboBox.setMinimumSize(new Dimension(120, HomeFrame.APP_HEIGHT / 100 * 9));
-        cplusplusVersionComboBox.setMaximumSize(new Dimension(120, HomeFrame.APP_HEIGHT / 100 * 9));
-        cplusplusVersionComboBox.setAlignmentX(Component.LEFT_ALIGNMENT);
-        cplusplusVersionComboBox.addItem("C++");
-        cplusplusVersionComboBox.addItem("C++ 11");
-        cplusplusVersionComboBox.addItem("C++ 14");
-        cplusplusVersionComboBox.addItem("C++ 17");
-        cplusplusVersionComboBox.addItem("C++ 20");
-        cplusplusVersionComboBox.addItem("C++ 2a");
-        advancedSettingPanel.add(cplusplusVersionComboBox);
+        languageComboBox = new JComboBox<String>();
+        languageComboBox.setFont(GlobalResource.getExtendedFont().getFont(FontType.MEDIUM, FontSize.MEDIUM));
+        languageComboBox.setBackground(GlobalResource.getTheme().getBackgroundColor());
+        languageComboBox.setForeground(GlobalResource.getTheme().getInverseFontColor());
+        languageComboBox.setMinimumSize(new Dimension(120, HomeFrame.APP_HEIGHT / 100 * 9));
+        languageComboBox.setMaximumSize(new Dimension(120, HomeFrame.APP_HEIGHT / 100 * 9));
+        languageComboBox.setAlignmentX(Component.LEFT_ALIGNMENT);
+        languageComboBox.addItem("C++");
+        languageComboBox.addItem("C++ 11");
+        languageComboBox.addItem("C++ 14");
+        languageComboBox.addItem("C++ 17");
+        languageComboBox.addItem("C++ 20");
+        languageComboBox.addItem("C++ 2a");
+        advancedSettingPanel.add(languageComboBox);
 
         timeOutLabel = new JLabel("Timeout");
         timeOutLabel.setFont(GlobalResource.getExtendedFont().getFont(FontType.MEDIUM, FontSize.MEDIUM));
@@ -215,6 +218,25 @@ public class GenerateTestPanel extends JPanel {
         timeOutTextField.setMaximumSize(new Dimension(100, HomeFrame.APP_HEIGHT / 100 * 9));
         timeOutTextField.setAlignmentX(Component.LEFT_ALIGNMENT);
         advancedSettingPanel.add(timeOutTextField);
+        
+        osLabel = new JLabel("OS");
+        osLabel.setFont(GlobalResource.getExtendedFont().getFont(FontType.MEDIUM, FontSize.MEDIUM));
+        osLabel.setForeground(GlobalResource.getTheme().getFontColor());
+        osLabel.setMinimumSize(new Dimension(200, HomeFrame.APP_HEIGHT / 100 * 9));
+        osLabel.setMaximumSize(new Dimension(200, HomeFrame.APP_HEIGHT / 100 * 9));
+        osLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        advancedSettingPanel.add(osLabel);
+
+        osComboBox = new JComboBox<String>();
+        osComboBox.setFont(GlobalResource.getExtendedFont().getFont(FontType.MEDIUM, FontSize.MEDIUM));
+        osComboBox.setBackground(GlobalResource.getTheme().getBackgroundColor());
+        osComboBox.setForeground(GlobalResource.getTheme().getInverseFontColor());
+        osComboBox.setMinimumSize(new Dimension(120, HomeFrame.APP_HEIGHT / 100 * 9));
+        osComboBox.setMaximumSize(new Dimension(120, HomeFrame.APP_HEIGHT / 100 * 9));
+        osComboBox.setAlignmentX(Component.LEFT_ALIGNMENT);
+        osComboBox.addItem("Window");
+        osComboBox.addItem("Linux");
+        advancedSettingPanel.add(osComboBox);
     }
 
     public void increaseDoneTestcase() {
