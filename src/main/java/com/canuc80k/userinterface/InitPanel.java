@@ -74,7 +74,7 @@ public class InitPanel extends JPanel {
             JLabel optionDescription = new JLabel(option, SwingConstants.CENTER);
             optionPanel.add(optionDescription, BorderLayout.CENTER);
             optionDescription.setAlignmentX(Component.CENTER_ALIGNMENT);
-            optionDescription.setFont(GlobalResource.getExtendedFont().getFont(FontType.MEDIUM, FontSize.MEDIUM));
+            optionDescription.setFont(GlobalResource.getExtendedFont().getFont(FontType.MEDIUM, 20));
             optionDescription.setForeground(GlobalResource.getTheme().getFontColor());
             optionDescription.addMouseListener(new MouseInputListener() {
                 public void mouseClicked(MouseEvent e) {

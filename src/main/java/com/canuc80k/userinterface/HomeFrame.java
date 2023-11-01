@@ -12,8 +12,8 @@ import javax.swing.border.EmptyBorder;
 import com.canuc80k.launcher.GlobalResource;
 
 public class HomeFrame extends JFrame {
-    protected static final int APP_WIDTH = 350;
-    protected static final int APP_HEIGHT = 550;
+    protected static final int APP_WIDTH = 450;
+    protected static final int APP_HEIGHT = 650;
     protected static final int TOPPANEL_HEIGHT = APP_HEIGHT / 7 * 5;
 
     private JPanel contentPane;

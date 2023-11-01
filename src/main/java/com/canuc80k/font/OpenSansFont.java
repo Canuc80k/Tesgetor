@@ -22,9 +22,9 @@ public class OpenSansFont extends ExtendedFont {
         fonts.add(new Pair(FileTool.inputStreamtoFile(OpenSansFont.class.getResourceAsStream("/font/OpenSans/OpenSans-Medium.ttf"), new File(GlobalResource.getTempFolder().getAbsolutePath() + "/OpenSans-Medium.ttf")), FontType.MEDIUM));
         fonts.add(new Pair(FileTool.inputStreamtoFile(OpenSansFont.class.getResourceAsStream("/font/OpenSans/OpenSans-Light.ttf"), new File(GlobalResource.getTempFolder().getAbsolutePath() + "/OpenSans-Light.ttf")), FontType.LIGHT));
     
-        sizes.add(new Pair(16.0f, FontSize.LARGE));
-        sizes.add(new Pair(14.0f, FontSize.MEDIUM));
-        sizes.add(new Pair(12.0f, FontSize.SMALL));
+        sizes.add(new Pair(22.0f, FontSize.LARGE));
+        sizes.add(new Pair(18.0f, FontSize.MEDIUM));
+        sizes.add(new Pair(15.0f, FontSize.SMALL));
 
         super.initFont(fonts);
         super.initSize(sizes);

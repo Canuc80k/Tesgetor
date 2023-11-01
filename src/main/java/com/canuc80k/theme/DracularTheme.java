@@ -18,7 +18,7 @@ public class DracularTheme extends Theme {
         try {
             UIManager.setLookAndFeel("com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatDraculaIJTheme");
             UIManager.put("Button.arc", 10);
-            UIManager.put("Component.arc", 20);
+            UIManager.put("Component.arc", 10);
             UIManager.put("ProgressBar.arc", 20);
             UIManager.put("TextComponent.arc", 20);
             UIManager.put("Button.foreground", Color.white);
