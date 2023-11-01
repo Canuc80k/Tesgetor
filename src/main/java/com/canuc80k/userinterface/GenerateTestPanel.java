@@ -124,26 +124,25 @@ public class GenerateTestPanel extends JPanel {
         generateButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (doneTestcase == totalTestcase) {
+                if (doneTestcase == 0 && totalTestcase == 0) {
                     TestcaseFileNameType type = TestcaseFileNameType.NORMAL;
                     String beginIndex = beginTestcaseIndexTextField.getText().trim();
                     String endIndex = endTestcaseIndexTextField.getText().trim();
 
-                    if (!DirectoryValidator.validateConfigFiles())
-                        return;
-                    if (!TestcaseIndexValidator.validate(beginIndex, endIndex))
-                        return;
+                    if (!DirectoryValidator.validateConfigFiles()) return;
+                    if (!TestcaseIndexValidator.validate(beginIndex, endIndex)) return;
 
-                    if (beginIndex.length() == endIndex.length()) {
+                    if (beginIndex.length() == endIndex.length()) 
                         type = TestcaseFileNameType.LEXICOGRAPHICAL_ORDER;
-                    }
 
                     try {
-                        GlobalResource.getGenerator().generate(Integer.parseInt(beginIndex), Integer.parseInt(endIndex), type,
-                                endIndex.length());
+                        GlobalResource.getGenerator().generate(Integer.parseInt(beginIndex), 
+                            Integer.parseInt(endIndex), type, endIndex.length());
                     } catch (NumberFormatException | IOException | InterruptedException e1) {
                         e1.printStackTrace();
                     }
+                } else {
+                    System.out.println("Stop");
                 }
             }
         });
