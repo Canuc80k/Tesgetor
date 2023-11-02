@@ -36,7 +36,7 @@ public class CPPGenerator extends Generator {
         GlobalResource.getGenerateTestPanel().setTotalTestcase(endTestcaseIndex - beginTestcaseIndex + 1);
 
         errorInformation = "";
-        if (!isRunParallel) 
+        if (isRunParallel) 
             runParallelExcuteFilesToCreateTestcase(beginTestcaseIndex, endTestcaseIndex, type, lastTestcaseFileNameLength, timeout);
         else 
             runSequentiallyExcuteFilesToCreateTestcase(beginTestcaseIndex, endTestcaseIndex, type, lastTestcaseFileNameLength, timeout);
@@ -66,14 +66,16 @@ public class CPPGenerator extends Generator {
     private synchronized void runParallelExcuteFilesToCreateTestcase(int beginTestcaseIndex, int endTestcaseIndex, TestcaseFileNameType type, int lastTestcaseFileNameLength, int timeout) {
         List<CPPGeneratorTask> tasks = new ArrayList<CPPGeneratorTask>();
         for (int i = beginTestcaseIndex; i <= endTestcaseIndex; i ++) {
+            String inputTescaseFilePath = testcaseFolder.getAbsolutePath() + "\\" + TestcaseFileNameType.getFileName(type, i, lastTestcaseFileNameLength) + ".INP";
+            String outputTescaseFilePath = testcaseFolder.getAbsolutePath() + "\\" + TestcaseFileNameType.getFileName(type, i, lastTestcaseFileNameLength) + ".OUT";
+            
             CPPGeneratorTask inputGeneratorThread = new CPPGeneratorTask(
                 cppCompiler,
                 INPUT_GENERATOR_EXE_FILE,
                 OUTPUT_GENERATOR_EXE_FILE,
-                testcaseFolder.getAbsolutePath() + "\\" + TestcaseFileNameType.getFileName(type, i, lastTestcaseFileNameLength) + ".INP",
-                testcaseFolder.getAbsolutePath() + "\\" + TestcaseFileNameType.getFileName(type, i, lastTestcaseFileNameLength) + ".OUT",
-                timeout,
-                false
+                inputTescaseFilePath,
+                outputTescaseFilePath,
+                timeout
             );
             tasks.add(inputGeneratorThread);
         }
@@ -84,7 +86,7 @@ public class CPPGenerator extends Generator {
     }
 
     private synchronized void runSequentiallyExcuteFilesToCreateTestcase(int beginTestcaseIndex, int endTestcaseIndex, TestcaseFileNameType type, int lastTestcaseFileNameLength, int timeout) {
-        for (int i = beginTestcaseIndex; i < endTestcaseIndex; i ++) {
+        for (int i = beginTestcaseIndex; i <= endTestcaseIndex; i ++) {
             String inputTescaseFilePath = testcaseFolder.getAbsolutePath() + "\\" + TestcaseFileNameType.getFileName(type, i, lastTestcaseFileNameLength) + ".INP";
             String outputTescaseFilePath = testcaseFolder.getAbsolutePath() + "\\" + TestcaseFileNameType.getFileName(type, i, lastTestcaseFileNameLength) + ".OUT";
                 
@@ -95,6 +97,7 @@ public class CPPGenerator extends Generator {
             } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
             } catch (RuntimeErrorException | TimeoutException e) {
+                GlobalResource.getCPPGenerator().notifyError(e);
                 new File(inputTescaseFilePath).delete();
                 new File(outputTescaseFilePath).delete();
                 GlobalResource.getGenerateTestPanel().stopGenerateTestcase();

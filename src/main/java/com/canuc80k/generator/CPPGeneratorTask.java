@@ -14,44 +14,20 @@ public class CPPGeneratorTask implements Runnable {
     private final File outputgeneratorExeFile;
     private CPPCompiler compiler;
     private int timeout;
-    private Boolean isParallel;
 
     private String inputTescaseFilePath, outputTescaseFilePath;
 
-    CPPGeneratorTask(CPPCompiler compiler, File inputgeneratorExeFile, File outputgeneratorExeFile, String inputTescaseFilePath, String outputTescaseFilePath, int timeout, Boolean isParallel) {
+    CPPGeneratorTask(CPPCompiler compiler, File inputgeneratorExeFile, File outputgeneratorExeFile, String inputTescaseFilePath, String outputTescaseFilePath, int timeout) {
         this.compiler = compiler;
         this.inputgeneratorExeFile = inputgeneratorExeFile;
         this.outputgeneratorExeFile = outputgeneratorExeFile;
         this.inputTescaseFilePath = inputTescaseFilePath;
         this.outputTescaseFilePath = outputTescaseFilePath;
         this.timeout = timeout;
-        this.isParallel = isParallel;
     }
 
     @Override
-    public synchronized void run() {
-        if (isParallel) runParallel();
-        else runSequentially();
-    }
-    
-    private synchronized void runSequentially() {
-        try {
-            compiler.run(inputgeneratorExeFile, inputTescaseFilePath, timeout);
-            compiler.run(outputgeneratorExeFile, inputTescaseFilePath, outputTescaseFilePath, timeout);
-            GlobalResource.getGenerateTestPanel().increaseDoneTestcase();
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-        } catch (RuntimeErrorException | TimeoutException e) {
-            GlobalResource.getCPPGenerator().threadPool.shutdownNow();
-            new File(inputTescaseFilePath).delete();
-            new File(outputTescaseFilePath).delete();
-            GlobalResource.getGenerateTestPanel().stopGenerateTestcase();
-        } catch (CompileErrorException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private synchronized void runParallel() {
+    public synchronized void run() {        
         try {
             compiler.run(inputgeneratorExeFile, inputTescaseFilePath, timeout);
             compiler.run(outputgeneratorExeFile, inputTescaseFilePath, outputTescaseFilePath, timeout);
@@ -67,4 +43,5 @@ public class CPPGeneratorTask implements Runnable {
             e.printStackTrace();
         }
     }
+
 }

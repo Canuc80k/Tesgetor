@@ -52,7 +52,7 @@ public class GenerateTestPanel extends JPanel {
     private JComboBox<String> languageComboBox;
     private JComboBox<String> osComboBox;
 
-    private JButton generateButton;
+    public JButton generateButton;
     
     public GenerateTestPanel() {
         setPreferredSize(new Dimension(HomeFrame.APP_WIDTH, HomeFrame.TOPPANEL_HEIGHT));
@@ -256,11 +256,13 @@ public class GenerateTestPanel extends JPanel {
             stopGenerateTestcase();
             return;
         }
-        System.out.println(doneTestcase + "/" + totalTestcase);
         generateButton.setText(doneTestcase + "/" + totalTestcase);
+        generateButton.validate();
+        generateButton.repaint();
     }
 
     public void stopGenerateTestcase() {
+        System.out.println("asdasdasd");
         doneTestcase = totalTestcase = 0;
         generateButton.setText("Run");
         
