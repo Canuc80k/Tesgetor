@@ -29,7 +29,7 @@ public abstract class Generator {
         testcaseFolder = new File(configData.get(2));
     }
 
-    public abstract void generate(int beginTestcaseIndex, int endTestcaseIndex, TestcaseFileNameType type, int lastTestcaseFileNameLength, String os, String language, int timeout) throws IOException, InterruptedException;
+    public abstract void generate(int beginTestcaseIndex, int endTestcaseIndex, TestcaseFileNameType type, int lastTestcaseFileNameLength, String os, String language, int timeout, Boolean isRunParallel) throws IOException, InterruptedException;
 
     public synchronized void clear() {
         FileTool.deleteFolder(testcaseFolder, FileTool.KEEP_CURRENT_FOLDER);

@@ -150,7 +150,8 @@ public class GenerateTestPanel extends JPanel {
                                 endIndex.length(),
                                 os,
                                 language,
-                                Integer.parseInt(timeout)
+                                Integer.parseInt(timeout),
+                                false
                             );
                         }
                     } catch (NumberFormatException | IOException | InterruptedException e1) {
