@@ -47,8 +47,8 @@ public class ConfigPanel extends JPanel {
         inputGeneratorFileLabel = new JLabel("Input Generator File");
         inputGeneratorFileLabel.setForeground(GlobalResource.getTheme().getFontColor());
         inputGeneratorFileLabel.setFont(GlobalResource.getExtendedFont().getFont(FontType.BOLD, FontSize.MEDIUM));
-        inputGeneratorFileLabel.setMinimumSize(new Dimension(HomeFrame.APP_WIDTH / 5 * 4, HomeFrame.APP_HEIGHT / 10 * 4));
-        inputGeneratorFileLabel.setMaximumSize(new Dimension(HomeFrame.APP_WIDTH / 5 * 4, HomeFrame.APP_HEIGHT / 10 * 4));
+        inputGeneratorFileLabel.setMinimumSize(new Dimension(HomeFrame.APP_WIDTH / 5 * 4, HomeFrame.APP_HEIGHT / 10 * 6));
+        inputGeneratorFileLabel.setMaximumSize(new Dimension(HomeFrame.APP_WIDTH / 5 * 4, HomeFrame.APP_HEIGHT / 10 * 6));
         inputGeneratorFileLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         add(inputGeneratorFileLabel);
 
@@ -71,8 +71,8 @@ public class ConfigPanel extends JPanel {
         outputGeneratorFileLabel = new JLabel("Output Generator File");    
         outputGeneratorFileLabel.setForeground(GlobalResource.getTheme().getFontColor());
         outputGeneratorFileLabel.setFont(GlobalResource.getExtendedFont().getFont(FontType.BOLD, FontSize.MEDIUM));
-        outputGeneratorFileLabel.setMinimumSize(new Dimension(HomeFrame.APP_WIDTH / 5 * 4, HomeFrame.APP_HEIGHT / 10 * 4));
-        outputGeneratorFileLabel.setMaximumSize(new Dimension(HomeFrame.APP_WIDTH / 5 * 4, HomeFrame.APP_HEIGHT / 10 * 4));
+        outputGeneratorFileLabel.setMinimumSize(new Dimension(HomeFrame.APP_WIDTH / 5 * 4, HomeFrame.APP_HEIGHT / 10 * 6));
+        outputGeneratorFileLabel.setMaximumSize(new Dimension(HomeFrame.APP_WIDTH / 5 * 4, HomeFrame.APP_HEIGHT / 10 * 6));
         outputGeneratorFileLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         add(outputGeneratorFileLabel);
 
@@ -95,8 +95,8 @@ public class ConfigPanel extends JPanel {
         testcaseFolderLabel = new JLabel("Testcase Output Folder");
         testcaseFolderLabel.setForeground(GlobalResource.getTheme().getFontColor());
         testcaseFolderLabel.setFont(GlobalResource.getExtendedFont().getFont(FontType.BOLD, FontSize.MEDIUM));
-        testcaseFolderLabel.setMinimumSize(new Dimension(HomeFrame.APP_WIDTH / 5 * 4, HomeFrame.APP_HEIGHT / 10 * 4));
-        testcaseFolderLabel.setMaximumSize(new Dimension(HomeFrame.APP_WIDTH / 5 * 4, HomeFrame.APP_HEIGHT / 10 * 4));
+        testcaseFolderLabel.setMinimumSize(new Dimension(HomeFrame.APP_WIDTH / 5 * 4, HomeFrame.APP_HEIGHT / 10 * 6));
+        testcaseFolderLabel.setMaximumSize(new Dimension(HomeFrame.APP_WIDTH / 5 * 4, HomeFrame.APP_HEIGHT / 10 * 6));
         testcaseFolderLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         add(testcaseFolderLabel);
 
