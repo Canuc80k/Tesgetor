@@ -14,6 +14,7 @@ public class DirectoryValidator {
         for (int i = 0; i < paths.size(); i ++) {
             File file = new File(paths.get(i));
             if (!file.exists()) {
+                System.out.println(paths.size());
                 JOptionPane.showMessageDialog(
                     GlobalResource.getTopDialog(),
                     "One or more configuration files are missing or inaccessible.",

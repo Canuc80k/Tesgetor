@@ -30,6 +30,7 @@ public class GlobalResource {
     private static File configFile;
     private static File tempFolder;
     private static File projectFolder;
+    private static File testcaseAdvancedSettingFile;
 
     private static Theme theme;
     private static ExtendedFont extendedFont;
@@ -38,6 +39,7 @@ public class GlobalResource {
     private static ConfigPanel configPanel;
     private static InitPanel initPanel;
     private static List<String> configData;
+    private static List<String> testcaseAdvancedSettingData;
 
     private static CPPGenerator cppGenerator;
     private static JDialog topDialog;
@@ -53,7 +55,8 @@ public class GlobalResource {
         if (!configFolder.exists()) configFolder.mkdirs();
         
         configFile = new File(configFolder.getAbsolutePath() + "/config.cfg");
-        
+        testcaseAdvancedSettingFile = new File(configFolder.getAbsolutePath() + "/testcaseAdvancedSetting.cfg");
+
         DracularTheme dracularTheme = new DracularTheme();
         dracularTheme.applyTheme();
 
@@ -94,6 +97,10 @@ public class GlobalResource {
         return configFolder;
     }
 
+    public static File getTestcaseAdvancedSettingFile() {
+        return testcaseAdvancedSettingFile;
+    }
+
     public static ConfigPanel getConfigPanel() {
         return configPanel;
     }
@@ -108,6 +115,10 @@ public class GlobalResource {
 
     public static List<String> getConfigData() {
         return configData;
+    }
+
+    public static List<String> getTestcaseAdvancedSettingData() {
+        return testcaseAdvancedSettingData;
     }
 
     public static CPPGenerator getCPPGenerator() {
@@ -137,6 +148,30 @@ public class GlobalResource {
         } catch (IOException | ClassNotFoundException e) {
             configData = new ArrayList<String>();
             for (int i = 0; i < 3; i ++) configData.add("");
+        }
+    }
+
+    public static void serializeTestCaseAdvancedSettingData() {
+        try {
+            ObjectOutputStream configFileObjectOutputStream = new ObjectOutputStream(new FileOutputStream(GlobalResource.getTestcaseAdvancedSettingFile()));
+            configFileObjectOutputStream.writeObject(testcaseAdvancedSettingData);
+            configFileObjectOutputStream.flush();
+            configFileObjectOutputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void deserializeTestCaseAdvancedSettingData() {
+        try {
+            ObjectInputStream configFileObjectInputStream = new ObjectInputStream(new FileInputStream(GlobalResource.getTestcaseAdvancedSettingFile()));
+            testcaseAdvancedSettingData = (List<String>) configFileObjectInputStream.readObject();
+            configFileObjectInputStream.close();
+        } catch (IOException | ClassNotFoundException e) {
+            testcaseAdvancedSettingData = new ArrayList<String>();
+            testcaseAdvancedSettingData.add("0");
+            testcaseAdvancedSettingData.add("1");
+            testcaseAdvancedSettingData.add("0");
         }
     }
 }

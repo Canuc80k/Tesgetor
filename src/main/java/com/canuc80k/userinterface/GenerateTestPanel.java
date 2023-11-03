@@ -7,6 +7,8 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
 
@@ -55,6 +57,10 @@ public class GenerateTestPanel extends JPanel {
     public JButton generateButton;
     
     public GenerateTestPanel() {
+        if (GlobalResource.getTestcaseAdvancedSettingData() == null) {
+            GlobalResource.deserializeTestCaseAdvancedSettingData();
+        }
+
         setPreferredSize(new Dimension(HomeFrame.APP_WIDTH, HomeFrame.TOPPANEL_HEIGHT));
         setBackground(GlobalResource.getTheme().getTopPanelColor());
         setBorder(new EmptyBorder(0, 10, 10, 10));
@@ -212,6 +218,11 @@ public class GenerateTestPanel extends JPanel {
         languageComboBox.setAlignmentX(Component.LEFT_ALIGNMENT);
         for (int i = 0; i < LanguageConstant.LANGUAGE.length; i ++)
             languageComboBox.addItem(LanguageConstant.LANGUAGE[i]);
+        languageComboBox.addActionListener(e -> {
+            GlobalResource.getTestcaseAdvancedSettingData().set(0, String.valueOf(languageComboBox.getSelectedIndex()));
+            GlobalResource.serializeTestCaseAdvancedSettingData();
+        });
+        languageComboBox.setSelectedIndex(Integer.parseInt(GlobalResource.getTestcaseAdvancedSettingData().get(0)));
         advancedSettingPanel.add(languageComboBox);
 
         timeoutLabel = new JLabel("Timeout");
@@ -228,6 +239,20 @@ public class GenerateTestPanel extends JPanel {
         timeoutTextField.setMinimumSize(new Dimension(100, HomeFrame.APP_HEIGHT / 100 * 9));
         timeoutTextField.setMaximumSize(new Dimension(100, HomeFrame.APP_HEIGHT / 100 * 9));
         timeoutTextField.setAlignmentX(Component.LEFT_ALIGNMENT);
+        timeoutTextField.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                GlobalResource.getTestcaseAdvancedSettingData().set(1, timeoutTextField.getText());
+                GlobalResource.serializeTestCaseAdvancedSettingData();
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                GlobalResource.getTestcaseAdvancedSettingData().set(1, timeoutTextField.getText());
+                GlobalResource.serializeTestCaseAdvancedSettingData();
+            }
+        });
+        timeoutTextField.setText(GlobalResource.getTestcaseAdvancedSettingData().get(1));
         advancedSettingPanel.add(timeoutTextField);
         
         osLabel = new JLabel("OS");
@@ -247,6 +272,11 @@ public class GenerateTestPanel extends JPanel {
         osComboBox.setAlignmentX(Component.LEFT_ALIGNMENT);
         for (int i = 0; i < OsConstant.OS.length; i ++)
             osComboBox.addItem(OsConstant.OS[i]);
+        osComboBox.setSelectedIndex(Integer.parseInt(GlobalResource.getTestcaseAdvancedSettingData().get(2)));
+        osComboBox.addActionListener(e -> {
+            GlobalResource.getTestcaseAdvancedSettingData().set(2, String.valueOf(osComboBox.getSelectedIndex()));
+            GlobalResource.serializeTestCaseAdvancedSettingData();
+        });
         advancedSettingPanel.add(osComboBox);
     }
 
