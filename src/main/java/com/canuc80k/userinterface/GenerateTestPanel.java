@@ -120,8 +120,8 @@ public class GenerateTestPanel extends JPanel {
         generateButton.setBackground(GlobalResource.getTheme().getBackgroundColor());
         generateButton.setFont(GlobalResource.getExtendedFont().getFont(FontType.BOLD, FontSize.SMALL));
         generateButton.setForeground(GlobalResource.getTheme().getFontHighLightColor());
-        generateButton.setMinimumSize(new Dimension(100, HomeFrame.APP_HEIGHT / 100 * 9));
-        generateButton.setMaximumSize(new Dimension(100, HomeFrame.APP_HEIGHT / 100 * 9));
+        generateButton.setMinimumSize(new Dimension(150, HomeFrame.APP_HEIGHT / 100 * 9));
+        generateButton.setMaximumSize(new Dimension(150, HomeFrame.APP_HEIGHT / 100 * 9));
         generateButton.setAlignmentX(Component.LEFT_ALIGNMENT);
         generateButton.addActionListener(new ActionListener() {
             @Override
@@ -250,21 +250,23 @@ public class GenerateTestPanel extends JPanel {
         advancedSettingPanel.add(osComboBox);
     }
 
-    public void increaseDoneTestcase() {
+    public synchronized void startCompile() {
+        generateButton.setText("Compiling...");
+        generateButton.paintImmediately(generateButton.getVisibleRect());
+    }
+
+    public synchronized void increaseDoneTestcase() {
         doneTestcase ++;
         if (totalTestcase == doneTestcase) {
             stopGenerateTestcase();
             return;
         }
-        generateButton.setText(doneTestcase + "/" + totalTestcase);
-        generateButton.validate();
-        generateButton.repaint();
+        setGenerateButtonText(doneTestcase + "/" + totalTestcase);
     }
 
-    public void stopGenerateTestcase() {
-        System.out.println("asdasdasd");
+    public synchronized void stopGenerateTestcase() {
         doneTestcase = totalTestcase = 0;
-        generateButton.setText("Run");
+        setGenerateButtonText("Run");
         
         String errorInformation = GlobalResource.getCPPGenerator().getErrorInformation();
         if (errorInformation.length() == 0) {
@@ -284,12 +286,13 @@ public class GenerateTestPanel extends JPanel {
         }
     }
 
-    public void setTotalTestcase(int newTotalTestcase) {
+    public synchronized void setTotalTestcase(int newTotalTestcase) {
         totalTestcase = newTotalTestcase;
-        generateButton.setText(0 + "/" + totalTestcase);
+        setGenerateButtonText(0 + "/" + totalTestcase);
     }
 
     public synchronized void setGenerateButtonText(String text) {
         generateButton.setText(text);
-    }
+        generateButton.paintImmediately(generateButton.getVisibleRect());
+     }
 }

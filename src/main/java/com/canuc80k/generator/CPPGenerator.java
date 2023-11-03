@@ -28,11 +28,11 @@ public class CPPGenerator extends Generator {
     }
 
     @Override
-    public void generate(int beginTestcaseIndex, int endTestcaseIndex, TestcaseFileNameType type, int lastTestcaseFileNameLength, String os, String language, int timeout, Boolean isRunParallel) throws IOException, InterruptedException {
+    public synchronized void generate(int beginTestcaseIndex, int endTestcaseIndex, TestcaseFileNameType type, int lastTestcaseFileNameLength, String os, String language, int timeout, Boolean isRunParallel) throws IOException, InterruptedException {
         deleteOldExecuteFiles();
+        GlobalResource.getGenerateTestPanel().startCompile();
         Boolean compileSuccessfully = compileCplusplusGeneratorFiles(language, os);
         if (!compileSuccessfully) return;
-
         GlobalResource.getGenerateTestPanel().setTotalTestcase(endTestcaseIndex - beginTestcaseIndex + 1);
 
         errorInformation = "";
