@@ -1,107 +1,77 @@
-#  tesgetor
-
-# Lời cảm ơn: 
-gửi lời cảm ơn chân thành nhất đến [@CarlavierVN](https://github.com/CarlavierVN) vì đã dành nhiều ngày cuối tuần làm QC không lương >_<
-
+#  Tesgetor
 ![](https://img.shields.io/badge/java-1.8%2B-orange) ![](https://img.shields.io/badge/window-7%2B-blue)
 
-<br/>
+# Contributor
+Thanks, Sir [@CarlavierVN](https://github.com/CarlavierVN), for helping as an unpaid QC and reporting issues. 
 
-#  Tính năng
-
-Sinh test
 
 <br/>
-  
 
-#  Thì biết rồi, nhưng sinh test như nào .-.
+# Feature
+	- Compact tool helps you quickly create testcases for your competitive programming problems
+	- Generate testcase using your own custom input and output file
+	- Support multiple languages and systems
+	- Friendly user interface
+	
+<br/>
 
-  
+Tesgetor will run your _input generator file_ and _output generator file_ multiple times to create testcases.
+We have two main purposes:
 
-Phần mềm sẽ chạy [**file sinh input**] và [**file sinh output**] nhiều lần để tạo ra các testcase.
 
-Hiện tại, chỉ mới hỗ trợ các [**file sinh**] dùng ngôn ngữ C++.
+# Purpose
+	- Supports newbies in creating usable testcases without interacting with the console line
+	- Fast and compact tool for small and medium programming competitions
 
+	
 ![](https://i.ibb.co/vxKSpnr/a.png)
 
-ㅤ
+#  Setup
 
-#  Cài đặt
+## Step 1: Download and setup Java
 
-* ##  Bước 1: Tải và cài đặt Java
-
-&emsp;&emsp;Truy cập [java.com](https://www.java.com/en/download/ "java.com") và tải bản Java mới nhất.
-
-&emsp;&emsp;Rồi [cài đặt biến môi trường JAVA_HOME](https://viblo.asia/p/how-to-set-up-java-home-in-window-os-XL6lAvNp5ek "")
-
-&emsp;&emsp;Gì chứ, cái này tui thấy mấy đứa lớp 3 tự mò để chơi minecraft ầm ầm rồi ._.
-
- * ##  Bước 2: Thêm Path cho MinGW 
- &emsp;&emsp;Để cái [link hướng dẫn](https://www.youtube.com/watch?v=mQra00mT3Dg) ở đây cho dễ :b<br/>
- &emsp;&emsp;Nhớ là phải restart máy sau khi thêm path<br/>
- &emsp;&emsp;Và phải nhớ chọn bản MinGW nào hỗ trợ C++ 11<br/>
-
-* ##  Bước 3: Chỉnh config
-
-&emsp;&emsp;![](https://i.ibb.co/1MQhHvx/Untitled1.png)
-
-  
-
-&emsp;&emsp;Mục đầu chọn [**file sinh input**]
-
-&emsp;&emsp;Thứ hai chọn [**file sinh output**]
-
-&emsp;&emsp;Cái cuối là thư mục sẽ chứa các testcase sinh ra, khuyến khích chọn một thư mục **rỗng**.
-
-  
-
-* ##  Bước 4: Set up trên file sinh input và output
-
-&emsp;&emsp;**1) Thêm command line argument**:
-
-&emsp;&emsp;Thay vì **int main()** thì sửa lại thành
-
-&emsp;&emsp; ![](https://i.ibb.co/5RGwFZp/Untitled.png)
-
-&emsp;&emsp;**2) Thêm freopen**
-
-&emsp;&emsp;Ở file sinh input thêm dòng:
-
-&emsp;&emsp;  ``` freopen(argv[1], "w", stdout); ```
-
-&emsp;&emsp;
-
-  
-
-&emsp;&emsp;Ở file sinh output 2 thêm dòng:<br/>
-
-&emsp;&emsp;```freopen(argv[1], "r", stdin);```<br/>
-
-&emsp;&emsp;```freopen(argv[2], "w", stdout);```<br/>
+1. Go to [Java official website](https://www.java.com/en/download/ "java.com") and download lastest Java edition.
+2. Setup Java by click to installer and spam "Yes" or "I agree"
+3. Add Java Runtime Environment Path. You can follow [this tutorial video](https://www.youtube.com/watch?v=LnuUB-jydyU&t=30s "") from 0:30
 
 <br/>
 
+## Step 2: Add path for MinGW 
+1. Download MinGW (which supports C++ 11 or above). Skip this if you already have Codeblock or Dev-C.
+2. Add MinGW Enviroment Path. You can follow [this tutorial video](https://www.youtube.com/watch?v=mQra00mT3Dg)
+3. Restart your computer to make sure everything is setup perfectly
+
+<br/>
+
+## Step 3: Config
+1. Choose your input generator file, ex: [this file](https://paste.ubuntu.com/p/Fgp97tYPwS/)
+2. Choose your output generator file ex: [this file](https://paste.ubuntu.com/p/gtPtN8QfBR/)
+3. Choose your testcase output folder, this folder should be empty
+
+![](https://i.ibb.co/1MQhHvx/Untitled1.png)
   
+<br/>
 
-&emsp;&emsp;**3) Sử dụng random C++ 11** <br/>
-&emsp;&emsp;Nhớ dùng **high_resolution_clock** để sinh seed thay vì **srand**<br/>
-&emsp;&emsp;Tui để 2 file sinh input và output mẫu ở [đây](https://drive.google.com/drive/folders/1SLv9eGQN5Eh60MwKaBsic2K9VwB4bn71?usp=sharing) cho dễ tham khảo.<br/>
+## Step 4: Change generator file a little bit
 
+1. Add command line argument: Instead of int main(), we do ```int main(int argc, char** argv)```
+2. Add freopen in input generator: ```freopen(argv[1], "w", stdout);```
+3. Add freopen in output generator: ```freopen(argv[1], "r", stdin); freopen(argv[2], "w", stdout);```
+4. Use random function in C++ 11: high_resolution_clock instead of srand
 
-* ## Bước 5: Sinh test
+Take a look at our example files in step 3 for better understanding.
 
-&emsp;&emsp;![](https://i.ibb.co/CKbTJGH/Untitled.png)
+<br/>
 
-&emsp;&emsp;Ví dụ muốn sinh các testcase có số thứ tự từ 1 -> 10:<br/>
+## Step 5: Generate testcase
 
-&emsp;&emsp; * Nếu nhập [1, 10] các file sinh ra sẽ có dạng: 1, 2, 3, ..., 10<br/>
+1. If you want generate test from 1 -> 10
+	+ If you fill [From = 1, To = 10], testcases will be: 1.INP, 1.OUT, 2.INP, 2.OUT, ..., 10.INP, 10.OUT
+	+ If you fill [From = 01, To = 10], testcases will be: 01.INP, 01.OUT, 02.INP, 02.OUT, ..., 10.INP, 10.OUT
+	+ If you fill [From = 001, To = 010], testcases will be: 001.INP, 001.OUT, 002.INP, 002.OUT, ..., 010.INP, 010.OUT
+2. Timeout value means maximum time your generator files can run
+	+ If your input generator runs in 1s for 1 test, output generator runs in 1s for 1 test. Your timeout should be >= 1
+	
+<br/>
 
-&emsp;&emsp; * Nếu nhập [01, 10] các file sinh ra sẽ có dạng: 01, 02, 03, ..., 10<br/>
-
-&emsp;&emsp; * Nếu nhập [001, 010] các file sinh ra sẽ có dạng: 001, 002, 003, ..., 010<br/>
-
-&emsp;&emsp;Lưu ý là nếu sinh các test mà đã xuất hiện trong testcase folder (hay nói dễ hiểu hơn là sinh các test có trùng số thứ tự), những file test mới sinh sẽ ghi đè lên file cũ.
-
-##  Những câu hỏi thường gặp
-
-Để [đây](https://docs.google.com/document/d/1w9JIjzzNQg1ZDh0nMADl1f9dTTImvJUBrhCzo2S_EGM/edit?usp=sharing) lần sau có sửa lại gì thì đỡ phải commit :D
+## [Common Q & A](https://docs.google.com/document/d/1w9JIjzzNQg1ZDh0nMADl1f9dTTImvJUBrhCzo2S_EGM/edit?usp=sharing)
