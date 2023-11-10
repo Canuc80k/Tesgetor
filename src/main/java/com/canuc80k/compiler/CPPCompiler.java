@@ -24,7 +24,7 @@ public class CPPCompiler extends Compiler {
         String cppversion = LanguageConstant.getExecuteCommand(language);
         String compileCommand = "";
         if (os.equals(OsConstant.WINDOW))  
-            compileCommand = "g++ " + cppversion + " \"" + sourceFile.getAbsolutePath() + "\" -o " + "\"" + outputFile.getAbsolutePath() + "\"";
+            compileCommand = "g++ --O2 -s -static -Wl,--stack,66060288 -lm -x c++ " + cppversion + " \"" + sourceFile.getAbsolutePath() + "\" -o " + "\"" + outputFile.getAbsolutePath() + "\"";
 
         System.out.println(compileCommand);
         compile(compileCommand);
