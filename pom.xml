@@ -55,7 +55,7 @@
 
     <groupId>com.canuc80k</groupId>
     <artifactId>tesgetor</artifactId>
-    <version>v1.2.0</version>
+    <version>v1.2.1</version>
 	<dependencies>
 		<dependency>
 			<groupId>com.formdev</groupId>
