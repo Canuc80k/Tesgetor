@@ -281,8 +281,7 @@ public class GenerateTestPanel extends JPanel {
     }
 
     public synchronized void startCompile() {
-        generateButton.setText("Compiling...");
-        generateButton.paintImmediately(generateButton.getVisibleRect());
+        setGenerateButtonText("Compiling...");
     }
 
     public synchronized void increaseDoneTestcase() {

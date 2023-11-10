@@ -32,7 +32,10 @@ public class CPPGenerator extends Generator {
         deleteOldExecuteFiles();
         GlobalResource.getGenerateTestPanel().startCompile();
         Boolean compileSuccessfully = compileCplusplusGeneratorFiles(language, os);
-        if (!compileSuccessfully) return;
+        if (!compileSuccessfully) {
+            GlobalResource.getGenerateTestPanel().setGenerateButtonText("Run");
+            return;
+        }
         GlobalResource.getGenerateTestPanel().setTotalTestcase(endTestcaseIndex - beginTestcaseIndex + 1);
 
         errorInformation = "";
