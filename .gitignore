@@ -1,6 +1,6 @@
 config/
 temp/
-.iss
+*.iss
 output/
 
 ##############################
