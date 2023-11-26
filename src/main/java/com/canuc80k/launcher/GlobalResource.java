@@ -11,6 +11,7 @@ import java.util.List;
 
 import javax.swing.JDialog;
 
+import com.canuc80k.config.Config;
 import com.canuc80k.font.ExtendedFont;
 import com.canuc80k.font.OpenSansFont;
 import com.canuc80k.generator.CPPGenerator;
@@ -45,6 +46,8 @@ public class GlobalResource {
     private static JDialog topDialog;
 
     protected static void init() {
+        new Config();
+
         projectFolder = new File(System.getenv("LOCALAPPDATA") + "/tesgetor");
         if (!projectFolder.exists()) projectFolder.mkdirs();
 

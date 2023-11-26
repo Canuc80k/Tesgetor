@@ -32,14 +32,12 @@ public class CPPGeneratorTask implements Runnable {
             compiler.run(inputgeneratorExeFile, inputTescaseFilePath, timeout);
             compiler.run(outputgeneratorExeFile, inputTescaseFilePath, outputTescaseFilePath, timeout);
             GlobalResource.getGenerateTestPanel().increaseDoneTestcase();
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
         } catch (RuntimeErrorException | TimeoutException e) {
             GlobalResource.getCPPGenerator().notifyError(e);
             new File(inputTescaseFilePath).delete();
             new File(outputTescaseFilePath).delete();
             GlobalResource.getGenerateTestPanel().increaseDoneTestcase();
-        } catch (CompileErrorException e) {
+        } catch (CompileErrorException | IOException | InterruptedException e) {
             e.printStackTrace();
         }
     }

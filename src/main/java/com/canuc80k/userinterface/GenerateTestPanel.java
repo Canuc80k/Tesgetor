@@ -217,7 +217,7 @@ public class GenerateTestPanel extends JPanel {
         languageComboBox.setMaximumSize(new Dimension(120, HomeFrame.APP_HEIGHT / 100 * 9));
         languageComboBox.setAlignmentX(Component.LEFT_ALIGNMENT);
         for (int i = 0; i < LanguageConstant.LANGUAGE.length; i ++)
-            languageComboBox.addItem(LanguageConstant.LANGUAGE[i]);
+            languageComboBox.addItem((String)LanguageConstant.LANGUAGE[i].getFirstElement());
         languageComboBox.addActionListener(e -> {
             GlobalResource.getTestcaseAdvancedSettingData().set(0, String.valueOf(languageComboBox.getSelectedIndex()));
             GlobalResource.serializeTestCaseAdvancedSettingData();
@@ -282,6 +282,10 @@ public class GenerateTestPanel extends JPanel {
 
     public synchronized void startCompile() {
         setGenerateButtonText("Compiling...");
+    }
+
+    public synchronized void startRun() {
+        setGenerateButtonText("Run");
     }
 
     public synchronized void increaseDoneTestcase() {

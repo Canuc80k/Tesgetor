@@ -13,20 +13,24 @@ import com.canuc80k.exception.TimeoutException;
 
 public class CPPCompiler extends Compiler {
     public CPPCompiler() {
-        super();   
+        super();
         List<String> initCommands = new ArrayList<String>();
         initCommands.add("cmd.exe");
         initCommands.add("/c");
         setCommands(initCommands);
     }
 
-    public synchronized void compile(File sourceFile, File outputFile, String language, String os) throws IOException, InterruptedException, CompileErrorException, TimeoutException, RuntimeErrorException {
+    @Override
+    void killTimeoutProcess() throws InterruptedException, IOException {
+        Runtime.getRuntime().exec("taskkill /f /t /im inputGenerator.exe").waitFor();
+        Runtime.getRuntime().exec("taskkill /f /t /im outputGenerator.exe").waitFor();
+    }
+
+    public synchronized void compile(File sourceFile, File executeFile, String language, String os) throws IOException, InterruptedException, CompileErrorException, TimeoutException, RuntimeErrorException {
         String cppversion = LanguageConstant.getExecuteCommand(language);
         String compileCommand = "";
         if (os.equals(OsConstant.WINDOW))  
-            compileCommand = "g++ -O2 -s -static -Wl,--stack,66060288 -lm -x c++ " + cppversion + " \"" + sourceFile.getAbsolutePath() + "\" -o " + "\"" + outputFile.getAbsolutePath() + "\"";
-
-        System.out.println(compileCommand);
+            compileCommand = "g++ -O2 -s -static -Wl,--stack,66060288 -lm -x c++ " + cppversion + " \"" + sourceFile.getAbsolutePath() + "\" -o " + "\"" + executeFile.getAbsolutePath() + "\"";
         compile(compileCommand);
     }
 

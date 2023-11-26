@@ -1,6 +1,6 @@
 package com.canuc80k.compiler;
 
-public enum CompileAction {
+public enum CompilerAction {
     COMPILE,
     RUN
 }

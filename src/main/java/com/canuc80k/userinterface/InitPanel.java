@@ -23,9 +23,10 @@ import javax.swing.event.MouseInputListener;
 
 import org.zeroturnaround.zip.ZipUtil;
 
+import com.canuc80k.config.Config;
+import com.canuc80k.filetool.FileTool;
 import com.canuc80k.font.FontSize;
 import com.canuc80k.font.FontType;
-import com.canuc80k.generator.CPPGenerator;
 import com.canuc80k.launcher.GlobalResource;
 import com.canuc80k.validator.DirectoryValidator;
 
@@ -112,7 +113,7 @@ public class InitPanel extends JPanel {
                             JOptionPane.YES_NO_CANCEL_OPTION
                         );
                         if (answer != JOptionPane.YES_OPTION) return;
-                        new CPPGenerator().clear();
+                        clearOldTestcase();
                         JOptionPane.showMessageDialog(
                             GlobalResource.getTopDialog(),
                             "Mission accomplished",
@@ -145,5 +146,10 @@ public class InitPanel extends JPanel {
 
             });
         });
+    }
+    
+    public synchronized void clearOldTestcase() {
+        FileTool.deleteChildFilesInFolder(Config.testcaseFolder);
+        new File(Config.testcaseFolder.getAbsolutePath() + ".zip").delete();
     }
 }

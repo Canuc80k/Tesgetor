@@ -17,31 +17,30 @@ public abstract class Compiler {
     }
 
     public synchronized void compile(String command) throws IOException, InterruptedException, CompileErrorException, TimeoutException, RuntimeErrorException {
-        executeCommand(command, CompileAction.COMPILE, Integer.MAX_VALUE);
+        executeCommand(command, CompilerAction.COMPILE, Integer.MAX_VALUE);
     }
 
     public synchronized void run(String command, int timeout) throws IOException, InterruptedException, CompileErrorException, TimeoutException, RuntimeErrorException {
-        executeCommand(command, CompileAction.RUN, timeout);
+        executeCommand(command, CompilerAction.RUN, timeout);
     }
 
-    private synchronized void executeCommand(String command, CompileAction action, int timeout) throws IOException, InterruptedException, CompileErrorException, TimeoutException, RuntimeErrorException {
-        commands.add(command);
+    abstract void killTimeoutProcess() throws InterruptedException, IOException;
 
+    private synchronized void executeCommand(String command, CompilerAction action, int timeout) throws IOException, InterruptedException, CompileErrorException, TimeoutException, RuntimeErrorException {
+        commands.add(command);
         Process process = builder.command(commands).start();
         boolean isRunCompletely = process.waitFor(timeout, TimeUnit.SECONDS);
         commands.remove(commands.size() - 1);
         
         if (!isRunCompletely) {
-            Runtime.getRuntime().exec("taskkill /f /t /im inputGenerator.exe").waitFor();
-            Runtime.getRuntime().exec("taskkill /f /t /im outputGenerator.exe").waitFor();
-
+            killTimeoutProcess();
             process.destroy();
             throw new TimeoutException();
         }
 
         int exit_code = process.exitValue();
         if (exit_code != 0) {
-            if (action == CompileAction.COMPILE) {
+            if (action == CompilerAction.COMPILE) {
                 throw new CompileErrorException();
             }
             throw new RuntimeErrorException();
